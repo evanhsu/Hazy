@@ -55,3 +55,10 @@ svg.tree-logo {
     margin: 2rem;
     text-align: center;
 }
+
+.facebook {
+    stroke: white;
+    fill: white;
+    margin: .5rem;
+    height: 2rem;
+}
