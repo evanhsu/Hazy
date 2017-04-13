@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'Roboto';
+  font-weight: normal;
+  src: url('/static/font/Roboto-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 700;
+  src: url('/static/font/Roboto-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 300;
+  src: url('/static/font/Roboto-Light.ttf') format('truetype');
+}
+
+html {
+    color: white;
+    font-family: Roboto;
+    font-weight: 300;
+    background-color: black;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+svg.name-logo {
+    display: block;
+    height: 10rem;
+    padding-top: 1rem;
+    margin: 0rem auto;
+    width: 100%;
+}
+
+svg.tree-logo {
+    display: block;
+    height: 20rem;
+    margin: 0rem auto;
+}
+
+.text {
+    margin: 1rem 5rem;
+}
+
+.contact {
+    margin: 2rem;
+    text-align: center;
+}
