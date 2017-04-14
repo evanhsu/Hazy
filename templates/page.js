@@ -18073,7 +18073,8 @@ module.exports = p => `
             </svg>
             <div class="text">Right now we are working on something new, so give us a little time to spin it up.  In the meantime, during these strange times, do not be a stranger.  Come say hi in person, give us a call, or send us an email so you can get by with a little disc golf help from Hazy.</div>
             <div class="contact">
-                <div>723 Watervliet Ave Dayton, OH 45420</div>
+                <div>Dayton: 723 Watervliet Ave Dayton, OH 45420</div>
+                <div>Springfield: 2113 Park Rd Springfield, OH 45504</div>
                 <div>(937) 256-2690</div>
                 <div>hazyshade&#64;gmail.com</div>
                 <div>Mon - Sat 11am - 8pm</div>
