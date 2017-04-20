@@ -1,20 +1,25 @@
 require('node-env-file')( __dirname + '/.env' )
 
 const Fs = require('fs'),
-    router = require('./router'),
+    Router = require('./router'),
     httpPort = process.env.HTTP_PORT || 80,
     httpsPort = process.env.HTTPS_PORT || 443
 
-require('http').createServer( ( request, response ) => {
-    response.writeHead( 301, { 'Location': `https://${process.env.DOMAIN}:${httpsPort}${request.url}` } )
-    response.end("")
-} ).listen( httpPort )
+Router.initialize()
+.then( () => {
 
-console.log( `HTTP server listening at ${httpPort}` )
+    require('http').createServer( ( request, response ) => {
+        response.writeHead( 301, { 'Location': `https://${process.env.DOMAIN}:${httpsPort}${request.url}` } )
+        response.end("")
+    } ).listen( httpPort )
 
-require('https').createServer(
-    { key: Fs.readFileSync( process.env.SSLKEY ), cert: Fs.readFileSync( process.env.SSLCERT ) },
-    require('./router')
-).listen( httpsPort )
+    console.log( `HTTP server listening at ${httpPort}` )
 
-console.log( `HTTPS server listening at ${httpsPort}` )
+    require('https').createServer(
+        { key: Fs.readFileSync( process.env.SSLKEY ), cert: Fs.readFileSync( process.env.SSLCERT ) },
+        Router.handler.bind(Router)
+    ).listen( httpsPort )
+
+    console.log( `HTTPS server listening at ${httpsPort}` )
+} )
+.catch( e => console.log( `Error initializing app: ${e.stack ||e}` ) )

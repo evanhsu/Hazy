@@ -3,12 +3,8 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
     Fs: require('fs'),
 
     Path: require('path'),
-
-    constructor() {
-        this.isDev = ( process.env.ENV === 'development' )
-
-        return this.handler.bind(this)
-    },
+    
+    Postgres: require('./dal/Postgres'),
 
     handler( request, response ) {
         let path = request.url.split('/').slice(1)
@@ -25,7 +21,9 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
 
         ( path[0] === "static" || /favicon/.test( path.join('') )
             ? this.static( request, response, path )
-            : this.html( request, response )
+            : ( /application\/json/.test( request.headers.accept ) )
+                ? this.rest( request, response, path, qs )
+                : this.html( request, response )
         )
         .catch( e => {
             if( e.message !== "Handled" ) {
@@ -38,12 +36,41 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
 
     html( request, response ) {
         response.writeHead( 200 )
-        response.end( require('./templates/page')( {
-            isDev: this.isDev,
-            title: process.env.NAME
-        } ) )
-        
+        response.end( require('./templates/page')( { isDev: this.isDev, title: process.env.NAME } ) )
         return Promise.resolve()
+    },
+
+    initialize() {
+
+        this.jsonRoutes = { me: 'me' }
+
+        return Promise.all( [
+            this.Postgres.initialize(),
+            this.P( this.Fs.readdir, [ `${__dirname}/resources` ] )
+        ] )
+        .then( ( [ a, [ files ] ] ) => {
+            const fileHash =
+                files.filter( name => !/^[\._]/.test(name) && /\.js/.test(name) )
+                .reduce( ( memo, name ) => Object.assign( memo, { [name.replace('.js','')]: true } ), { } )
+            
+            this.Postgres.tableNames.forEach( table => this.jsonRoutes[ table ] = fileHash[ table ] ? table : '__proto' )
+        } )
+    },
+
+    rest( request, response, path, qs ) {
+        const file = this.jsonRoutes[ path[0] ]
+
+        if( !file ) {
+            response.writeHead( 404, { 'Content-Length': 0, 'Content-Type': 'text/plain' } )
+            response.end()
+        }
+
+        return Object.create( require(`./resources/${file}`), {
+            request: { value: request },
+            response: { value: response },
+            path: { value: path },
+            qs: { value: qs },
+        } ).apply( request.method )
     },
 
     static( request, response, path ) {
@@ -82,4 +109,4 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
         } ) )
     }
 
-} ), { } ).constructor()
+} ), { isDev: { value: process.env.NODE_ENV === 'development' } } )
