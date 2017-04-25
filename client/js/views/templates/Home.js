@@ -2,7 +2,7 @@ module.exports = p =>
 `<div>
     <img src="/static/img/behind-basket.jpg"/>
     <div class="intro">
-        ${require('./lib/logoWhite')}
+        ${require('./lib/logoWhite')()}
         <div>
             <h3>Taking Disc Golf to a Whole New Level</h3>
             <p>At Hazy Shade, disc golf is more than just a game...it's an obsession.  That's why since 2002, we've supplied the Miami Valley with the latest in disc golf gear and technology.</p>A
@@ -19,9 +19,20 @@ module.exports = p =>
             <img src="/static/img/basket-close.jpg" />
         </div>
     </div>
+    <div class="disc-doctor">
+        <div>
+            ${require('./lib/logoWhite')()}
+            <div>Disc Doctor</div>
+        </div>
+        <div>New to the sport?  Find the perfect disc with out interactive guide</div>
+    </div>
     <div class="featured-event">
         <div>Join us for the 10th Annual</div>
         <div>BYOP</div>
         <div>Belmont Park / Dayton / August 23-24, 2017</div>
+    </div>
+    <div class="suppliers">
+        <div>We are proud to carry the best names in disc golf</div>
+        <div>Logos</div>
     </div>
 </div>`

@@ -20,6 +20,18 @@ module.exports = Object.create( {
             .catch( this.Error )
         )
 
+        this.header =
+            this.ViewFactory.create(
+                'header',
+                { insertion: { value: { el: this.contentContainer, method: 'insertBefore' } }, user: { value: this.User } }
+            )
+
+        this.footer =
+            this.ViewFactory.create(
+                'footer',
+                { insertion: { value: { el: this.contentContainer, method: 'after' } }, user: { value: this.User } }
+            )
+
         this.handle()
     },
 

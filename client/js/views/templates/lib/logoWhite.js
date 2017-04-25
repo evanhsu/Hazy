@@ -1,6 +1,7 @@
-module.exports = `
-<svg version="1.1" class="logo-white" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="500px" height="254.307px"
+module.exports = ( p = {} ) => {
+const dataJs = p.name ? `data-js="${p.name}"` : ``
+return `<svg version="1.1" ${dataJs} class="logo-white" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 
 	 viewBox="0 0 500 254.307" enable-background="new 0 0 500 254.307" xml:space="preserve">
 <switch>
 	<foreignObject requiredExtensions="&ns_ai;" x="0" y="0" width="1" height="1">
@@ -3498,4 +3499,4 @@ e7ji1YTlciaf3zi/ud5+Of9zd/2SuXk9/5/r7PnDw+Pb+dv1E93J3rxcv749vlxnX38//gcl9Er8
 eD4/t17N/H+SLInI
 	]]>
 </i:pgf>
-</svg>`
+</svg>` }

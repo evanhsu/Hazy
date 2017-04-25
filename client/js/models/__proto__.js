@@ -1,4 +1,4 @@
-module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('events').EventEmitter.prototype, {
+module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('../../../lib/Model'), require('events').EventEmitter.prototype, {
 
     Xhr: require('../Xhr'),
 
@@ -66,6 +66,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         } )
     },
 
+    /*
     storeBy( data ) {
 
         data.forEach( datum => Object.keys( this.store ).forEach( attr => this._store( datum, attr ) ) )
@@ -77,5 +78,6 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         if( !this.store[ attr ][ datum[ attr ] ] ) this.store[ attr ][ datum[ attr ] ] = [ ]
         this.store[ attr ][ datum[ attr ] ].push( datum )
     }
+    */
 
 } )

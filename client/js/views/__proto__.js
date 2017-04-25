@@ -41,19 +41,11 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
 
     events: {},
 
-    getData() {
-        if( !this.model ) this.model = Object.create( this.Model, { resource: { value: this.name } } )
-
-        return this.model.get()
-    },
-
     getTemplateOptions() {
-        return Object.assign(
-            {},
-            (this.model) ? this.model.data : {} ,
-            { user: (this.user) ? this.user.data : {} },
-            { opts: (this.templateOpts) ? this.templateOpts : {} }
-        )
+        const rv = { user: this.user.data }
+
+        if( this.model)  rv.model = this.model.data
+        return rv
     },
 
     handleLogin() {
@@ -115,6 +107,8 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     postRender() { return this },
 
     render() {
+        if( this.data ) this.model = Object.create( this.Model, { } ).constructor( this.data )
+
         this.slurpTemplate( { template: this.template( this.getTemplateOptions() ), insertion: this.insertion, isView: true } )
 
         this.renderSubviews()

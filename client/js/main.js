@@ -7,4 +7,4 @@ require('./polyfill')
 
 Promise.all( [ User.get(), onLoad ] )
 .then( () => router.initialize() )
-.catch( e => console.log( `Error initializing client` ) )
+.catch( e => console.log( `Error initializing client -> ${e.stack || e}` ) )

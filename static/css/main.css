@@ -1,3 +1,82 @@
+.Footer {
+  color: #fff;
+  display: flex;
+  background-image: url("/static/img/hazy-tree.svg");
+  background-repeat: no-repeat;
+  background-size: 90% 100%;
+  background-color: #000;
+  height: 40rem;
+  padding: 2rem;
+}
+.Footer >div {
+  flex: 1;
+}
+.Footer .logo-white {
+  width: 10rem;
+}
+.Footer .contact {
+  float: right;
+  padding-top: 3rem;
+}
+.Footer .contact div:first-child,
+.Footer .contact div:nth-child(6) {
+  margin-bottom: 1rem;
+}
+.Footer .contact a {
+  display: block;
+  height: 2rem;
+  margin: 0.5rem auto;
+  width: 2rem;
+}
+.Footer .contact svg {
+  fill: #fff;
+}
+.Header {
+  background-color: #000;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.35);
+  border-top: 1px solid #000;
+  opacity: 0.75;
+  height: 5rem;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: 1rem;
+  width: 100%;
+  z-index: 100;
+}
+.Header .nav {
+  display: flex;
+}
+.Header .nav >li:first-child {
+  flex: 1;
+}
+.Header .nav >li:nth-child(2) {
+  flex: 10;
+}
+.Header .nav >li:last-child {
+  flex: 1;
+}
+.Header .spans li {
+  display: inline-block;
+  line-height: 5rem;
+}
+.Header ul {
+  height: 100%;
+}
+.Header .logo-white {
+  height: 3rem;
+  margin: 1rem;
+}
+.Header .profile {
+  height: 2rem;
+  margin: 1.5rem;
+}
+.Header span {
+  color: #fff;
+  font-size: 1rem;
+  margin: 0rem 2rem;
+  text-transform: uppercase;
+}
 .Home > img {
   display: block;
   height: 30rem;
@@ -24,6 +103,15 @@
 }
 .Home .featured-products >div span {
   position: absolute;
+}
+.Home .disc-doctor {
+  background-image: url("/static/img/basket-under-trees.jpg");
+  background-size: cover;
+  padding: 3rem;
+  text-align: center;
+}
+.Home .disc-doctor .logo-white {
+  height: 10rem;
 }
 .Home .featured-event {
   background-image: url("/static/img/belmont-sun.jpg");
@@ -57,7 +145,6 @@ html {
 }
 body {
   background-color: #f8f8f8;
-  color: $bodyGrey;
   height: 100%;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 1rem;
@@ -106,9 +193,6 @@ input:focus,
 select:focus,
 button:focus {
   outline: 0;
-}
-#content {
-  height: 100%;
 }
 .showing {
   opacity: 0;
