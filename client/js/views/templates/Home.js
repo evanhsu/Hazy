@@ -20,11 +20,13 @@ module.exports = p =>
         </div>
     </div>
     <div class="disc-doctor">
-        <div>
-            ${require('./lib/logoWhite')()}
+        <div class="main">
+            <div>${require('./lib/logoWhite')()}</div>
             <div>Disc Doctor</div>
         </div>
-        <div>New to the sport?  Find the perfect disc with out interactive guide</div>
+        <div class="subtitle">New to the sport?  Find the perfect disc with out interactive guide</div>
+    </div>
+    <div>
     </div>
     <div class="featured-event">
         <div>Join us for the 10th Annual</div>

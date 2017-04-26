@@ -90,6 +90,12 @@
 .Home .intro >svg {
   flex: 1;
 }
+.Home .side-by-side {
+  display: flex;
+}
+.Home .side-by-side >div {
+  flex: 1;
+}
 .Home .featured-products {
   display: flex;
 }
@@ -107,11 +113,28 @@
 .Home .disc-doctor {
   background-image: url("/static/img/basket-under-trees.jpg");
   background-size: cover;
+  color: #fff;
   padding: 3rem;
-  text-align: center;
 }
-.Home .disc-doctor .logo-white {
+.Home .disc-doctor .main {
+  display: flex;
+}
+.Home .disc-doctor .main div {
+  flex: 1;
+  margin: 0rem 1rem;
+}
+.Home .disc-doctor .main div .logo-white {
   height: 10rem;
+}
+.Home .disc-doctor .main div:first-child {
+  text-align: right;
+}
+.Home .disc-doctor .main div:last-child {
+  font-size: 4rem;
+  line-height: 10rem;
+}
+.Home .disc-doctor .subtitle {
+  text-align: center;
 }
 .Home .featured-event {
   background-image: url("/static/img/belmont-sun.jpg");

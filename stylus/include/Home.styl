@@ -10,6 +10,12 @@
 
         >div, >svg
             flex: 1
+            
+    .side-by-side
+        display: flex
+
+        >div
+            flex: 1
 
     .featured-products
         display: flex
@@ -28,11 +34,31 @@
     .disc-doctor
         background-image: url(/static/img/basket-under-trees.jpg)
         background-size: cover
+        color: white
         padding: 3rem
-        text-align: center
 
-        .logo-white
-            height: 10rem
+        .main
+            display: flex
+
+            div
+                flex: 1
+                margin: 0rem 1rem
+            
+                .logo-white
+                    height: 10rem
+            
+                &:first-child
+                    text-align: right
+
+                &:last-child
+                    font-size: 4rem
+                    line-height: 10rem
+        
+        
+        .subtitle
+            text-align: center
+
+            
 
     .featured-event
         background-image: url(/static/img/belmont-sun.jpg)
