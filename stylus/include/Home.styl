@@ -5,35 +5,37 @@
         width: 100%
 
     .intro
-        background-color: gray
-        display: flex
+        background: linear-gradient(to right, black, #565759, black)
+        padding: 2rem 6rem
+        color: white
 
-        >div, >svg
-            flex: 1
-            
+        h3
+            margin-bottom: 1rem
+            text-transform: uppercase
+
     .side-by-side
         display: flex
 
-        >div
+        >*
             flex: 1
 
-    .featured-products
-        display: flex
+    .featured-product
+        position: relative
 
-        >div
-            flex: 1
-            position: relative
+        img
+            display: block
+            width: 100%
 
-            img
-                display: block
-                width: 100%
-
-            span
-                position: absolute
+        span
+            font-size: 2rem
+            left: 1rem
+            position: absolute
+            top: 1rem
+            text-transform: uppercase
 
     .disc-doctor
         background-image: url(/static/img/basket-under-trees.jpg)
-        background-size: cover
+        background-size: 100% 100%
         color: white
         padding: 3rem
 
@@ -58,7 +60,12 @@
         .subtitle
             text-align: center
 
-            
+    .ez-finder
+        background: linear-gradient(to bottom, #8f57a3, #e3098e)
+
+        .disc
+            border-radius: 50%
+            background: linear-gradient(to bottom, #f38c3e, #fee32a, #f38c3e )
 
     .featured-event
         background-image: url(/static/img/belmont-sun.jpg)
@@ -66,3 +73,4 @@
         padding: 3rem
         text-align: center
 
+    
