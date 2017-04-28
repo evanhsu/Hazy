@@ -77,6 +77,13 @@
   margin: 0rem 2rem;
   text-transform: uppercase;
 }
+.Home .title {
+  font-size: 2rem;
+  left: 1rem;
+  position: absolute;
+  top: 1rem;
+  text-transform: uppercase;
+}
 .Home > img {
   display: block;
   height: 30rem;
@@ -96,20 +103,11 @@
 }
 .Home .side-by-side >* {
   flex: 1;
-}
-.Home .featured-product {
   position: relative;
 }
 .Home .featured-product img {
   display: block;
   width: 100%;
-}
-.Home .featured-product span {
-  font-size: 2rem;
-  left: 1rem;
-  position: absolute;
-  top: 1rem;
-  text-transform: uppercase;
 }
 .Home .disc-doctor {
   background-image: url("/static/img/basket-under-trees.jpg");
@@ -141,14 +139,42 @@
   background: linear-gradient(to bottom, #8f57a3, #e3098e);
 }
 .Home .ez-finder .disc {
-  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
+.Home .ez-finder .disc path {
   background: linear-gradient(to bottom, #f38c3e, #fee32a, #f38c3e);
+}
+.Home .ez-finder .disc .curvedText {
+  dominant-baseline: text-before-edge;
+  letter-spacing: 2px;
+  text-anchor: middle;
+  stroke: #2cff00;
+  fill: #2cff00;
+}
+.Home .ez-finder .caption {
+  position: absolute;
+  width: 33%;
+  text-align: center;
+  left: 33%;
+  bottom: 1rem;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 .Home .featured-event {
   background-image: url("/static/img/belmont-sun.jpg");
-  background-size: cover;
+  background-size: 100% 100%;
+  color: #fff;
+  font-size: 2rem;
+  line-height: 3rem;
   padding: 3rem;
   text-align: center;
+}
+.Home .featured-event >*:nth-child(2) {
+  color: #2cff00;
+  font-size: 3rem;
+  line-height: 5rem;
 }
 @font-face {
   font-family: 'Roboto';

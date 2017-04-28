@@ -11,11 +11,11 @@ module.exports = p =>
     </div>
     <div class="side-by-side">
         <div class="featured-product">
-            <span>Featured Item #1</span>
+            <span class="title">Featured Item #1</span>
             <img src="/static/img/basket-close.jpg" />
         </div>
         <div class="featured-product">
-            <span>Featured Item #2</span>
+            <span class="title">Featured Item #2</span>
             <img src="/static/img/basket-close.jpg" />
         </div>
     </div>
@@ -28,16 +28,24 @@ module.exports = p =>
     </div>
     <div class="side-by-side">
         <div class="ez-finder">
-            <span>E-Z Finder</span>
-            <svg>
-                <circle cx="115" cy="115" r="110"></circle>
-                <path d="M115,115 L115,5 A110,110 1 0,1 190,35 z"></path>
-                <text>Hazy E-Z Finder</text>
-                <text>An enlightened search experience awaits you</text>
+            <span class="title">E-Z Finder</span>
+            <svg class="disc" viewBox="0 0 230 70">
+                <defs>
+                    <linearGradient id="MyGradient">
+                        <stop offset="0%"  stop-color="#f38c3e"/>
+                        <stop offset="100%" stop-color="#fee32a"/>
+                    </linearGradient>
+                    <path id="yourPath" d="M115,5 A110,110 1 0,1 115,225"></path>
+                </defs>
+                <path fill="url(#MyGradient)" d="M115,115 L115,5 A110,110 1 0,1 115,225 z" transform="rotate(270,115,115)"></path>
+                <text class="curvedText" transform="rotate(270,115,115) translate(-20,0)">
+                    <textPath startOffset="50%" xlink:href="#yourPath">Hazy E-Z Finder</textPath>
+                </text>
             </svg>
+            <span class="caption">An enlightened search experience awaits you...</span>
         </div>
         <div class="featured-product">
-            <span>Featured Item #3</span>
+            <span class="title">Featured Item #3</span>
             <img src="/static/img/basket-close.jpg" />
         </div>
     </div>
