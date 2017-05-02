@@ -186,7 +186,6 @@
 }
 .Home .disc-doctor .main .subtitle {
   font-weight: 300;
-  text-align: center;
 }
 .Home .ez-finder {
   background-image: url("/static/img/ez-finder.png");
@@ -247,6 +246,7 @@
   .Home .disc-doctor .subtitle {
     font-size: 1.5rem;
     line-height: 1.5rem;
+    padding-top: 1rem;
   }
 }
 @font-face {
