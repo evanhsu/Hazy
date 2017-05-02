@@ -10,7 +10,6 @@
 
     > img
         display: block
-        height: 30rem
         width: 100%
 
     .intro
@@ -30,12 +29,10 @@
             text-transform: uppercase
 
         p
-            font-size: .85rem
             font-weight: 300
 
     .side-by-side
         display: flex
-        height: 20rem
 
         >*
             flex: 1
@@ -44,7 +41,6 @@
     .featured-product
         img
             display: block
-            height: 100%
             width: 100%
 
     .disc-doctor
@@ -116,3 +112,24 @@
 
             li
                 flex: 1
+
+@media (min-width: 1200px)
+    .Home
+        .intro
+            p
+                font-size: .85rem
+
+@media (min-width: 1400px)
+    .Home
+        .intro
+            h3
+                font-size: 1.5rem
+                line-height: 1.5rem
+            p
+                font-size: 1.25rem
+                line-height: 1.25rem
+
+        .disc-doctor
+            .subtitle
+                font-size: 1.5rem
+                line-height: 1.5rem

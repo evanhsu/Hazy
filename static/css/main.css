@@ -37,11 +37,16 @@
 .Footer >div .contact a svg {
   fill: #fff;
 }
+@media (min-width: 1400px) {
+  .Footer .contact {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
 .Header {
   background-color: #000;
   font-weight: 300;
   opacity: 0.7;
-  height: 5rem;
   left: 0;
   position: absolute;
   text-align: center;
@@ -68,19 +73,51 @@
 .Header ul {
   height: 100%;
 }
-.Header .logo-white {
-  height: 3rem;
-  margin: 1rem 2rem;
-}
-.Header .profile {
-  height: 2rem;
-  margin: 1.5rem;
-}
 .Header span {
   color: #fff;
-  font-size: 1rem;
-  margin: 0rem 2rem;
   text-transform: uppercase;
+}
+@media (min-width: 1200px) {
+  .Header {
+    height: 5rem;
+  }
+  .Header .spans li {
+    display: inline-block;
+    line-height: 5rem;
+  }
+  .Header .logo-white {
+    height: 3rem;
+    margin: 1rem 3rem;
+  }
+  .Header .profile {
+    height: 1rem;
+    margin: 2rem;
+  }
+  .Header span {
+    font-size: 1rem;
+    margin: 0rem 2rem;
+  }
+}
+@media (min-width: 1400px) {
+  .Header {
+    height: 7rem;
+  }
+  .Header .spans li {
+    display: inline-block;
+    line-height: 7rem;
+  }
+  .Header .logo-white {
+    height: 5rem;
+    margin: 1rem 4rem;
+  }
+  .Header .profile {
+    height: 2rem;
+    margin: 2.5rem;
+  }
+  .Header span {
+    font-size: 2rem;
+    margin: 0rem 4rem;
+  }
 }
 .Home .title {
   color: #fff;
@@ -92,7 +129,6 @@
 }
 .Home > img {
   display: block;
-  height: 30rem;
   width: 100%;
 }
 .Home .intro {
@@ -112,12 +148,10 @@
   text-transform: uppercase;
 }
 .Home .intro p {
-  font-size: 0.85rem;
   font-weight: 300;
 }
 .Home .side-by-side {
   display: flex;
-  height: 20rem;
 }
 .Home .side-by-side >* {
   flex: 1;
@@ -125,7 +159,6 @@
 }
 .Home .featured-product img {
   display: block;
-  height: 100%;
   width: 100%;
 }
 .Home .disc-doctor {
@@ -196,6 +229,25 @@
 }
 .Home .suppliers .logos li {
   flex: 1;
+}
+@media (min-width: 1200px) {
+  .Home .intro p {
+    font-size: 0.85rem;
+  }
+}
+@media (min-width: 1400px) {
+  .Home .intro h3 {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
+  .Home .intro p {
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+  }
+  .Home .disc-doctor .subtitle {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
 }
 @font-face {
   font-family: 'Roboto';
