@@ -11,6 +11,14 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         'legacy',
         'millenium',
         'westside'
-    ]
+    ],
+
+    events: {
+        byopBtn: 'click'
+    },
+
+    onByopBtnClick() {
+        this.emit( 'navigate', 'byop' )
+    },
 
 } )

@@ -8,6 +8,8 @@ module.exports = Object.create( {
 
     User: require('./models/User'),
 
+    capitalizeFirstLetter: string => string.charAt(0).toUpperCase() + string.slice(1),
+
     initialize() {
 
         this.contentContainer = document.querySelector('#content')
@@ -40,7 +42,7 @@ module.exports = Object.create( {
     },
 
     handler( path ) {
-        const view = this.Views[ path[0] ] ? path[0] : 'home'
+        const view = this.Views[ this.capitalizeFirstLetter( path[0] ) ] ? path[0] : 'home'
 
         if( view === this.currentView ) return this.views[ view ].onNavigation( path )
 

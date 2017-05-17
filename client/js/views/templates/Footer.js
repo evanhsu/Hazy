@@ -9,7 +9,7 @@ module.exports = p =>
                 <div>Dayton, OH 45420</div>
                 <div>2113 Park Rd</div>
                 <div>Springfield, OH 45504</div>
-                <div>937.681.9521</div>
+                <div>937.256.2690</div>
                 <div>sales@hazyshade.com</div>
                 <div>Mon - Sat 11am - 8pm</div>
                 <div>Sun 12pm - 7pm</div>
