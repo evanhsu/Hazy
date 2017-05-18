@@ -1,3 +1,35 @@
+.Byop {
+  text-align: center;
+}
+.Byop select {
+  background-color: #fff;
+  padding: 0.25rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.Byop input,
+.Byop select {
+  width: 100%;
+}
+.Byop h3 {
+  font-size: 2rem;
+  text-transform: uppercase;
+  padding-top: 4rem;
+}
+.Byop .sub-heading {
+  color: #acacac;
+  margin-bottom: 4rem;
+}
+.Byop .registration {
+  margin: 0 auto;
+  width: 40%;
+}
+.Byop .registration .info {
+  color: #acacac;
+  font-size: 0.65rem;
+  line-height: 0.75rem;
+}
 .featured-event {
   position: relative;
 }
