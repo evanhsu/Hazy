@@ -8,22 +8,86 @@
   -moz-appearance: none;
   appearance: none;
 }
-.Byop input,
-.Byop select {
-  width: 100%;
-}
 .Byop h3 {
   font-size: 2rem;
   text-transform: uppercase;
   padding-top: 4rem;
+}
+.Byop .side-by-side {
+  display: flex;
 }
 .Byop .sub-heading {
   color: #acacac;
   margin-bottom: 4rem;
 }
 .Byop .registration {
+  font-size: 1.25rem;
+  font-weight: 100;
+  line-height: 1.5rem;
   margin: 0 auto;
   width: 40%;
+}
+.Byop .registration .division,
+.Byop .registration .player:first-child,
+.Byop .registration .players,
+.Byop .registration .contact,
+.Byop .registration .shirts,
+.Byop .registration .payment-info {
+  margin-bottom: 2rem;
+}
+.Byop .registration .player input:not(last-child),
+.Byop .registration .contact input:not(last-child),
+.Byop .registration .payment-info input:not(last-child),
+.Byop .registration .player select:not(last-child),
+.Byop .registration .contact select:not(last-child),
+.Byop .registration .payment-info select:not(last-child) {
+  margin-bottom: 0.5rem;
+}
+.Byop .registration .shirts {
+  line-height: 2rem;
+}
+.Byop .registration .shirts >div {
+  margin-right: 1rem;
+}
+.Byop .registration .shirts input {
+  width: 2rem;
+}
+.Byop .registration .exp-ccv {
+  display: flex;
+  text-align: left;
+}
+.Byop .registration .exp-ccv .exp {
+  display: flex;
+}
+.Byop .registration .exp-ccv .exp >div {
+  flex: 1;
+}
+.Byop .registration .exp-ccv >div:first-child {
+  flex: 2;
+}
+.Byop .registration .exp-ccv >div:nth-child(2) {
+  flex: 1;
+}
+.Byop .registration button {
+  font-size: 1.25rem;
+  background-color: #fff;
+  border: 1px solid #b5b5b5;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+}
+.Byop .registration input {
+  background-color: #eff1f0;
+  border: 1px solid #b5b5b5;
+  color: #999997;
+  padding: 0.25rem;
+}
+.Byop .registration input,
+.Byop .registration select {
+  font-size: 1.25rem;
+  font-weight: 100;
+  line-height: 1.5rem;
+  width: 100%;
 }
 .Byop .registration .info {
   color: #acacac;
@@ -113,6 +177,24 @@
     font-size: 1.5rem;
     line-height: 2rem;
   }
+}
+.select-wrap {
+  position: relative;
+}
+.select-wrap select {
+  background-color: transparent;
+  position: relative;
+  z-index: 2;
+}
+.select-wrap .caret-down {
+  fill: #a3a3a3;
+  stroke: #8b8b8b;
+  height: 1rem;
+  position: absolute;
+  right: 0.6rem;
+  top: 0.6rem;
+  width: 1rem;
+  z-index: 1;
 }
 .Header {
   background-color: #000;

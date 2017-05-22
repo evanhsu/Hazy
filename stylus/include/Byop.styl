@@ -8,21 +8,77 @@
         -moz-appearance: none
         appearance: none
 
-    input, select
-        width: 100%
-
     h3
         font-size: 2rem
         text-transform: uppercase
         padding-top: 4rem
+
+    .side-by-side
+        display: flex
 
     .sub-heading
         color: $LightGray
         margin-bottom: 4rem
 
     .registration
+        font-size: 1.25rem
+        font-weight: 100
+        line-height: 1.5rem
         margin: 0 auto
         width: 40%
+
+        .division, .player:first-child, .players, .contact, .shirts, .payment-info
+            margin-bottom: 2rem
+
+        .player, .contact, .payment-info
+            input:not(last-child), select:not(last-child)
+                margin-bottom: .5rem
+                
+        .shirts
+            line-height: 2rem
+                
+            >div
+                margin-right: 1rem
+
+            input
+                width: 2rem 
+        
+        .exp-ccv
+            display: flex
+            text-align: left
+
+            .exp
+                display: flex
+
+                >div
+                    flex: 1
+
+            >div
+                &:first-child 
+                    flex: 2
+
+                &:nth-child(2)
+                    flex: 1
+
+        button
+            font-size: 1.25rem
+            background-color: white
+            border: 1px solid #b5b5b5
+            padding: .5rem 1rem
+            text-transform: uppercase
+            margin-bottom: 4rem
+
+        input
+            background-color: #eff1f0
+            border: 1px solid #b5b5b5
+            color: #999997
+            padding: .25rem 
+
+        input, select
+            font-size: 1.25rem
+            font-weight: 100
+            line-height: 1.5rem
+            width: 100%
 
         .info
             color: $LightGray
