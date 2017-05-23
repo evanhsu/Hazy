@@ -135,7 +135,7 @@ module.exports = ( { model, Currency, Range } ) =>  {
       </div>
       <div class="total side-by-side">
           <span>Total:</span>
-          <span data-js="total">${Currency.format(model.basePrice)}</span>
+          <span data-js="total">${Currency.format(model.total)}</span>
       </div>
       <div>
           <button data-js="submitBtn" type="button">Submit</button>

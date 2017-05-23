@@ -4,6 +4,8 @@ module.exports = Object.assign( { }, require('../lib/MyObject'), {
 
     Jwt: require('./lib/Jwt'),
 
+    Model: require('../lib/Model'),
+
     Postgres: require('../dal/Postgres'),
 
     Response: require('./lib/Response'),

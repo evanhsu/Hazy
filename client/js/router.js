@@ -6,6 +6,8 @@ module.exports = Object.create( {
     
     Views: require('./.ViewMap'),
 
+    Toast: require('./views/Toast'),
+
     User: require('./models/User'),
 
     capitalizeFirstLetter: string => string.charAt(0).toUpperCase() + string.slice(1),
@@ -13,6 +15,8 @@ module.exports = Object.create( {
     initialize() {
 
         this.contentContainer = document.querySelector('#content')
+
+        this.Toast.constructor()
 
         window.onpopstate = this.handle.bind(this)
 

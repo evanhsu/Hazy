@@ -27,6 +27,9 @@
   margin: 0 auto;
   width: 40%;
 }
+.Byop .registration .error {
+  border-color: #b13325;
+}
 .Byop .registration .division,
 .Byop .registration .player:first-child,
 .Byop .registration .players,
@@ -82,9 +85,10 @@
   margin: 0.25rem;
 }
 .Byop .registration button {
-  font-size: 1.25rem;
   background-color: #fff;
   border: 1px solid #b5b5b5;
+  cursor: pointer;
+  font-size: 1.25rem;
   padding: 0.5rem 1rem;
   text-transform: uppercase;
   margin-bottom: 4rem;
@@ -92,8 +96,19 @@
 .Byop .registration input {
   background-color: #eff1f0;
   border: 1px solid #b5b5b5;
-  color: #999997;
   padding: 0.25rem;
+}
+.Byop .registration input::-webkit-input-placeholder {
+  color: #999997;
+}
+.Byop .registration input:-moz-placeholder {
+  color: #999997;
+}
+.Byop .registration input::-moz-placeholder {
+  color: #999997;
+}
+.Byop .registration input:-ms-input-placeholder {
+  color: #999997;
 }
 .Byop .registration input,
 .Byop .registration select {
@@ -400,6 +415,40 @@
     line-height: 1.5rem;
     padding-top: 1rem;
   }
+}
+.Toast {
+  background-color: #b13325;
+  border-radius: 5px;
+  box-shadow: 0 0 12px #999;
+  color: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  opacity: 0.8;
+  position: fixed;
+  padding: 1rem;
+  right: 2rem;
+  top: 2rem;
+  transition: all 3s ease-in-out;
+  z-index: 200;
+}
+.Toast.success {
+  background-color: #4aa252;
+}
+.Toast >div:first-child {
+  float: left;
+  padding: 0.5rem;
+}
+.Toast >div:first-child svg {
+  fill: #fff;
+  stroke: #fff;
+  height: 2rem;
+  width: 2rem;
+}
+.Toast >div:nth-child(2) {
+  float: left;
+  padding: 0 0.5rem;
+}
+.Toast >div:nth-child(2) >div:first-child {
+  font-weight: bold;
 }
 @font-face {
   font-family: 'Roboto';

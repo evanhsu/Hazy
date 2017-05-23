@@ -13,8 +13,8 @@ module.exports = Object.create( Object.assign( {}, require('../../lib/MyObject')
 
                 req.onload = function() {
                     [ 500, 404, 401 ].includes( this.status )
-                        ? reject( this.response )
-                        : resolve( JSON.parse(this.response) )
+                        ? reject( JSON.parse( this.response ) )
+                        : resolve( JSON.parse( this.response ) )
                 }
 
                 if( data.method === "get" || data.method === "options" ) {

@@ -44,7 +44,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     events: {},
 
     getTemplateOptions() {
-        const rv = Object.assign( { user: this.user.data }, this.Format )
+        const rv = Object.assign( this.user ? { user: this.user.data } : {},  this.Format )
 
         if( this.model ) rv.model = this.model.data
         return rv
@@ -115,7 +115,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     render() {
         if( this.data ) this.model = Object.create( this.Model, { } ).constructor( this.data )
 
-        this.slurpTemplate( { template: this.template( this.getTemplateOptions() ), insertion: this.insertion, isView: true } )
+        this.slurpTemplate( { template: this.template( this.getTemplateOptions() ), insertion: this.insertion || { el: document.body }, isView: true } )
 
         this.renderSubviews()
 
