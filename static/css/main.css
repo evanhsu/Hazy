@@ -32,7 +32,8 @@
 .Byop .registration .players,
 .Byop .registration .contact,
 .Byop .registration .shirts,
-.Byop .registration .payment-info {
+.Byop .registration .payment-info,
+.Byop .registration .total {
   margin-bottom: 2rem;
 }
 .Byop .registration .player input:not(last-child),
@@ -42,6 +43,11 @@
 .Byop .registration .contact select:not(last-child),
 .Byop .registration .payment-info select:not(last-child) {
   margin-bottom: 0.5rem;
+}
+.Byop .registration .payment-info .info {
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin: 0.25rem;
 }
 .Byop .registration .shirts {
   line-height: 2rem;
@@ -67,6 +73,13 @@
 }
 .Byop .registration .exp-ccv >div:nth-child(2) {
   flex: 1;
+}
+.Byop .registration .total {
+  font-weight: 700;
+  justify-content: center;
+}
+.Byop .registration .total >* {
+  margin: 0.25rem;
 }
 .Byop .registration button {
   font-size: 1.25rem;

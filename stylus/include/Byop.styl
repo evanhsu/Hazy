@@ -27,12 +27,18 @@
         margin: 0 auto
         width: 40%
 
-        .division, .player:first-child, .players, .contact, .shirts, .payment-info
+        .division, .player:first-child, .players, .contact, .shirts, .payment-info, .total
             margin-bottom: 2rem
 
         .player, .contact, .payment-info
             input:not(last-child), select:not(last-child)
                 margin-bottom: .5rem
+
+        .payment-info
+            .info
+                font-size: .75rem
+                font-weight: 700
+                margin: .25rem
                 
         .shirts
             line-height: 2rem
@@ -59,6 +65,13 @@
 
                 &:nth-child(2)
                     flex: 1
+
+        .total
+            font-weight: 700
+            justify-content: center
+
+            >*
+                margin: .25rem
 
         button
             font-size: 1.25rem

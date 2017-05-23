@@ -1,5 +1,7 @@
 module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('events').EventEmitter.prototype, {
 
+    Format: require('../Format'),
+
     Model: require('../models/__proto__'),
 
     OptimizedResize: require('./lib/OptimizedResize'),
@@ -42,9 +44,9 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     events: {},
 
     getTemplateOptions() {
-        const rv = { user: this.user.data }
+        const rv = Object.assign( { user: this.user.data }, this.Format )
 
-        if( this.model)  rv.model = this.model.data
+        if( this.model ) rv.model = this.model.data
         return rv
     },
 

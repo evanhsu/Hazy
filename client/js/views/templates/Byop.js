@@ -1,5 +1,6 @@
-module.exports = ( { model } ) =>  {
+module.exports = ( { model, Currency, Range } ) =>  {
     const selectCaret = require('./lib/caret-down')( { name: 'caret' } )
+    const weightOptions = Range( 26 ).map( i => { const value = i + 150; return `<option value="${value}">${value}</option>` } ).join('')
     const playerFields = no =>
         `<div class="player">` +
             `<div>Player ${no}</div>` +
@@ -12,6 +13,9 @@ module.exports = ( { model } ) =>  {
                     `<option value="l">Large</option>` +
                     `<option value="xl">X-Large</option>` +
                     `<option value="xxl">XX-Large</option>` +
+                    `<option value="xxxl">XXX-Large</option>` +
+                    `<option value="xxxxl">XXXX-Large</option>` +
+                    `<option value="xxxxxl">XXXXX-Large</option>` +
                 `</select>${selectCaret}` +
             `</div>` +
             `<div class="select-wrap">` +
@@ -19,6 +23,19 @@ module.exports = ( { model } ) =>  {
                     `<option value="null">Ace Fund</option>` +
                     `<option value="true">Yes!</option>` +
                     `<option value="falsem">Not right now</option>` +
+                `</select>${selectCaret}` +
+            `</div>` +
+            `<div class="select-wrap">` +
+                `<select data-js="disc{no}">` +
+                    `<option value="null">I like to throw</option>` +
+                    `<option value="stable">Stable</option>` +
+                    `<option value="under">Under Stable</option>` +
+                    `<option value="over">Over Stable</option>` +
+                `</select>${selectCaret}` +
+            `</div>` +
+            `<div class="select-wrap">` +
+                `<select data-js="weight{no}">` +
+                    `<option value="null">My preferred weight is</option>` + weightOptions +
                 `</select>${selectCaret}` +
             `</div>` +
         `</div>`
@@ -43,13 +60,14 @@ module.exports = ( { model } ) =>  {
           <select data-js="division">
             <option value="null">Division</option>
             <option value="rec">Recreation</option>
-            <option value="rec-int">Recreation Intermediate</option>
-            <option value="int-adv">Intermediate Advanced</option>
-            <option value="adv-opn">Advanced Open</option>
-            <option value="mxd-adv">Mixed Advanced</option>
-            <option value="mst-opn">Master's Open</option>
-            <option value="mst-wmn">Master's Women</option>
-            <option value="mst-wmn">Women's Open</option>
+            <option value="int">Intermediate</option>
+            <option value="adv">Advanced</option>
+            <option value="adv-mas">Advanced Masters</option>
+            <option value="opn">Open</option>
+            <option value="opn-mas">Open Masters</option>
+            <option value="wom">Women's</option>
+            <option value="wom-opn">Women's Open</option>
+            <option value="mix">Mixed</option>
           </select>
           ${selectCaret}
       </div>
@@ -57,17 +75,13 @@ module.exports = ( { model } ) =>  {
           ${playerFields('1')}  
           ${playerFields('2')}
           <div class="info">$5 per player for entry into the ace fund. You can pass for now and still enter your team on the day of the event.</div>
+          <div class="info">Shirt sizes XXL and larger will include an extra fee of $2.50.</div>
       </div>
       <div class="contact">
           <div>Contact</div>
           <div class="info">We will not release your info to anyone.  Contact information will only be used for us to reach you for purposes related to the BYOP event.</div>
           <input data-js="email" type="text" placeholder="Email" />
           <input data-js="phone" type="text" placeholder="Phone Number" />
-      </div>
-      <div class="info">Need extra shirts? Tell us how many in the box below. $5 per shirt, limit 10 per team.</div>
-      <div class="shirts side-by-side">
-        <div>Extra Shirts</div>
-        <input data-js="extraShirts" type="text" maxlength="2" placeholder="0" />
       </div>
       <div class="payment-info">
           <div>Payment Info</div>
@@ -119,8 +133,12 @@ module.exports = ( { model } ) =>  {
             </div>
           </div>
       </div>
+      <div class="total side-by-side">
+          <span>Total:</span>
+          <span data-js="total">${Currency.format(model.basePrice)}</span>
+      </div>
       <div>
-        <button data-js="submitBtn" type="button">Submit</button>
+          <button data-js="submitBtn" type="button">Submit</button>
       </div>
   </div>
 </section>`
