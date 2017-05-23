@@ -92,6 +92,10 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         this.initialize().render()
     },
 
+    onNavigation() {
+        return this.show()
+    },
+
     onShown( resolve ) {
         this.els.container.removeEventListener( 'transitionend', this.onShownProxy )
         if( this.size ) this.size()

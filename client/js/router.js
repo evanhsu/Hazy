@@ -46,6 +46,8 @@ module.exports = Object.create( {
 
         if( view === this.currentView ) return this.views[ view ].onNavigation( path )
 
+        this.scrollToTop()
+
         Promise.all( Object.keys( this.views ).map( view => this.views[ view ].hide() ) )
         .then( () => {
 
@@ -69,6 +71,10 @@ module.exports = Object.create( {
     navigate( location ) {
         if( location !== window.location.pathname ) history.pushState( {}, '', location )
         this.handle()
-    }
+    },
+
+    scrollToTop() {
+        window.scroll( { top: 0, left: 0, behavior: 'smooth' } )
+    },
 
 }, { currentView: { value: '', writable: true }, views: { value: { } } } )
