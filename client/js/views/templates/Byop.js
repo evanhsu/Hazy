@@ -128,8 +128,8 @@ module.exports = ( { model, Currency, Range } ) =>  {
                 </div>
             </div>
             <div>
-                <div>CCV</div>
-                <input data-js="ccv" type="text" />
+                <div>CVC</div>
+                <input data-js="cvc" type="text" />
             </div>
           </div>
       </div>

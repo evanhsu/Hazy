@@ -5,7 +5,7 @@ const Fs = require('fs'),
     httpPort = process.env.HTTP_PORT || 80,
     httpsPort = process.env.HTTPS_PORT || 443
 
-Router.initialize()
+module.exports = Router.initialize()
 .then( () => {
 
     require('http').createServer( ( request, response ) => {
@@ -21,5 +21,7 @@ Router.initialize()
     ).listen( httpsPort )
 
     console.log( `HTTPS server listening at ${httpsPort}` )
+
+    return Promise.resolve()
 } )
 .catch( e => console.log( `Error initializing app: ${e.stack ||e}` ) )

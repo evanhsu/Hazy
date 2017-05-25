@@ -1,14 +1,14 @@
 module.exports = Object.create( {
 
-    apply( resource, result ) { return this[ resource.request.method ]( resource, result ) },
+    apply( resource, rows ) { return this[ resource.request.method ]( resource, rows ) },
 
-    DELETE( resource, result ) { return resource.respond( result.rows.id ) },
+    DELETE( resource, rows ) { return resource.respond( rows[0].id ) },
 
-    GET( resource, result ) {
-        return resource.respond( { body: body = ( resource.path.length > 2 ) ? ( ( result.rows.length ) ? result.rows[0] : { } ) : result.rows } )
+    GET( resource, rows ) {
+        return resource.respond( { body: body = ( resource.path.length > 2 ) ? ( ( rows.length ) ? rows[0] : { } ) : rows } )
     },
 
-    PATCH( resource, result ) { resource.respond( { body: result.rows[0] } ) },
+    PATCH( resource, rows ) { resource.respond( { body: rows[0] } ) },
 
-    POST( resource, result ) { resource.respond( { body: result.rows[0] } ) }
+    POST( resource, rows ) { resource.respond( { body: rows[0] } ) }
 }, { } )

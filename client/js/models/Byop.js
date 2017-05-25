@@ -59,9 +59,9 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             error: 'A credit card year expiration is required'
         },
 
-        'ccv': {
+        'cvc': {
             type: 'text',
-            error: 'A credit card ccv is required'
+            error: 'A credit card cvc is required'
         }
     },
 

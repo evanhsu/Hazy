@@ -172,7 +172,7 @@ module.exports = Object.create( Object.assign( {}, require('../lib/MyObject'), {
             return Promise.resolve()
         } )
         .then( () => 
-            this.Postgres.query( `SELECT * FROM division` )
+            this.query( `SELECT * FROM division` )
             .then( divisions =>
                 Promise.resolve( this.divisions = Object.create( this.Model ).constructor( divisions, { storeBy: [ 'id', 'name' ] } ) )
             )

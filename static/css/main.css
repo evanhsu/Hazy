@@ -1,3 +1,7 @@
+.Admin img {
+  margin: 5rem auto;
+  width: 75%;
+}
 .Byop {
   text-align: center;
 }
@@ -85,37 +89,7 @@
   margin: 0.25rem;
 }
 .Byop .registration button {
-  background-color: #fff;
-  border: 1px solid #b5b5b5;
-  cursor: pointer;
-  font-size: 1.25rem;
-  padding: 0.5rem 1rem;
-  text-transform: uppercase;
   margin-bottom: 4rem;
-}
-.Byop .registration input {
-  background-color: #eff1f0;
-  border: 1px solid #b5b5b5;
-  padding: 0.25rem;
-}
-.Byop .registration input::-webkit-input-placeholder {
-  color: #999997;
-}
-.Byop .registration input:-moz-placeholder {
-  color: #999997;
-}
-.Byop .registration input::-moz-placeholder {
-  color: #999997;
-}
-.Byop .registration input:-ms-input-placeholder {
-  color: #999997;
-}
-.Byop .registration input,
-.Byop .registration select {
-  font-size: 1.25rem;
-  font-weight: 100;
-  line-height: 1.5rem;
-  width: 100%;
 }
 .Byop .registration .info {
   color: #acacac;
@@ -223,6 +197,38 @@
   top: 0.6rem;
   width: 1rem;
   z-index: 1;
+}
+input {
+  background-color: #eff1f0;
+  border: 1px solid #b5b5b5;
+  padding: 0.25rem;
+}
+input::-webkit-input-placeholder {
+  color: #999997;
+}
+input:-moz-placeholder {
+  color: #999997;
+}
+input::-moz-placeholder {
+  color: #999997;
+}
+input:-ms-input-placeholder {
+  color: #999997;
+}
+input,
+select {
+  font-size: 1.25rem;
+  font-weight: 100;
+  line-height: 1.5rem;
+  width: 100%;
+}
+button {
+  background-color: #fff;
+  border: 1px solid #b5b5b5;
+  cursor: pointer;
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
 }
 .Header {
   background-color: #000;
@@ -415,6 +421,15 @@
     line-height: 1.5rem;
     padding-top: 1rem;
   }
+}
+.Login {
+  margin: 10rem auto 6rem auto;
+  text-align: center;
+  width: 50%;
+}
+.Login input,
+.Login h3 {
+  margin-bottom: 1rem;
 }
 .Toast {
   background-color: #b13325;

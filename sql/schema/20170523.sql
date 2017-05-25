@@ -42,4 +42,6 @@ CREATE TABLE byop (
 );
 
 ALTER TABLE byop ADD COLUMN "waitList" BOOLEAN;
-ALTER TABLE byop ADD COLUMN "hasPaid" BOOLEAN;
+ALTER TABLE byop ADD COLUMN "hasPaid" BOOLEAN DEFAULT FALSE;
+ALTER TABLE byop ADD COLUMN "stripeChargeId" TEXT;
+ALTER TABLE person ADD CONSTRAINT constraint_email_unique UNIQUE (email);

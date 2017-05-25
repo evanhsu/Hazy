@@ -18,6 +18,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         this.subviewElements = [ ]
 
         if( this.requiresLogin && ( !this.user.isLoggedIn() ) ) return this.handleLogin()
+        if( this.user && !this.isAllowed( this.user ) ) return this.scootAway()
 
         return this.initialize().render()
     },
@@ -81,6 +82,11 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     initialize() {
         return Object.assign( this, { els: { }, slurp: { attr: 'data-js', view: 'data-view', name: 'data-name' }, views: { } } )
     },
+
+    isAllowed( user ) {
+        if( !this.requiresRole ) return true
+        return this.requiresRole && user.data.roles.includes( this.requiresRole )
+    },
     
     isHidden() { return this.els.container.classList.contains('hidden') },
 
@@ -91,6 +97,9 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     },
 
     onLogin() {
+
+        if( !this.isAllowed( this.user ) ) return this.scootAway()
+
         this.initialize().render()
     },
 
@@ -137,6 +146,14 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         } )
 
         delete this.subviewElements
+
+        return this
+    },
+
+    scootAway() {
+        this.Toast.show( 'error', 'You are not allowed here.  Sorry.')
+        .catch( e => { this.Error( e ); this.emit( 'navigate', `/` ) } )
+        .then( () => this.emit( 'navigate', `/` ) )
 
         return this
     },
