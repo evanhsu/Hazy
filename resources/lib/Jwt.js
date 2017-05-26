@@ -15,15 +15,16 @@ module.exports = Object.create( Object.assign( { }, require('../../lib/MyObject'
     },
 
     parseToken( token ) {
+        const defaultUser = { roles: [ ] }
         return new Promise( ( resolve, reject ) => {
-            if( ! token ) return resolve({})
+            if( ! token ) return resolve( defaultUser )
     
             this.Jws.createVerify( {
                 algorithm: "HS256",
                 key: process.env.JWS_SECRET,
                 signature: token,
             } ).on( 'done', ( verified, obj ) => {
-                if( ! verified ) return resolve({})
+                if( ! verified ) return resolve( defaultUser )
                 resolve( obj.payload )
             } ).on( 'error', reject )
         } )

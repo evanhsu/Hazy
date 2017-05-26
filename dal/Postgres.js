@@ -63,7 +63,7 @@ module.exports = Object.create( Object.assign( {}, require('../lib/MyObject'), {
             nullColumnsStr = nullColumns.length ? `, ${nullColumns.map( this.wrap ).join(', ')}` : '',
             nullVals = nullColumns.length ? `, ${nullColumns.map( column => `NULL` ).join(', ')}` : '',
             queryData = this.getVarsValues( name, data, keys )
-
+        
         let upsert = ``,
             upsertVals = [ ]
             
@@ -104,8 +104,8 @@ module.exports = Object.create( Object.assign( {}, require('../lib/MyObject'), {
         } )
     },
 
-    truncate() {
-        return this.query( `TRUNCATE ` + Object.keys( this.tables ).map( table => `"${table}"` ).join(', ') )
+    truncate( omit=[] ) {
+        return this.query( `TRUNCATE ` + this.tableNames.filter( table => !omit.includes(table) ).map( table => `"${table}"` ).join(', ') )
     },
 
     getColumnDescription( table, column ) {
@@ -243,6 +243,7 @@ module.exports = Object.create( Object.assign( {}, require('../lib/MyObject'), {
         "date": "Date",
         "integer": "Integer",
         "money": "Float",
+        "numeric": "Float",
         "real": "Float",
         "timestamp with time zone": "DateTime",
         "text": "Text"

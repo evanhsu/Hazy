@@ -1,4 +1,6 @@
 module.exports = Object.assign( { }, require('../lib/MyObject'), {
+
+    Common: require('./lib/Common'),
     
     Db: require('./lib/Db'),
 
@@ -11,6 +13,8 @@ module.exports = Object.assign( { }, require('../lib/MyObject'), {
     Response: require('./lib/Response'),
 
     apply( method ) {
+        if( this[method] ) return this[method]()
+
         return this.getUser()
         .then( () => 
             method === 'GET'

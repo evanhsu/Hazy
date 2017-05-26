@@ -28,8 +28,8 @@ CREATE TABLE byop (
    "divisionId"   INTEGER REFERENCES division (id),
    name1          VARCHAR(100),
    name2          VARCHAR(100),
-   shirtSize1     VARCHAR(100),
-   shirtSize2     VARCHAR(100),
+   "shirtSize1"   VARCHAR(100),
+   "shirtSize2"   VARCHAR(100),
    ace1           BOOLEAN,
    ace2           BOOLEAN,
    disc1          VARCHAR(50),
@@ -44,4 +44,6 @@ CREATE TABLE byop (
 ALTER TABLE byop ADD COLUMN "waitList" BOOLEAN;
 ALTER TABLE byop ADD COLUMN "hasPaid" BOOLEAN DEFAULT FALSE;
 ALTER TABLE byop ADD COLUMN "stripeChargeId" TEXT;
+ALTER TABLE byop ADD COLUMN "belmontDonation" DECIMAL;
+
 ALTER TABLE person ADD CONSTRAINT constraint_email_unique UNIQUE (email);

@@ -29,6 +29,8 @@ module.exports = Object.create( {
     },
 
     POST( resource ) {
+        return this.Postgres.insert( resource.path[0], resource.body )
+        /*
         const bodyKeys = Object.keys( resource.body ),
               name = resource.path[0],
               columns = bodyKeys.map( key => this.Postgres.tables[ name ].columns.find( column => column.name === key ) )
@@ -37,6 +39,7 @@ module.exports = Object.create( {
             `INSERT INTO "${name}" ( ${this._wrapKeys(bodyKeys)} ) VALUES ( ${ this._getValues( bodyKeys, columns ) } ) RETURNING ${this._getColumns(name, { columnOnly: true } )}`,
             this._getParameters( bodyKeys, resource.body, columns )
         )
+        */
     },
 
     _getColumns( name, opts={} ) {
@@ -47,11 +50,11 @@ module.exports = Object.create( {
 
     _getValues( keys, columns ) {
         let varIdx = 1
-        return keys.map( ( key, i ) =>
-            columns[i].range === 'Geography'
+        return keys.map( ( key, i ) => {
+            return columns[i].range === 'Geography'
                 ? `ST_Makepoint( $${varIdx++}, $${varIdx++} )`
                 : `$${varIdx++}`
-        ).join(', ')
+        } ).join(', ')
     },
 
     _getParameters( keys, body, columns ) {

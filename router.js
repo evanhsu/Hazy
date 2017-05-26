@@ -53,7 +53,7 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
                 files.filter( name => !/^[\._]/.test(name) && /\.js/.test(name) )
                 .reduce( ( memo, name ) => Object.assign( memo, { [name.replace('.js','')]: true } ), { } )
             
-            this.Postgres.tableNames.forEach( table => this.jsonRoutes[ table ] = fileHash[ table ] ? table : '__proto__' )
+            return Promise.resolve( this.Postgres.tableNames.forEach( table => this.jsonRoutes[ table ] = fileHash[ table ] ? table : '__proto__' ) )
         } )
     },
 
