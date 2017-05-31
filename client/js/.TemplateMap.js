@@ -5,5 +5,6 @@ module.exports={
 	Header: require('./views/templates/Header'),
 	Home: require('./views/templates/Home'),
 	Login: require('./views/templates/Login'),
+	PaidCash: require('./views/templates/PaidCash'),
 	Toast: require('./views/templates/Toast')
 }

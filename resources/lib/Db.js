@@ -12,6 +12,8 @@ module.exports = Object.create( {
             queryKeys = ( resource.path.length > 1 ) ? { id: resource.path[1] } : Object.keys( resource.query || {} ),
             where = ( queryKeys.length ) ? 'WHERE' : ''
 
+        if( this.Postgres[ `${name}s` ] ) return Promise.resolve( this.Postgres[ `${name}s` ].data )
+
         queryKeys.forEach( key => where += ` ${name}.${key} = $${paramCtr++}` )
 
         return this.Postgres.query( `SELECT ${this._getColumns(name)} FROM "${name}" ${where}`, queryKeys.map( key => this.query[key] ) )

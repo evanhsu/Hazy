@@ -1,10 +1,41 @@
 module.exports = Object.assign( {}, require('./__proto__'), {
 
     data: {
-        total: 35
+        total: 123.5
     },
 
     meta: {
+ 
+        aceOptions:[
+            { value: 'true', label: 'Yes!' },
+            { value: 'false', label: 'Not right now' }
+        ],
+
+        discs: [
+            { value: 'luster-gator', label: 'Luster Gator (173g-175g)' },
+            { value: 'star-roc', label: 'Star Roc (178g-180g)' },
+            { value: 'star-destroyer', label: 'Star Destroyer (151g-175g)' },
+            { value: 'champion-thunderbird', label: 'Champion Thunderbird (165g-175g)' },
+            { value: 'champion-leopard-three', label: 'Champion Leopard 3 (165g-175g)' },
+            { value: 'champion-flattop-firebird', label: 'Champion Flattop Firebird (165g-175g)' }
+        ],
+
+        shirtSizes: [
+            { value: 'f-sx', label: 'Female X-Small' },
+            { value: 'f-s', label: 'Female Small' },
+            { value: 'f-m', label: 'Female Medium' },
+            { value: 'f-l', label: 'Female Large' },
+            { value: 'f-xl', label: 'Female X-Large' },
+            { value: 'f-xxl', label: 'Female XX-Large' },
+            { value: 'm-s', label: 'Male Small' },
+            { value: 'm-m', label: 'Male Medium' },
+            { value: 'm-l', label: 'Male Large' },
+            { value: 'm-xl', label: 'Male X-Large' },
+            { value: 'm-xxl', label: 'Male XX-Large' },
+            { value: 'm-xxxl', label: 'Male XXX-Large' },
+            { value: 'm-xxxxl', label: 'Male XXXX-Large' }
+        ],
+
         division: {
             type: 'select'
         },

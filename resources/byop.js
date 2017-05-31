@@ -4,9 +4,11 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
     Stripe: require('./lib/Stripe'),
 
-    DELETE() { return this.respond( { body: { }, code: 404 } ) },
+    DELETE() { this.respond( { body: { }, code: 404 } ); return Promise.resolve() },
 
-    PATCH() { return this.respond( { body: { }, code: 404 } ) },
+    PATCH() { this.respond( { body: { }, code: 404 } ); return Promise.resolve() },
+    
+    PUT() { this.respond( { body: { }, code: 404 } ); return Promise.resolve() },
 
     POST() {
         return this.getUser()
@@ -16,7 +18,9 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         .then( ( [ { id } ] ) =>
             this.hasCCInfo && (!this.body.waitList)
                 ? this.pay( id )
-                : this.nonPayingResponse()
+                : this.user.roles.includes('admin') && (!this.body.waitList)
+                    ? this.paidCash( id )
+                    : this.nonPayingResponse()
         )
     },
 
@@ -31,10 +35,15 @@ module.exports = Object.assign( { }, require('./__proto__'), {
             : this.respond( { body: { message: 'You have been added to the wait list.' } } )
     },
 
+    paidCash( byopId ) [
+        .then( charge => this.Postgres.update( 'byop', { hasPaid: true }, { id: byopId } ) )
+        .then( () => this.respond( { body: { message: 'Great Job!' } } ) )
+    },
+
     pay( byopId ) {
         return this.Stripe.charge( {
             amount: Math.floor( this.body.total * 100 ),
-            metadata: { byopId },
+            metadata: { byopId, names: [ this.body.name1, this.body.name2 ] },
             receipt_email: this.body.email,
             source: {
                 exp_month: this.body.ccMonth,
@@ -59,13 +68,17 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         this.belmontDonation = Number.parseFloat( this.body.belmontDonation )
         this.total = Number.parseFloat( this.body.total )
 
+        this.Byop.generatedAttrs.forEach( attr => {
+            if( this.body[ attr ] !== undefined ) this.respond( { stopChain: true, code: 500, body: { message: `${attr} disallowed.` } } )
+        } )
+
         this.Byop.requiredAttrs.forEach( attr => {
             if( this.body[ attr ] === undefined ) this.respond( { stopChain: true, code: 500, body: { message: `${attr} required.` } } )
         } )
 
         if( ! this.division ) return this.respond( { stopChain: true, code: 500, body: { message: 'Invalid Division' } } )
 
-        if( Number.isNaN( this.total ) || this.total < 123.5 ) return this.respond( { stopChain: true, code: 500, body: { message: 'Invalid Total.' } } )
+        if( Number.isNaN( this.total ) || this.total < 120 ) return this.respond( { stopChain: true, code: 500, body: { message: 'Invalid Total.' } } )
 
         return ( this.division.name === 'rec' || this.division.name === 'int'
             ? this.checkAvailability( 'sat' )
@@ -79,7 +92,9 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     validateTotal() {
-        let price = 123.5
+        let price = 120
+
+        if( this.hasCCInfo ) price += 3.5
 
         if( this.body.ace1 ) price += 5
         if( this.body.ace2 ) price += 5

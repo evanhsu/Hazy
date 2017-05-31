@@ -20,7 +20,7 @@ module.exports = Object.assign( { }, require('../lib/MyObject'), {
             method === 'GET'
                 ? Promise.resolve( this.getQs() )
                 : method === 'PATCH' || method === 'POST'
-                    ? this.slurpBody()
+                    ? this.validateUser().then( () => this.slurpBody() )
                     : method === 'DELETE'
                         ? Promise.resolve()
                         : this.respond( { stopChain: true, code: 404 } )
@@ -99,5 +99,10 @@ module.exports = Object.assign( { }, require('../lib/MyObject'), {
         } )
     },
 
+    validateUser() {
+        if( this.user.id === undefined ) return this.respond( { stopChain: true, code: 401, body: { } } )
+
+        return Promise.resolve()
+    }
     
 } )

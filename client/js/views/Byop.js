@@ -1,5 +1,15 @@
 module.exports = Object.assign( {}, require('./__proto__'), {
 
+    Divisions: Object.create( require('../models/__proto__'), { resource: { value: 'division' } } ),
+
+    Templates: {
+        PaidCash: require('./templates/PaidCash')
+    },
+
+    addDivisions() {
+        this.Divisions.data.forEach( division => this.slurpTemplate( { template: `<option value="${division.id}">${division.label}</option>`, insertion: { el: this.els.division } } ) )
+    },
+
     model: Object.create( require('../models/Byop') ),
 
     events: {
@@ -27,6 +37,12 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
     postRender() {
         this.els.container.querySelectorAll('input, select').forEach( el => el.addEventListener( 'focus', e => e.target.classList.remove('error') ) )
+
+        this.Divisions.get()
+        .then( () => this.addDivisions() )
+        .catch( e => this.Error() )
+
+        if( this.user.roles.includes('admin') ) this.slurpTemplate( { template: this.Templates.PaidCash(), insertion: { el: this.els.payment } } )
 
         return this
     },

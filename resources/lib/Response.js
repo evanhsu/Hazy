@@ -5,7 +5,7 @@ module.exports = Object.create( {
     DELETE( resource, rows ) { return resource.respond( rows[0].id ) },
 
     GET( resource, rows ) {
-        return resource.respond( { body: body = ( resource.path.length > 2 ) ? ( ( rows.length ) ? rows[0] : { } ) : rows } )
+        return resource.respond( { body: ( resource.path.length > 2 ) ? ( ( rows.length ) ? rows[0] : { } ) : rows } )
     },
 
     PATCH( resource, rows ) { resource.respond( { body: rows[0] } ) },

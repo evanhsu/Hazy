@@ -47,7 +47,11 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     getTemplateOptions() {
         const rv = Object.assign( this.user ? { user: this.user.data } : {},  this.Format )
 
-        if( this.model ) rv.model = this.model.data
+        if( this.model ) {
+            rv.model = this.model.data
+
+            if( this.model.meta ) rv.meta = this.model.meta
+        }
         return rv
     },
 

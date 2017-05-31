@@ -11,7 +11,7 @@ const Request = Object.assign( { }, require('../../lib/MyObject'), {
         this.headers = Object.assign( { accept: 'application/json' }, this.opts.headers )
            
         if( /(PUT|POST|PATCH)/.test(this.method) ) {
-            if( ! this.opts.contentType ) this.opts.body = JSON.stringify(this.opts.body)
+            if( !this.opts.contentType && this.opts.body ) this.opts.body = JSON.stringify(this.opts.body)
             Object.assign( this.headers, {
                 'Content-Type': this.opts.contentType || 'application/json',
                 'Content-Length': this.opts.body ? this.opts.body.length : 0 } )
