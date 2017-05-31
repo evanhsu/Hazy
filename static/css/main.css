@@ -76,10 +76,19 @@
 .Byop .registration .payment-info select:not(last-child) {
   margin-bottom: 0.5rem;
 }
+.Byop .registration .spots-left {
+  color: #4ab74a;
+}
 .Byop .registration .payment-info .info {
   font-size: 0.75rem;
   font-weight: 700;
   margin: 0.25rem;
+}
+.Byop .registration .payment-info.disabled {
+  opacity: 0.3;
+}
+.Byop .registration .payment-info .cash {
+  opacity: 1;
 }
 .Byop .registration .shirts {
   line-height: 2rem;
@@ -115,6 +124,18 @@
 }
 .Byop .registration button {
   margin-bottom: 4rem;
+  transition: background-color 0.5s, color 0.5s, opacity 0.25s;
+}
+.Byop .registration button.submitting {
+  opacity: 0.3;
+}
+.Byop .registration button.submitting:hover {
+  background-color: #fff;
+  color: #000;
+}
+.Byop .registration button:hover {
+  background-color: #000;
+  color: #fff;
 }
 .featured-event {
   position: relative;
@@ -154,6 +175,11 @@
   font-size: 1rem;
   margin-top: 1rem;
   font-weight: 700;
+  transition: background-color 0.5s, color 0.5s;
+}
+.featured-event .content .center button:hover {
+  background-color: #fff;
+  color: #000;
 }
 .Footer {
   color: #fff;
@@ -241,6 +267,10 @@ select {
   font-weight: 100;
   line-height: 1.5rem;
   width: 100%;
+}
+input:focus,
+select:focus {
+  border-color: #4ab74a;
 }
 button {
   background-color: #fff;

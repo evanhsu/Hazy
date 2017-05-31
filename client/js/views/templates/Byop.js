@@ -18,11 +18,11 @@ module.exports = ( { meta, model, Currency, Range } ) =>  {
                 `</select>${selectCaret}` +
             `</div>` +
             `<div class="select-wrap">` +
-                `<select data-js="disc{no}">` +
+                `<select data-js="disc${no}">` +
                     `<option value="null">Would like a...</option>` + discs +
                 `</select>${selectCaret}` +
             `</div>` +
-            `<input data-js="weight{no}" placeholder="My preferred weight is" />` +
+            `<input data-js="weight${no}" placeholder="My preferred weight is" />` +
         `</div>`
          
     return `` +
@@ -51,11 +51,14 @@ module.exports = ( { meta, model, Currency, Range } ) =>  {
       <h3>Registration</h3>
       <div class="sub-heading">Enter your information below.</div>
       <div class="info">Recreation and Intermediate divisions will play on August 12th.  All other divisions will play August 13th. There must be 3 teams to make a division. If you sign up for a division that is too small you will have the option to move to another division.</div>
-      <div class="select-wrap division">
-          <select data-js="division">
-            <option value="null">Division</option>
-          </select>
-          ${selectCaret}
+      <div class="division">
+          <div class="select-wrap">
+              <select data-js="divisionId">
+                <option value="null">Division</option>
+              </select>
+              ${selectCaret}
+          </div>
+          <div class="spots-left" data-js="spotsLeft"></div>
       </div>
       <div class="players">
           ${playerFields('1')}  

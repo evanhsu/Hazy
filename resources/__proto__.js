@@ -29,6 +29,8 @@ module.exports = Object.assign( { }, require('../lib/MyObject'), {
         .then( result => this.Response.apply( this, result ) )
     },
 
+    badRequest() { return Promise.resolve( this.respond( { stopChain: true, body: { message: 'Bad Request' }, code: 400 } ) ) },
+
     end( data ) {
         return new Promise( resolve => {
             data.body = JSON.stringify( data.body )

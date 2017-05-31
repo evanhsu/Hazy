@@ -42,7 +42,7 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
 
     initialize() {
 
-        this.jsonRoutes = { me: 'me', auth: 'auth' }
+        this.jsonRoutes = { me: 'me', auth: 'auth', spotsLeft: 'spotsLeft' }
 
         return Promise.all( [
             this.Postgres.initialize(),
@@ -64,7 +64,7 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
             response.writeHead( 404, { 'Content-Length': 0, 'Content-Type': 'text/plain' } )
             response.end()
         }
-
+        
         return Object.create( require(`./resources/${file}`), {
             request: { value: request },
             response: { value: response },

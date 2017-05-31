@@ -65,11 +65,20 @@
             input:not(last-child), select:not(last-child)
                 margin-bottom: .5rem
 
+        .spots-left
+            color: $HazyGreen
+
         .payment-info
             .info
                 font-size: .75rem
                 font-weight: 700
                 margin: .25rem
+
+            &.disabled
+                opacity: .3
+
+            .cash
+                opacity: 1
                 
         .shirts
             line-height: 2rem
@@ -106,5 +115,15 @@
 
         button
             margin-bottom: 4rem
+            transition: background-color .5s, color .5s, opacity .25s
 
-        
+            &.submitting
+                opacity: .3
+            
+                &:hover
+                    background-color: white
+                    color: black
+
+            &:hover
+                background-color: black
+                color: white

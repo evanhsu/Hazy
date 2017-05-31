@@ -44,6 +44,8 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         } )
     },
 
+    git( attr ) { return this.data[ attr ] },
+
     patch( id, data ) {
         return this.Xhr( { method: 'patch', id, resource: this.resource, headers: this.headers || {}, data: JSON.stringify( data ) } )
         .then( response => {
@@ -56,28 +58,19 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     },
 
     post( model ) {
-        return this.Xhr( { method: 'post', resource: this.resource, headers: this.headers || {}, data: JSON.stringify( model ) } )
+        return this.Xhr( { method: 'post', resource: this.resource, headers: this.headers || {}, data: JSON.stringify( model || this.data ) } )
         .then( response => {
-            this.data = this.data ? this.data.concat( response ) : [ response ]
+            //this.data = this.data ? this.data.concat( response ) : [ response ]
 
-            if( this.store ) Object.keys( this.store ).forEach( attr => this._store( response, attr ) )
+            //if( this.store ) Object.keys( this.store ).forEach( attr => this._store( response, attr ) )
 
             return Promise.resolve( response )
         } )
     },
 
-    /*
-    storeBy( data ) {
-
-        data.forEach( datum => Object.keys( this.store ).forEach( attr => this._store( datum, attr ) ) )
-
-        return data
-    },
-
-    _store( datum, attr ) {
-        if( !this.store[ attr ][ datum[ attr ] ] ) this.store[ attr ][ datum[ attr ] ] = [ ]
-        this.store[ attr ][ datum[ attr ] ].push( datum )
+    set( attr, value ) {
+        this.data[ attr ] = value
+        this.emit( `${attr}Changed` )
     }
-    */
 
 } )

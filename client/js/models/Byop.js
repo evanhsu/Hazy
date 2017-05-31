@@ -5,6 +5,8 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     },
 
     meta: {
+
+        basePrice: 123.5,
  
         aceOptions:[
             { value: 'true', label: 'Yes!' },
@@ -15,7 +17,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             { value: 'luster-gator', label: 'Luster Gator (173g-175g)' },
             { value: 'star-roc', label: 'Star Roc (178g-180g)' },
             { value: 'star-destroyer', label: 'Star Destroyer (151g-175g)' },
-            { value: 'champion-thunderbird', label: 'Champion Thunderbird (165g-175g)' },
+            { value: 'star-aviar-three', label: 'Star Aviar3 (173g-175g)' },
             { value: 'champion-leopard-three', label: 'Champion Leopard 3 (165g-175g)' },
             { value: 'champion-flattop-firebird', label: 'Champion Flattop Firebird (165g-175g)' }
         ],
@@ -36,7 +38,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             { value: 'm-xxxxl', label: 'Male XXXX-Large' }
         ],
 
-        division: {
+        divisionId: {
             type: 'select'
         },
 

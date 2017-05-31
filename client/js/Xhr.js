@@ -13,9 +13,11 @@ module.exports = Object.create( Object.assign( {}, require('../../lib/MyObject')
 
                 req.onload = function() {
                     [ 500, 404, 401 ].includes( this.status )
-                        ? reject( JSON.parse( this.response ) )
+                        ? reject( this.response ? JSON.parse( this.response ) : this.status )
                         : resolve( JSON.parse( this.response ) )
                 }
+
+                data.method = data.method || "get"
 
                 if( data.method === "get" || data.method === "options" ) {
                     let qs = data.qs ? `?${data.qs}` : '' 

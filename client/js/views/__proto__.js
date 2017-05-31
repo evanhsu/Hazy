@@ -5,13 +5,13 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     Model: require('../models/__proto__'),
 
     OptimizedResize: require('./lib/OptimizedResize'),
+    
+    Xhr: require('../Xhr'),
 
     bindEvent( key, event, el ) {
         var els = el ? [ el ] : Array.isArray( this.els[ key ] ) ? this.els[ key ] : [ this.els[ key ] ]
         els.forEach( el => el.addEventListener( event || 'click', e => this[ `on${this.capitalizeFirstLetter(key)}${this.capitalizeFirstLetter(event)}` ]( e ) ) )
     },
-
-    capitalizeFirstLetter: string => string.charAt(0).toUpperCase() + string.slice(1),
 
     constructor() {
 

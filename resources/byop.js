@@ -18,15 +18,15 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         .then( ( [ { id } ] ) =>
             this.hasCCInfo && (!this.body.waitList)
                 ? this.pay( id )
-                : this.user.roles.includes('admin') && (!this.body.waitList)
-                    ? this.paidCash( id )
+                : this.user.roles.includes('admin') && (!this.body.waitList) && this.body.paidCash
+                    ? this.respond( { body: { message: 'Great Job!' } } )
                     : this.nonPayingResponse()
         )
     },
 
-    checkAvailability( day ) {
-        return Reflect.apply( this.Common.isFull, this, [ day ] )
-        .then( result => Promise.resolve( this.body.waitList = result ) )
+    checkAvailability( division ) {
+        return Reflect.apply( this.Common.spotsTaken, this, [ division ] )
+        .then( count => Promise.resolve( this.body.waitList = Boolean( count >= 108 ) ) )
     },
 
     nonPayingResponse() {
@@ -35,15 +35,10 @@ module.exports = Object.assign( { }, require('./__proto__'), {
             : this.respond( { body: { message: 'You have been added to the wait list.' } } )
     },
 
-    paidCash( byopId ) [
-        .then( charge => this.Postgres.update( 'byop', { hasPaid: true }, { id: byopId } ) )
-        .then( () => this.respond( { body: { message: 'Great Job!' } } ) )
-    },
-
     pay( byopId ) {
         return this.Stripe.charge( {
             amount: Math.floor( this.body.total * 100 ),
-            metadata: { byopId, names: [ this.body.name1, this.body.name2 ] },
+            metadata: { byopId, names: `${this.body.name1}, ${this.body.name2}` },
             receipt_email: this.body.email,
             source: {
                 exp_month: this.body.ccMonth,
@@ -54,10 +49,11 @@ module.exports = Object.assign( { }, require('./__proto__'), {
             },
             statement_descriptor: 'HazyShade BYOP'
         } )
-        .catch( e => 
-            this.Postgres.query( `DELETE FROM byop WHERE id = ${byopId}` )
+        .catch( e => {
+            console.log( e.stack || e )
+            return this.Postgres.query( `DELETE FROM byop WHERE id = ${byopId}` )
             .then( () => this.respond( { stopChain: true, code: 500, body: { message: 'Error processing payment.  Please try again.' } } ) )
-        )
+        } )
         .then( charge => this.Postgres.update( 'byop', { stripeChargeId: charge.id, hasPaid: true }, { id: byopId } ) )
         .then( () => this.respond( { body: { message: 'Great Job!' } } ) )
     },
@@ -80,10 +76,11 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
         if( Number.isNaN( this.total ) || this.total < 120 ) return this.respond( { stopChain: true, code: 500, body: { message: 'Invalid Total.' } } )
 
-        return ( this.division.name === 'rec' || this.division.name === 'int'
-            ? this.checkAvailability( 'sat' )
-            : this.checkAvailability( 'sun' )
-        )
+        if( this.body.paidCash && !this.user.roles.includes('admin') ) return this.badRequest()
+
+        if( this.body.paidCash ) this.body.hasPaid = true
+
+        return this.checkAvailability( this.division.name )
         .then( () =>
             ( !this.body.waitList && !this.user.roles.includes('admin') ) && ( !this.hasCCInfo )
                 ? this.respond( { stopChain: true, code: 500, body: { message: 'Credit card information is required.' } } )
@@ -99,7 +96,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         if( this.body.ace1 ) price += 5
         if( this.body.ace2 ) price += 5
 
-        if( ! Number.isNaN( this.belmontDonation ) ) { price += this.belmontDonation }
+        if( ( !Number.isNaN( this.belmontDonation ) ) && this.belmontDonation > 0 ) { price += this.belmontDonation }
 
         if( price !== this.total ) return this.respond( { stopChain: true, code: 500, body: { message: `Doesn't add up.` } } )
     }

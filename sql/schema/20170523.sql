@@ -32,10 +32,10 @@ CREATE TABLE byop (
    "shirtSize2"   VARCHAR(100),
    ace1           BOOLEAN,
    ace2           BOOLEAN,
-   disc1          VARCHAR(50),
-   disc2          VARCHAR(50),
-   weight1        INTEGER,
-   weight2        INTEGER,
+   disc1          VARCHAR(150),
+   disc2          VARCHAR(150),
+   weight1        VARCHAR(50),
+   weight2        VARCHAR(50),
    email          VARCHAR(200),
    phone          VARCHAR(20),
    total          DECIMAL
@@ -45,5 +45,6 @@ ALTER TABLE byop ADD COLUMN "waitList" BOOLEAN;
 ALTER TABLE byop ADD COLUMN "hasPaid" BOOLEAN DEFAULT FALSE;
 ALTER TABLE byop ADD COLUMN "stripeChargeId" TEXT;
 ALTER TABLE byop ADD COLUMN "belmontDonation" DECIMAL;
+ALTER TABLE byop ADD COLUMN "paidCash" BOOLEAN DEFAULT FALSE;
 
 ALTER TABLE person ADD CONSTRAINT constraint_email_unique UNIQUE (email);
