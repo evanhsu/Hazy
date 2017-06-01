@@ -28,7 +28,7 @@ module.exports = ( { meta, model, Currency, Range } ) =>  {
     return `` +
 `<section>
   <div class="featured-event">
-    <img src="/static/img/basket-sunrise.jpg"/>
+    <img src="/static/img/discs-in-basket.jpg"/>
     <div class="content">
         <div class="center">
             <div>Join us for the Hazy Shade 16th Annual BYOP Doubles Sponsored by Innova and Discmania at Belmont and Belmont West, August 11-13, 2017</div>

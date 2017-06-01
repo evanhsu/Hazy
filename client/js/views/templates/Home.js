@@ -41,7 +41,7 @@ const logos = model.map( item => `<li><img src="/static/img/${item}-logo.jpg"/><
 */
 
 return `<div>
-    <img src="/static/img/basket-sunset.jpg"/>
+    <img src="/static/img/saugatuck-basket-on-right.jpg"/>
     <div class="intro side-by-side">
         <div>
             ${require('./lib/logoBlack')()}
@@ -53,7 +53,7 @@ return `<div>
         </div>        
     </div>
     <div class="featured-event">
-        <img src="/static/img/basket-sunrise.jpg"/>
+        <img src="/static/img/discs-in-basket.jpg"/>
         <div class="content">
             <div class="center">
                 <div>Join us for the 16th Annual</div>
