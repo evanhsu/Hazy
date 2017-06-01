@@ -18,6 +18,10 @@
 .Byop a {
   color: #4ab74a;
 }
+.Byop .featured-event .content {
+  left: 0;
+  width: 100%;
+}
 .Byop .featured-event .content .center {
   font-size: 10rem;
 }
@@ -35,6 +39,9 @@
 }
 .Byop .side-by-side {
   display: flex;
+}
+.Byop .event-info {
+  padding: 0rem 10rem;
 }
 .Byop .important-info {
   font-size: 1rem;
@@ -173,6 +180,9 @@
   .Byop .featured-event .content .center {
     font-size: 5rem;
   }
+  .Byop .event-info {
+    padding: 0rem 1rem;
+  }
   .Byop .important-info {
     font-size: 0.75rem;
     line-height: 1rem;
@@ -214,6 +224,43 @@
   .Byop .registration .info {
     font-size: 0.8rem;
     line-height: 0.9rem;
+  }
+}
+.Byopplayers {
+  margin-top: 7rem;
+}
+.Byopplayers h3 {
+  text-align: center;
+}
+.Division {
+  padding: 2rem 6rem;
+}
+.Division h4 {
+  text-align: center;
+}
+.Division .empty {
+  color: #b13325;
+  text-align: center;
+}
+.Division ol {
+  margin: 1rem 3rem;
+  padding: 1rem 3rem;
+  border: 1px solid #4ab74a;
+  border-top: none;
+}
+.Division ol li {
+  color: #acacac;
+  display: list-item;
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+@media (max-width: 767px) {
+  .Division {
+    padding: 1rem;
+  }
+  .Division ol {
+    margin: 0.25rem 1rem;
+    padding: 0.25rem 1rem;
   }
 }
 .featured-event {

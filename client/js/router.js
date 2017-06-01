@@ -47,7 +47,7 @@ module.exports = Object.create( {
     },
 
     handler( path ) {
-        const view = this.Views[ this.capitalizeFirstLetter( path[0] ) ] ? path[0] : 'home'
+        const view = this.Views[ this.capitalizeFirstLetter( path[0].replace( '-', '' ) ) ] ? path[0] : 'home'
 
         if( view === this.currentView ) return this.views[ view ].onNavigation( path )
 

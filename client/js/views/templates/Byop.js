@@ -33,38 +33,40 @@ module.exports = ( { meta, model, Currency, Range } ) =>  {
         <div class="center">BYOP</div>
     </div>
   </div>
-  <section class="important-info">
-      <h4>Join us for the 16th Annual Hazy Shade BYOP Doubles Tournament</h4>
-      <div>Sponsored by Innova and Discmania</div>
-      <div>
-          <span>Belmont Park and Belmont Park West, August 11th-13th, 2017</span>
-          <a href="/static/img/byop-map.pdf" target="_blank">Map</a>
-      </div>
-  </section>
-  <ol class="dates">
-    <li>Friday August 11th: Belmont West preview round and Players Party at Hazy Shade in Dayton</li>
-    <li>Saturday August 12th: Rec and Intermediate Divisions</li>
-    <li>Sunday August 13th: All remaining Divisions</li>
-  </ol>
-  <ul class="detailed-info">
-    <li>
-        <div>Check-In</div>
-        <p>Player check-in and Players Pack pick-up starts at 12pm, Friday, August 11th, at Hazy Shade’s Dayton location (723 Watervliet Ave). Players who check-in Friday will not need to check-in Saturday or Sunday before the round. Players who have not checked-in on Friday can do so on the day of their Division's event, starting at 8am. A players meeting will be held August 12th and 13th at 9:15am before tee-off at 9:30am.</p>
-        <p>The event will feature two rounds of best-shot doubles: one at Belmont, and one at Belmont West.</p>
-    </li>
-    <li>
-        <div>Players Party</div>
-        <p>Don't miss our Friday Night Players Party! It's a chance to have a great time with fellow golfers and win prizes with raffle tickets included with registration.</p>
-    </li>
-    <li>
-        <div>Players Pack</div>
-        <p>With help from our friends at Innova and Discmania all amateur divisions will receive an amazing Players Pack. Pro divisions will receive a reduced pack and cash payout.</p>
-    </li>
-    <li>
-        <div>Register Today!</div>
-        <p>The BYOP event can accommodate 108 teams per day and normally sells out. If you have any questions email us at sales@hazyshade.com.</p>
-    </li>
-  </ul>
+  <div class="event-info">
+      <section class="important-info">
+          <h4>Join us for the 16th Annual Hazy Shade BYOP Doubles Tournament</h4>
+          <div>Sponsored by Innova and Discmania</div>
+          <div>
+              <span>Belmont Park and Belmont Park West, August 11th-13th, 2017</span>
+              <a href="/static/img/byop-map.pdf" target="_blank">Map</a>
+          </div>
+      </section>
+      <ol class="dates">
+        <li>Friday August 11th: Belmont West preview round and Players Party at Hazy Shade in Dayton</li>
+        <li>Saturday August 12th: Rec and Intermediate Divisions</li>
+        <li>Sunday August 13th: All remaining Divisions</li>
+      </ol>
+      <ul class="detailed-info">
+        <li>
+            <div>Check-In</div>
+            <p>Player check-in and Players Pack pick-up starts at 12pm, Friday, August 11th, at Hazy Shade’s Dayton location (723 Watervliet Ave). Players who check-in Friday will not need to check-in Saturday or Sunday before the round. Players who have not checked-in on Friday can do so on the day of their Division's event, starting at 8am. A players meeting will be held August 12th and 13th at 9:15am before tee-off at 9:30am.</p>
+            <p>The event will feature two rounds of best-shot doubles: one at Belmont, and one at Belmont West.</p>
+        </li>
+        <li>
+            <div>Players Party</div>
+            <p>Don't miss our Friday Night Players Party! It's a chance to have a great time with fellow golfers and win prizes with raffle tickets included with registration.</p>
+        </li>
+        <li>
+            <div>Players Pack</div>
+            <p>With help from our friends at Innova and Discmania all amateur divisions will receive an amazing Players Pack. Pro divisions will receive a reduced pack and cash payout.</p>
+        </li>
+        <li>
+            <div>Register Today!</div>
+            <p>The BYOP event can accommodate 108 teams per day and normally sells out. If you have any questions email us at sales@hazyshade.com.</p>
+        </li>
+      </ul>
+  </div>
   <div class="registration">
       <h3>Registration</h3>
       <div class="sub-heading">Enter your information below.</div>

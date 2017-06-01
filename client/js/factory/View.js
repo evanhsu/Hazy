@@ -2,7 +2,7 @@ module.exports = Object.create( {
 
     create( name, opts ) {
         const lower = name
-        name = name.charAt(0).toUpperCase() + name.slice(1)
+        name = ( name.charAt(0).toUpperCase() + name.slice(1) ).replace( '-', '' )
         return Object.create(
             this.Views[ name ],
             Object.assign( {

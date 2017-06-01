@@ -6,6 +6,11 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
     DELETE() { this.respond( { body: { }, code: 404 } ); return Promise.resolve() },
 
+    GET() {
+        return this.Postgres.query( `SELECT "divisionId", name1, name2 FROM byop WHERE "waitList" = false ORDER BY created` )
+        .then( results => this.respond( { body: results } ) )
+    },
+
     PATCH() { this.respond( { body: { }, code: 404 } ); return Promise.resolve() },
     
     PUT() { this.respond( { body: { }, code: 404 } ); return Promise.resolve() },
