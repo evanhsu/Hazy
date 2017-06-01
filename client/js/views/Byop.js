@@ -9,7 +9,6 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     addDivisions() {
         this.Divisions.data.forEach( division => this.slurpTemplate( { template: `<option value="${division.id}">${division.label}</option>`, insertion: { el: this.els.divisionId } } ) )
 
-            if( true ) { this.els.divisionId.value = 4042 }
         window.requestAnimationFrame( () => this.els.divisionId.focus() )
 
         return Promise.resolve()
@@ -147,31 +146,8 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
         if( this.user.data.roles.includes('admin') ) {
             this.slurpTemplate( { template: this.Templates.PaidCash(), insertion: { method: 'after', el: this.els.payment } } )
-            //this.bindEvent( 'paidCash', 'change', this.els.paidCash )
         }
 
-        if( true ) {
-            this.els.name1.value = 'c'
-            this.els.ace1.value = 'true'
-            this.els.shirtSize1.value = 'f-sx'
-            this.els.disc1.value = 'luster-gator'
-            this.els.weight1.value = '175'
-            this.els.name2.value = 'c'
-            this.els.ace2.value = 'true'
-            this.els.shirtSize2.value = 'f-sx'
-            this.els.disc2.value = 'luster-gator'
-            this.els.weight2.value = '175'
-            this.els.email.value = 'topherbaron@gmail.com'
-            this.els.phone.value = '1111111111'
-            this.els.belmontDonation.value = '0'
-            this.els.ccName.value = 'C'
-            this.els.ccNo.value = '4242424242424242'
-            this.els.ccMonth.value = '1'
-            this.els.ccYear.value = '2019'
-            this.els.cvc.value = '111'
-            this.updateTotal()
-        }
-       
         return this
     },
 
