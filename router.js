@@ -102,7 +102,9 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
                             ? 'text/css'
                             : ext === '.svg'
                                 ? 'image/svg+xml'
-                                : 'text/plain'
+                                : ext === '.pdf'
+                                    ? 'application/pdf'
+                                    : 'text/plain'
                 }
             )
             stream.pipe( response, { end: false } )

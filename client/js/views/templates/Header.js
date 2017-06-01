@@ -4,7 +4,7 @@ module.exports = ( { model } ) => {
         //<li>${require('./lib/profile')('profile')}</li>
 return `<nav>
     <ul class="nav">
-        <li>${require('./lib/logoWhite')('logo')}</li>
+        <li>${require('./lib/logoWhite')( { name: 'logo' } )}</li>
     </ul>
 </nav>`
 }

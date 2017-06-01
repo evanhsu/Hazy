@@ -33,8 +33,28 @@
                 svg
                     fill: white
 
+@media (max-width: 767px)
+    .Footer
+        display: inherit
+        font-size: .75rem
+        line-height: 1rem
+        
+        >div
+            flex: inherit
+
+            &:nth-child(2)
+                height: 15rem
+
+            .contact
+                padding: 0
+
+                a
+                    height: 1rem
+                    width: 1rem
+
 @media (min-width: 1400px)
     .Footer
         .contact
             font-size: 1.5rem
             line-height: 2rem
+            

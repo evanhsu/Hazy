@@ -15,19 +15,11 @@
   background-color: #4ab74a;
   color: #fff;
 }
-.Byop {
-  text-align: center;
+.Byop a {
+  color: #4ab74a;
 }
 .Byop .featured-event .content .center {
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.25rem;
-}
-.Byop .featured-event .content .center ol {
-  font-size: 0.75rem;
-  line-height: 1rem;
-  margin-top: 2rem;
-  text-align: left;
+  font-size: 10rem;
 }
 .Byop select {
   background-color: #fff;
@@ -44,6 +36,33 @@
 .Byop .side-by-side {
   display: flex;
 }
+.Byop .important-info {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding: 2rem;
+}
+.Byop .important-info h4 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.Byop .dates {
+  font-size: 1rem;
+  line-height: 2rem;
+  padding: 0rem 2rem;
+}
+.Byop .detailed-info {
+  font-size: 0.85rem;
+  line-height: 1rem;
+  padding: 2rem;
+}
+.Byop .detailed-info li {
+  margin: 1rem 0rem;
+}
+.Byop .detailed-info li div {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.35rem;
+}
 .Byop .sub-heading {
   color: #acacac;
   margin-bottom: 4rem;
@@ -53,20 +72,14 @@
   font-weight: 100;
   line-height: 1.5rem;
   margin: 0 auto;
+  text-align: center;
   width: 40%;
-}
-.Byop .registration .main-info {
-  font-size: 0.85rem;
-  line-height: 1rem;
-  margin-top: 4rem;
-}
-.Byop .registration .main-info li {
-  margin: 1rem 0rem;
 }
 .Byop .registration .info {
   color: #acacac;
-  font-size: 0.65rem;
-  line-height: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.05rem;
+  text-align: left;
 }
 .Byop .registration .error {
   border-color: #b13325;
@@ -93,7 +106,7 @@
   color: #4ab74a;
 }
 .Byop .registration .payment-info .info {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: 700;
   margin: 0.25rem;
 }
@@ -156,6 +169,53 @@
   background-color: #000;
   color: #fff;
 }
+@media (max-width: 767px) {
+  .Byop .featured-event .content .center {
+    font-size: 5rem;
+  }
+  .Byop .important-info {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding: 1rem;
+  }
+  .Byop .important-info h4 {
+    font-size: 1rem;
+    line-height: 1.15rem;
+  }
+  .Byop .dates {
+    font-size: 0.75rem;
+    line-height: 0.85rem;
+    padding: 1rem;
+  }
+  .Byop .dates li {
+    margin-bottom: 0.5rem;
+  }
+  .Byop .detailed-info {
+    font-size: 0.75rem;
+    line-height: 0.9rem;
+    padding: 1rem;
+  }
+  .Byop .detailed-info li {
+    margin: 0.5rem 0rem;
+  }
+  .Byop .detailed-info li div {
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.25rem;
+  }
+  .Byop .registration {
+    font-size: 1rem;
+    font-weight: 100;
+    line-height: 1.25rem;
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+  }
+  .Byop .registration .info {
+    font-size: 0.8rem;
+    line-height: 0.9rem;
+  }
+}
 .featured-event {
   color: #fff;
   position: relative;
@@ -201,6 +261,27 @@
   background-color: #fff;
   color: #000;
 }
+@media (max-width: 767px) {
+  .featured-event .content {
+    width: 65%;
+    left: 30%;
+  }
+  .featured-event .content .center {
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+  .featured-event .content .center >*:nth-child(2) {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 3rem;
+  }
+  .featured-event .content .center >*:nth-child(3) {
+    font-size: 0.75rem;
+  }
+  .featured-event .content .center button {
+    padding: 0.5rem 1rem;
+  }
+}
 .Footer {
   color: #fff;
   display: flex;
@@ -235,6 +316,26 @@
 }
 .Footer >div .contact a svg {
   fill: #fff;
+}
+@media (max-width: 767px) {
+  .Footer {
+    display: inherit;
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+  .Footer >div {
+    flex: inherit;
+  }
+  .Footer >div:nth-child(2) {
+    height: 15rem;
+  }
+  .Footer >div .contact {
+    padding: 0;
+  }
+  .Footer >div .contact a {
+    height: 1rem;
+    width: 1rem;
+  }
 }
 @media (min-width: 1400px) {
   .Footer .contact {
@@ -303,6 +404,7 @@ button.submitting {
 .Header {
   background-color: #000;
   font-weight: 300;
+  height: 2rem;
   opacity: 0.7;
   left: 0;
   position: absolute;
@@ -310,6 +412,11 @@ button.submitting {
   top: 1rem;
   width: 100%;
   z-index: 100;
+}
+.Header .logo-white {
+  cursor: pointer;
+  height: 1.5rem;
+  margin: 0.25rem;
 }
 .Header .nav {
   display: flex;
@@ -405,6 +512,7 @@ button.submitting {
   text-transform: uppercase;
 }
 .Home .intro p {
+  font-size: 0.85rem;
   font-weight: 300;
 }
 .Home .side-by-side {
@@ -471,6 +579,22 @@ button.submitting {
 }
 .Home .suppliers .logos li {
   flex: 1;
+}
+@media (max-width: 767px) {
+  .Home .side-by-side {
+    display: inherit;
+  }
+  .Home .intro svg {
+    margin: 0;
+    padding: 2rem;
+  }
+  .Home .intro >div:nth-child(2) {
+    padding: 2rem;
+  }
+  .Home .intro h3 {
+    font-size: 0.75rem;
+    text-align: center;
+  }
 }
 @media (min-width: 1200px) {
   .Home .intro p {
@@ -569,6 +693,13 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 h1,
 h2,

@@ -31,6 +31,7 @@ module.exports = Object.create( {
                 'header',
                 { insertion: { value: { el: this.contentContainer, method: 'insertBefore' } }, user: { value: this.User } }
             )
+            .on( 'navigate', route => this.navigate( route ) )
 
         this.footer =
             this.ViewFactory.create(

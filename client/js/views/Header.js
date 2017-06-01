@@ -5,4 +5,10 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         'courses',
         'events'
     ],
+
+    events: {
+        logo: 'click'
+    },
+
+    onLogoClick() { this.emit( 'navigate', '/' ) }
 } )

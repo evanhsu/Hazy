@@ -29,6 +29,7 @@
             text-transform: uppercase
 
         p
+            font-size: .85rem
             font-weight: 300
 
     .side-by-side
@@ -96,6 +97,23 @@
 
             li
                 flex: 1
+
+@media (max-width: 767px)
+    .Home
+        .side-by-side
+            display: inherit
+
+        .intro
+            svg
+                margin: 0
+                padding: 2rem
+
+            >div:nth-child(2)
+                padding: 2rem
+
+            h3
+                font-size: .75rem
+                text-align: center
 
 @media (min-width: 1200px)
     .Home
