@@ -76,8 +76,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
         this.Xhr( { resource: 'spotsLeft', qs: JSON.stringify( { divisionId: this.els.divisionId.value } ) } )
         .then( ( { spotsLeft } ) => {
-            if( spotsLeft <= 100 ) {
-            //if( spotsLeft <= 0 ) {
+            if( spotsLeft <= 0 ) {
                 this.waitList = true
                 this.els.spotsLeft.textContent = 'No spots left.  Please register to be placed on the waiting list.'
                 this.disablePayment()

@@ -26,8 +26,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
     checkAvailability( division ) {
         return Reflect.apply( this.Common.spotsTaken, this, [ division ] )
-        .then( count => Promise.resolve( this.body.waitList = Boolean( count >= 8 ) ) )
-        //.then( count => Promise.resolve( this.body.waitList = Boolean( count >= 108 ) ) )
+        .then( count => Promise.resolve( this.body.waitList = Boolean( count >= 108 ) ) )
     },
 
     nonPayingResponse() {
