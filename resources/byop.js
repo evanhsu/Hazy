@@ -26,7 +26,8 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
     checkAvailability( division ) {
         return Reflect.apply( this.Common.spotsTaken, this, [ division ] )
-        .then( count => Promise.resolve( this.body.waitList = Boolean( count >= 108 ) ) )
+        .then( count => Promise.resolve( this.body.waitList = Boolean( count >= 8 ) ) )
+        //.then( count => Promise.resolve( this.body.waitList = Boolean( count >= 108 ) ) )
     },
 
     nonPayingResponse() {
@@ -74,7 +75,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
         if( ! this.division ) return this.respond( { stopChain: true, code: 500, body: { message: 'Invalid Division' } } )
 
-        if( Number.isNaN( this.total ) || this.total < 120 ) return this.respond( { stopChain: true, code: 500, body: { message: 'Invalid Total.' } } )
+        if( Number.isNaN( this.total ) ) return this.respond( { stopChain: true, code: 500, body: { message: 'Invalid Total.' } } )
 
         if( this.body.paidCash && !this.user.roles.includes('admin') ) return this.badRequest()
 
@@ -82,13 +83,17 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
         return this.checkAvailability( this.division.name )
         .then( () =>
-            ( !this.body.waitList && !this.user.roles.includes('admin') ) && ( !this.hasCCInfo )
-                ? this.respond( { stopChain: true, code: 500, body: { message: 'Credit card information is required.' } } )
-                : Promise.resolve( this.validateTotal() ) 
+            ( !this.body.waitList && this.total < 120 )
+                ? this.respond( { stopChain: true, code: 500, body: { message: 'Invalid Total.' } } )
+                : ( ( !this.body.waitList && !this.user.roles.includes('admin') ) && ( !this.hasCCInfo ) )
+                    ? this.respond( { stopChain: true, code: 500, body: { message: 'Credit card information is required.' } } )
+                    : Promise.resolve( this.validateTotal() ) 
         )
     },
 
     validateTotal() {
+        if( this.body.waitList === true && this.total === 0 ) return
+
         let price = 120
 
         if( this.hasCCInfo ) price += 3.5

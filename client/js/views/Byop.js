@@ -42,11 +42,14 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         this.els.payment.querySelectorAll('input, select').forEach( el => {
             if( !el.isEqualNode( this.els.paidCash ) ) el.setAttribute( 'disabled', 'true' )
         } )
+
+        if( this.waitList === true && this.user.data.roles.includes('admin') ) this.els.paidCash.setAttribute( 'disabled', 'true' )
     },
 
     enablePayment() {
         this.els.payment.classList.remove('disabled')
         this.els.payment.querySelectorAll('input, select').forEach( el => el.removeAttribute( 'disabled' ) )
+        if( this.els.paidCash ) this.els.paidCash.removeAttribute('disabled')
     },
 
     model: Object.create( require('../models/Byop') ),
@@ -74,10 +77,11 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
         this.Xhr( { resource: 'spotsLeft', qs: JSON.stringify( { divisionId: this.els.divisionId.value } ) } )
         .then( ( { spotsLeft } ) => {
-            if( spotsLeft <= 0 ) {
+            if( spotsLeft <= 100 ) {
+            //if( spotsLeft <= 0 ) {
+                this.waitList = true
                 this.els.spotsLeft.textContent = 'No spots left.  Please register to be placed on the waiting list.'
                 this.disablePayment()
-                this.waitList = true
                 this.model.set( 'total', 0 )
             } else {
                 this.els.spotsLeft.textContent = `${spotsLeft} spots left!`
@@ -92,6 +96,8 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         this.els.paidCash.checked
             ? this.disablePayment()
             : this.enablePayment()
+
+        this.updateTotal()
     },
 
     onSubmitBtnClick() {
@@ -172,7 +178,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     updateTotal() {
         let total = this.model.meta.basePrice
 
-        if( this.els.paidCash && this.els.paidCash.checked ) total =- 3.5
+        if( this.els.paidCash && this.els.paidCash.checked ) total -= 3.5
 
         if( this.els.ace1.value === "true" ) total += 5
         if( this.els.ace2.value === "true" ) total += 5
@@ -199,7 +205,11 @@ module.exports = Object.assign( {}, require('./__proto__'), {
                 el.classList.add( 'error' )
                 rv = false
             } else if( this.model.validate( attr, el.value ) ) {
-                this.model.data[ attr ] = attr === "paidCash" ? Boolean( el.checked ) : el.value
+                this.model.data[ attr ] = attr === "paidCash"
+                    ? Boolean( el.checked )
+                    : attr === "ace1" || attr === "ace2"
+                        ? Boolean( el.value === "true" )
+                        : el.value
             }
         } )
 

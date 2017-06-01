@@ -103,6 +103,7 @@
 .Byop .registration .cash {
   display: flex;
   justify-content: center;
+  margin: -1rem 0 3rem 0;
   opacity: 1;
 }
 .Byop .registration .cash input {
