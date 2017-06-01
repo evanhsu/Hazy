@@ -4,7 +4,6 @@ module.exports = p =>
         ${require('./lib/logoWhite')()}
         <div class="clearfix">
             <div class="contact">
-                <div>Hazy Shade Disc Golf</div>
                 <div>723 Watervliet Ave</div>
                 <div>Dayton, OH 45420</div>
                 <div>2113 Park Rd</div>

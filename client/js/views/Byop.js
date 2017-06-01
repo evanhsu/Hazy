@@ -39,7 +39,9 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
     disablePayment() {
         this.els.payment.classList.add('disabled')
-        this.els.payment.querySelectorAll('input, select').forEach( el => el.setAttribute( 'disabled', 'true' ) )
+        this.els.payment.querySelectorAll('input, select').forEach( el => {
+            if( !el.isEqualNode( this.els.paidCash ) ) el.setAttribute( 'disabled', 'true' )
+        } )
     },
 
     enablePayment() {
@@ -138,7 +140,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         .catch( e => this.Error(e) )
 
         if( this.user.data.roles.includes('admin') ) {
-            this.slurpTemplate( { template: this.Templates.PaidCash(), insertion: { el: this.els.payment } } )
+            this.slurpTemplate( { template: this.Templates.PaidCash(), insertion: { method: 'after', el: this.els.payment } } )
             //this.bindEvent( 'paidCash', 'change', this.els.paidCash )
         }
 

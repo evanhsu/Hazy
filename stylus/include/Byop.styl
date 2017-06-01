@@ -77,8 +77,14 @@
             &.disabled
                 opacity: .3
 
-            .cash
-                opacity: 1
+        .cash
+            display: flex
+            justify-content: center
+            opacity: 1
+
+            input
+                margin: .5rem
+                width: inherit
                 
         .shirts
             line-height: 2rem
@@ -115,7 +121,6 @@
 
         button
             margin-bottom: 4rem
-            transition: background-color .5s, color .5s, opacity .25s
 
             &.submitting
                 opacity: .3

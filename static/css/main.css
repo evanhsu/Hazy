@@ -1,6 +1,19 @@
+.Admin {
+  color: #4ab74a;
+  margin: 8rem;
+  text-align: center;
+}
 .Admin img {
-  margin: 5rem auto;
-  width: 75%;
+  display: block;
+  margin: 1rem auto;
+}
+.Admin button {
+  border-color: #4ab74a;
+  color: #4ab74a;
+}
+.Admin button:hover {
+  background-color: #4ab74a;
+  color: #fff;
 }
 .Byop {
   text-align: center;
@@ -87,8 +100,14 @@
 .Byop .registration .payment-info.disabled {
   opacity: 0.3;
 }
-.Byop .registration .payment-info .cash {
+.Byop .registration .cash {
+  display: flex;
+  justify-content: center;
   opacity: 1;
+}
+.Byop .registration .cash input {
+  margin: 0.5rem;
+  width: inherit;
 }
 .Byop .registration .shirts {
   line-height: 2rem;
@@ -124,7 +143,6 @@
 }
 .Byop .registration button {
   margin-bottom: 4rem;
-  transition: background-color 0.5s, color 0.5s, opacity 0.25s;
 }
 .Byop .registration button.submitting {
   opacity: 0.3;
@@ -207,10 +225,6 @@
   text-align: center;
   width: 50%;
 }
-.Footer >div .contact div:first-child {
-  margin-bottom: 1rem;
-  text-decoration: underline;
-}
 .Footer >div .contact a {
   display: block;
   height: 2rem;
@@ -279,6 +293,10 @@ button {
   font-size: 1.25rem;
   padding: 0.5rem 1rem;
   text-transform: uppercase;
+  transition: background-color 0.5s, color 0.5s, opacity 0.25s;
+}
+button.submitting {
+  opacity: 0.3;
 }
 .Header {
   background-color: #000;
@@ -496,7 +514,7 @@ button {
   z-index: 200;
 }
 .Toast.success {
-  background-color: #4aa252;
+  background-color: #4ab74a;
 }
 .Toast >div:first-child {
   float: left;

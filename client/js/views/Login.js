@@ -22,6 +22,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         .then( () => {
             if( !this.user.isLoggedIn() ) return Promise.reject('Unable to retrieve user')
             this.els.submit.classList.remove('submitting')
+            this.hide().then( () => this.emit('loggedIn') ).catch( this.Error )
         } )
         .catch( e => {
             this.isSubmitting = false
@@ -32,6 +33,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     postRender() {
+        this.els.email.focus()
         this.els.container.addEventListener( 'keypress', e => { if( e.keyCode === 13 ) this.onSubmitClick() } )
         return this
     },

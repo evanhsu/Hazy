@@ -57,13 +57,13 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
 
     handleLogin() {
         this.factory.create( 'login', { insertion: { value: { el: document.querySelector('#content') } } } )
-            .once( "loggedIn", () => this.onLogin() )
+            .on( "loggedIn", () => this.onLogin() )
 
         return this
     },
 
     hide() {
-        if( !document.body.contains(this.els.container) || this.isHidden() ) {
+        if( !this.els || !document.body.contains(this.els.container) || this.isHidden() ) {
             return Promise.resolve()
         } else if( this.els.container.classList.contains('hide') ) {
             return new Promise( resolve => this.once( 'hidden', resolve ) )
@@ -155,7 +155,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     },
 
     scootAway() {
-        this.Toast.show( 'error', 'You are not allowed here.  Sorry.')
+        this.Toast.showMessage( 'error', 'You are not allowed here.')
         .catch( e => { this.Error( e ); this.emit( 'navigate', `/` ) } )
         .then( () => this.emit( 'navigate', `/` ) )
 

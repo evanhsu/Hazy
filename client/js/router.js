@@ -22,7 +22,7 @@ module.exports = Object.create( {
 
         this.User.on( 'logout', () =>
             Promise.all( Object.keys( this.views ).map( view => this.views[ view ].delete() ) )
-            .then( () => this.handle() )
+            .then( () => { this.currentView = undefined; return this.handle() } )
             .catch( this.Error )
         )
 
