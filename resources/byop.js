@@ -69,6 +69,8 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         this.belmontDonation = Number.parseFloat( this.body.belmontDonation )
         this.total = Number.parseFloat( this.body.total )
 
+        if( Number.isNaN( this.belmontDonation ) ) this.body.belmontDonation = 0 
+
         this.Byop.generatedAttrs.forEach( attr => {
             if( this.body[ attr ] !== undefined ) this.respond( { stopChain: true, code: 500, body: { message: `${attr} disallowed.` } } )
         } )
