@@ -232,6 +232,10 @@
 .Byopplayers h3 {
   text-align: center;
 }
+.Byopplayers .register-link {
+  text-align: center;
+  margin: 1rem 0rem;
+}
 .Division {
   padding: 2rem 6rem;
 }
@@ -449,10 +453,9 @@ button.submitting {
   opacity: 0.3;
 }
 .Header {
-  background-color: #000;
+  background-color: rgba(0,0,0,0.7);
   font-weight: 300;
   height: 2rem;
-  opacity: 0.7;
   left: 0;
   position: absolute;
   text-align: center;
@@ -814,6 +817,13 @@ button:focus {
 }
 .clearfix {
   display: block;
+}
+.link {
+  color: #4ab74a;
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: underline;
 }
 @-moz-keyframes blink {
   0% {

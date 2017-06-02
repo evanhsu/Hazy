@@ -64,6 +64,11 @@ module.exports = ( { meta, model, Currency, Range } ) =>  {
         <li>
             <div>Register Today!</div>
             <p>The BYOP event can accommodate 108 teams per day and normally sells out. If you have any questions email us at sales@hazyshade.com.</p>
+            <p>
+                <span>See the</span>
+                <span data-js="playersPageLink" class="link">BYOP Players Page</span>
+                <span>to see who is currently registered in each division</span>
+            </p>
         </li>
       </ul>
   </div>

@@ -3,6 +3,14 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     Divisions: Object.create( require('../models/__proto__'), { resource: { value: 'division' } } ),
     Byops: Object.create( require('../models/__proto__'), { resource: { value: 'byop' } } ),
 
+    events: {
+        byopRegisterLink: 'click'
+    },
+
+    onByopRegisterLinkClick() {
+        this.emit( 'navigate', '/byop' )
+    },
+
     postRender() {
 
         Promise.all( [ this.Divisions.get(), this.Byops.get() ] )
