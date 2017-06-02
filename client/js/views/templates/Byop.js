@@ -152,7 +152,7 @@ module.exports = ( { meta, model, Currency, Range } ) =>  {
             </div>
           </div>
       </div>
-      <div class="total side-by-side">
+      <div data-js="totalWrap" class="total side-by-side">
           <span>Total:</span>
           <span data-js="total">${Currency.format(model.total)}</span>
       </div>

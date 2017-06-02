@@ -36,7 +36,7 @@ module.exports = Object.create( {
         this.footer =
             this.ViewFactory.create(
                 'footer',
-                { insertion: { value: { el: this.contentContainer, method: 'after' } }, user: { value: this.User } }
+                { insertion: { value: { el: document.body, method: 'appendChild' } }, user: { value: this.User } }
             )
 
         this.handle()

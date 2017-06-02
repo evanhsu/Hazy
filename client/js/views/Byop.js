@@ -149,7 +149,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         .catch( e => this.Error(e) )
 
         if( this.user.data.roles.includes('admin') ) {
-            this.slurpTemplate( { template: this.Templates.PaidCash(), insertion: { method: 'after', el: this.els.payment } } )
+            this.slurpTemplate( { template: this.Templates.PaidCash(), insertion: { method: 'insertBefore', el: this.els.totalWrap } } )
         }
 
         return this
