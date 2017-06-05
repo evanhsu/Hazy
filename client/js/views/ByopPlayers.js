@@ -2,6 +2,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
     Divisions: Object.create( require('../models/__proto__'), { resource: { value: 'division' } } ),
     Byops: Object.create( require('../models/__proto__'), { resource: { value: 'byop' } } ),
+    WaitingList: Object.create( require('../models/__proto__'), { resource: { value: 'waiting-list' } } ),
 
     events: {
         byopRegisterLink: 'click'
@@ -17,6 +18,10 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         .then( () => this.renderPlayers() )
         .catch( e => this.Error(e) )
 
+        this.WaitingList.get()
+        .then( () => this.renderWaitingList() )
+        .catch( e => this.Error(e) )
+
         return this
     },
 
@@ -30,5 +35,9 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         this.Byops.data.forEach( byop => this.divisions[ byop.divisionId ].addTeam( byop ) )
 
         Object.keys( this.divisions ).forEach( divisionId => this.divisions[ divisionId ].notifyIfEmpty() )
+    },
+
+    renderWaitingList() {
+        this.WaitingList.data.forEach( datum => this.slurpTemplate( { template: `<li>${datum.name1}, ${datum.name2}</li>`, insertion: { el: this.els.waitingList } } ) )
     }
 } )

@@ -42,7 +42,7 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
 
     initialize() {
 
-        this.jsonRoutes = { me: 'me', auth: 'auth', spotsLeft: 'spotsLeft' }
+        this.jsonRoutes = { me: 'me', auth: 'auth', spotsLeft: 'spotsLeft', 'waiting-list': 'waiting-list' }
 
         return Promise.all( [
             this.Postgres.initialize(),

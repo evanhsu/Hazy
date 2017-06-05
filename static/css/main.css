@@ -229,12 +229,16 @@
 .Byopplayers {
   margin-top: 7rem;
 }
-.Byopplayers h3 {
+.Byopplayers h3,
+.Byopplayers h4 {
   text-align: center;
 }
 .Byopplayers .register-link {
   text-align: center;
   margin: 1rem 0rem;
+}
+.Byopplayers .waiting-list {
+  color: #acacac;
 }
 .Division {
   padding: 2rem 6rem;
