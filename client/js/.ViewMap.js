@@ -7,5 +7,7 @@ module.exports={
 	Header: require('./views/Header'),
 	Home: require('./views/Home'),
 	Login: require('./views/Login'),
-	Toast: require('./views/Toast')
+	ManageByop: require('./views/ManageByop'),
+	Toast: require('./views/Toast'),
+	TypeAhead: require('./views/TypeAhead')
 }

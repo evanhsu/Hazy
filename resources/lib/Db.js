@@ -14,9 +14,23 @@ module.exports = Object.create( {
 
         if( this.Postgres[ `${name}s` ] ) return Promise.resolve( this.Postgres[ `${name}s` ].data )
 
-        queryKeys.forEach( key => where += ` ${name}.${key} = $${paramCtr++}` )
+        queryKeys.forEach( key => {
+            const value = resource.query[key],
+                isObj == Boolean( typeof resource.query[key] === 'object' )
 
-        return this.Postgres.query( `SELECT ${this._getColumns(name)} FROM "${name}" ${where}`, queryKeys.map( key => this.query[key] ) )
+            if( isObj && !this._validOperations.has( value.operation ) ) throw Error('Invalid Operation')
+
+            const operator = isObj ? isObj.operation : `=`
+            where += ` ${name}.${key} ${operator} $${paramCtr++}`
+        } )
+
+        const params = queryKeys.map( key =>
+            typeof resource.query[key] === 'object'
+                ? resource.query[ key ].value
+                : resource.query[ key ]
+        )
+
+        return this.Postgres.query( `SELECT ${this._getColumns(name)} FROM "${name}" ${where}`, params )
     },
 
     PATCH( resource ) { 
@@ -68,6 +82,8 @@ module.exports = Object.create( {
             ),
         [ ] )
     },
+
+    _validOperations: new Set( [ '<', '>', '<=', '>=', '=', '<>', '!=', '~*' ] ),
 
     _wrapKeys: keys => keys.map( key => `"${key}"` ).join(', ')
 

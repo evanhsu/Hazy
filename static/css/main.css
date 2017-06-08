@@ -1,17 +1,30 @@
 .Admin {
   color: #4ab74a;
-  margin: 8rem;
+  margin: 8rem 2rem;
   text-align: center;
 }
-.Admin img {
+.Admin .splash {
+  display: flex;
+}
+.Admin .splash >* {
+  flex: 1;
+}
+.Admin .splash img {
   display: block;
   margin: 1rem auto;
 }
-.Admin button {
+.Admin .splash button {
   border-color: #4ab74a;
   color: #4ab74a;
+  background-color: #fff;
+  border: 1px solid #acacac;
+  border-radius: 10px;
+  box-shadow: 1px 2px 5px #ccc;
+  padding: 1.25rem;
+  width: 10rem;
+  text-transform: uppercase;
 }
-.Admin button:hover {
+.Admin .splash button:hover {
   background-color: #4ab74a;
   color: #fff;
 }
@@ -475,14 +488,60 @@ button.submitting {
 .Header .nav {
   display: flex;
 }
+.Header .nav >li {
+  position: relative;
+/* 
+            &:nth-child(2)
+                flex: 10
+            
+            &:last-child
+                flex: 1
+            */
+}
 .Header .nav >li:first-child {
   flex: 1;
 }
-.Header .nav >li:nth-child(2) {
-  flex: 10;
-}
 .Header .nav >li:last-child {
-  flex: 1;
+  cursor: pointer;
+  height: 100%;
+  position: absolute;
+  right: 1rem;
+  transition: background-color 0.5s;
+}
+.Header .nav >li:last-child svg {
+  fill: #fff;
+}
+.Header .nav >li:last-child ul {
+  background-color: rgba(0,0,0,0.7);
+  cursor: pointer;
+  color: #fff;
+  display: none;
+  height: initial;
+  position: absolute;
+  top: 5rem;
+  right: 0rem;
+}
+.Header .nav >li:last-child ul li {
+  padding: 0.5rem;
+  white-space: nowrap;
+}
+.Header .nav >li:last-child ul li:hover {
+  text-decoration: underline;
+}
+.Header .nav >li:last-child ul li:first-child {
+  border-bottom: 1px solid #fff;
+  cursor: default;
+  text-decoration: none;
+}
+.Header .nav >li:last-child:hover {
+  background-color: #fff;
+}
+.Header .nav >li:last-child:hover svg {
+  fill: #000;
+  opacity: 0.7;
+}
+.Header .nav >li:last-child:hover ul {
+  display: block;
 }
 .Header .spans li {
   display: inline-block;
@@ -712,6 +771,22 @@ button.submitting {
 }
 .Toast >div:nth-child(2) >div:first-child {
   font-weight: bold;
+}
+.MemberTypeahead {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.MemberTypeahead input {
+  display: inline-block;
+  font-size: 1.2rem;
+  padding: 0.75rem 0.5rem;
+  width: 25rem;
+}
+.MemberTypeahead .form-label {
+  color: $gold;
+  font-size: 1.4rem;
+  margin-right: 1rem;
 }
 @font-face {
   font-family: 'Roboto';

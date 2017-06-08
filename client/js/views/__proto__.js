@@ -52,6 +52,9 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
 
             if( this.model.meta ) rv.meta = this.model.meta
         }
+
+        if( this.templateOptions ) { rv.opts = this.templateOptions }
+
         return rv
     },
 
@@ -74,6 +77,24 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
                 this.els.container.classList.add('hide')
             } )
         }
+    },
+
+    _hideEl( el, resolve, hash ) {
+        el.removeEventListener( 'transitionend', this[ hash ] )
+        el.classList.add('hidden')
+        delete this[hash]
+        resolve()
+    },
+
+    hideEl(el) {
+        const time = new Date().getTime(),
+            hash = `${time}Hide`
+        
+        return new Promise( resolve => {
+            this[ hash ] = e => this._hideEl( el, resolve, hash )
+            el.addEventListener( 'transitionend', this[ hash ] )
+            el.classList.add('hide')
+        } )
     },
 
     htmlToFragment( str ) {
@@ -145,7 +166,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
 
             if( this.Views && this.Views[ name ] ) opts = typeof this.Views[ name ] === "object" ? this.Views[ name ] : Reflect.apply( this.Views[ name ], this, [ ] )
 
-            this.views[ name ] = this.factory.create( key, Object.assign( { insertion: { value: { el: obj.el, method: 'insertBefore' } } }, { opts: { value: opts } } ) )
+            this.views[ name ] = this.factory.create( key, Object.assign( { insertion: { value: { el: obj.el, method: 'insertBefore' } } }, opts ) )
             obj.el.remove()
         } )
 
@@ -191,6 +212,29 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
                     : resolve => resolve()
 
         return new Promise( resolution )
+    },
+
+    _showEl( el, resolve, hash ) {
+        el.removeEventListener( 'transitionend', this[hash] )
+        delete this[ hash ]
+        resolve()
+    },
+
+    showEl(el) {
+
+        return new Promise( resolve => {
+            const time = new Date().getTime(),
+                hash = `${time}Show`
+
+            window.requestAnimationFrame( () => {
+                el.classList.remove( 'hidden' )
+                window.requestAnimationFrame( () => {
+                    this[hash] = e => this_showEl( el, resolve, hash ) 
+                    el.addEventListener( 'transitionend', this[hash] )
+                    el.classList.remove( 'hide' )
+                } )
+            } )
+        } )
     },
 
     slurpEl( el ) {

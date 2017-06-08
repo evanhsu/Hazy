@@ -25,7 +25,7 @@ module.exports = Object.create( {
             .then( () => { this.currentView = undefined; return this.handle() } )
             .catch( this.Error )
         )
-
+        
         this.header =
             this.ViewFactory.create(
                 'header',
@@ -66,16 +66,16 @@ module.exports = Object.create( {
                         insertion: { value: { el: this.contentContainer } },
                         path: { value: path, writable: true }
                     } )
-                    .on( 'navigate', route => this.navigate( route ) )
+                    .on( 'navigate', ( route, options ) => this.navigate( route, options ) )
                     .on( 'deleted', () => delete this.views[ view ] )
             )
         } )
         .catch( this.Error )
     },
 
-    navigate( location ) {
+    navigate( location, options={} ) {
         if( location !== window.location.pathname ) history.pushState( {}, '', location )
-        this.handle()
+        if( !options.silent ) this.handle()
     },
 
     scrollToTop() {

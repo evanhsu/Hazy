@@ -1,5 +1,7 @@
+$background = rgba( 0, 0, 0, .7 )
+
 .Header
-    background-color: rgba( 0, 0, 0, .7 )
+    background-color: $background
     font-weight: 300
     height: 2rem
     left: 0
@@ -18,14 +20,64 @@
         display: flex
 
         >li
+            position: relative
+
             &:first-child
                 flex: 1
-            
+           
+            &:last-child
+                cursor: pointer
+                height: 100%
+                position: absolute
+                right: 1rem
+                transition: background-color .5s
+                    
+                svg
+                    fill: white
+
+                ul
+                    background-color: $background
+                    cursor: pointer
+                    color: white
+                    display: none
+                    height: initial
+                    position: absolute
+                    top: 5rem
+                    right: 0rem
+
+                    li
+                        padding: .5rem
+                        white-space: nowrap
+
+                        &:hover
+                            text-decoration: underline
+
+                        &:first-child
+                            border-bottom: 1px solid white
+                            cursor: default
+                            text-decoration: none
+                            
+
+                &:hover
+                    background-color: white
+
+                    svg
+                        fill: black
+                        opacity: .7
+
+                    ul
+                        display: block
+
+                    
+
+            /* 
             &:nth-child(2)
                 flex: 10
             
             &:last-child
                 flex: 1
+            */
+            
 
     .spans
         li

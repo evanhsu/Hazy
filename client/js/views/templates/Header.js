@@ -1,10 +1,16 @@
 module.exports = ( { model } ) => {
 //const spans = model.map( item => `<li><span data-js="item">${item}</span></li>` ).join('')
         //<li><ul class="spans">${spans}</ul></li>
-        //<li>${require('./lib/profile')('profile')}</li>
 return `<nav>
     <ul class="nav">
         <li>${require('./lib/logoWhite')( { name: 'logo' } )}</li>
+        <li data-js="profileBtn" class="hide">
+            ${require('./lib/profile')('profile')}
+            <ul>
+                <li data-js="name"></li>
+                <li data-js="logout">Logout</li>
+            </ul>
+        </li>
     </ul>
 </nav>`
 }
