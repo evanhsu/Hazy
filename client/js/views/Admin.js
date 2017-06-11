@@ -8,16 +8,16 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         { name: 'byop', label: 'Manage Byop', roles: new Set( [ 'superuser' ] ) }
     ],
 
+    hideSplash() { return this.hideEl( this.els.splash ) },
+
     onByopClick() {
         this.emit( 'navigate', `/admin/manage-byop`, { silent: true } )
 
-        this.hideEl( this.els.splash )
-        .then( () => {
-            if( this.manageByop ) return this.manageByop.show()
-            this.manageByop = this.factory.create( 'manageByop', { insertion: { value: { el: this.els.views } } } )
-            return Promise.resolve()
-        } )
-        .catch( this.Error )
+        return this.showByop()
+    },
+
+    onNavigation( path ) {
+        if( path[0] === 'manage-byop' ) return this.showByop()
     },
 
     postRender() {
@@ -28,10 +28,22 @@ module.exports = Object.assign( { }, require('./__proto__'), {
             }
         } )
 
+        if( this.path.length > 1 ) this.onNavigation( this.path.slice( 1 ) )
+
         return this
     },
 
     requiresLogin: true,
 
-    requiresRole: 'admin'
+    requiresRole: 'admin',
+
+    showByop() {
+        return this.hideEl( this.els.splash )
+        .then( () => {
+            if( this.manageByop ) return this.manageByop.show()
+            this.manageByop = this.factory.create( 'manageByop', { insertion: { value: { el: this.els.views } } } )
+            return Promise.resolve()
+        } )
+        .catch( this.Error )
+    }
 } )

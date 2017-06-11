@@ -16,11 +16,11 @@ module.exports = Object.create( {
 
         queryKeys.forEach( key => {
             const value = resource.query[key],
-                isObj == Boolean( typeof resource.query[key] === 'object' )
+                isObj = Boolean( typeof value === 'object' )
 
             if( isObj && !this._validOperations.has( value.operation ) ) throw Error('Invalid Operation')
 
-            const operator = isObj ? isObj.operation : `=`
+            const operator = isObj ? value.operation : `=`
             where += ` ${name}.${key} ${operator} $${paramCtr++}`
         } )
 

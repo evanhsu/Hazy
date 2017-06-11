@@ -12,11 +12,8 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             selector: this.els.input,
             minChars: 3,
             cache: false,
-            renderItem: ( item, search ) {
-                search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-                var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
-                return `<div class="autocomplete-suggestion">${item.name1}, ${item.name2}</div>`
-            },
+            renderItem: ( item, search ) => {
+                return `<div class="autocomplete-suggestion" data-val="${item.id}">${item.name1}, ${item.name2}</div>` },
             source: ( term, suggest ) => {
                 this.search( 'name1', term.trim(), suggest )
                 .then( found => found ? Promise.resolve(true) : this.search( 'name2', term.trim(), suggest ) )
@@ -34,7 +31,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     },
 
     search( attr, term, suggest ) {
-        return this.Xhr( { method: 'get', qs: JSON.stringify( { [attr]: { operation: '~*', value: term } } ) } )
+        return this.Xhr( { method: 'get', qs: JSON.stringify( { [attr]: { operation: '~*', value: term } } ), resource: 'byop' } )
         .then( data => {
             if( ! data.length ) return Promise.resolve( false )
             

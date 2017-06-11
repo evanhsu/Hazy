@@ -12,8 +12,8 @@ module.exports = Object.assign( { }, require('../lib/MyObject'), {
 
     Response: require('./lib/Response'),
 
-    apply( method ) {
-        if( this[method] ) return this[method]()
+    apply( method, check=true ) {
+        if( check && this[method] ) return this[method]()
 
         return this.getUser()
         .then( () => 

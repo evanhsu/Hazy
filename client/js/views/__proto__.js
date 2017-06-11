@@ -93,7 +93,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         return new Promise( resolve => {
             this[ hash ] = e => this._hideEl( el, resolve, hash )
             el.addEventListener( 'transitionend', this[ hash ] )
-            el.classList.add('hide')
+            window.requestAnimationFrame( () => el.classList.add('hide') )
         } )
     },
 
@@ -160,13 +160,13 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
 
     renderSubviews() {
         this.subviewElements.forEach( obj => {
-            const name = obj.name
+            const name = obj.name || obj.view
 
             let opts = { }
 
             if( this.Views && this.Views[ name ] ) opts = typeof this.Views[ name ] === "object" ? this.Views[ name ] : Reflect.apply( this.Views[ name ], this, [ ] )
 
-            this.views[ name ] = this.factory.create( key, Object.assign( { insertion: { value: { el: obj.el, method: 'insertBefore' } } }, opts ) )
+            this.views[ name ] = this.factory.create( name, Object.assign( { insertion: { value: { el: obj.el, method: 'insertBefore' } } }, opts ) )
             obj.el.remove()
         } )
 

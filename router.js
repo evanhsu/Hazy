@@ -62,7 +62,7 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
 
         if( !file ) {
             response.writeHead( 404, { 'Content-Length': 0, 'Content-Type': 'text/plain' } )
-            response.end()
+            return Promise.resolve( response.end() )
         }
         
         return Object.create( require(`./resources/${file}`), {

@@ -49,7 +49,7 @@ module.exports = Object.create( {
     handler( path ) {
         const view = this.Views[ this.capitalizeFirstLetter( path[0].replace( '-', '' ) ) ] ? path[0] : 'home'
 
-        if( view === this.currentView ) return this.views[ view ].onNavigation( path )
+        if( view === this.currentView ) return this.views[ view ].onNavigation( path.slice(1) )
 
         this.scrollToTop()
 
