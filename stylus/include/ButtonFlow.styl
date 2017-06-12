@@ -1,0 +1,22 @@
+.ButtonFlow
+
+    .state
+        display: flex
+    
+        button
+            flex: 1
+    
+    button, svg
+        cursor: pointer
+
+        &.disabled
+            opacity: .25
+            cursor: default
+
+        &.link
+            border: none
+            background: none
+            color: black
+                
+            &:hover
+                text-decoration: underline

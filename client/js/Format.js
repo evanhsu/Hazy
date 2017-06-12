@@ -8,6 +8,9 @@ module.exports = {
 
     Range( int ) {
         return Array.from( Array( int ).keys() )
-    }
+    },
 
+    GetSelectOptions( options=[] ) {
+        return options.map( option => `<option value="${option.value}">${option.label}</option>` ).join('')
+    }
 }

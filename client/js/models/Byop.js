@@ -1,5 +1,69 @@
 module.exports = Object.assign( {}, require('./__proto__'), {
 
+    attributes: {
+        divisionId: {
+            label: 'Division',
+            type: 'select'
+        },
+
+        name1: {
+            label: 'Player 1',
+            type: 'text',
+        },
+
+        shirtSize1: {
+            label: 'Shirt Size ( p1 )',
+            type: 'select',
+            range: 'shirtSizes'
+        },
+
+        name2: {
+            label: 'Player 2',
+            type: 'text',
+        },
+
+        shirtSize2: {
+            label: 'Shirt Size ( p2 )',
+            type: 'select',
+            range: 'shirtSizes'
+        },
+
+        email: {
+            label: 'Email',
+            type: 'email',
+            range: 'email'
+        },
+    
+        phone: {
+            label: 'Phone',
+            type: 'phone',
+            range: 'phone'
+        },
+
+        disc1: {
+            label: 'Disc ( p1 )',
+            type: 'select',
+            range: 'discs'
+        },
+
+        disc2: {
+            label: 'Disc ( p2 )',
+            type: 'select',
+            range: 'discs'
+        },
+
+        weight1: {
+            label: 'Weight ( p1 )',
+            type: 'text',
+            range: 'discs'
+        },
+
+        weight2: {
+            label: 'Weight ( p2 )',
+            type: 'text'
+        },
+    },
+
     data: {
         total: 123.5
     },

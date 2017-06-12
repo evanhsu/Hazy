@@ -1,5 +1,6 @@
 module.exports={
 	Admin: require('./views/Admin'),
+	ButtonFlow: require('./views/ButtonFlow'),
 	Byop: require('./views/Byop'),
 	Byopplayers: require('./views/Byopplayers'),
 	Division: require('./views/Division'),

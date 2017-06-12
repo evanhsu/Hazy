@@ -1,5 +1,7 @@
 module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('events').EventEmitter.prototype, {
 
+    $( el, selector ) { return Array.from( el.querySelectorAll( selector ) ) },
+
     Format: require('../Format'),
 
     Model: require('../models/__proto__'),
@@ -53,7 +55,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
             if( this.model.meta ) rv.meta = this.model.meta
         }
 
-        if( this.templateOptions ) { rv.opts = this.templateOptions }
+        if( this.templateOptions ) rv.opts = typeof this.templateOptions === 'function' ? this.templateOptions() : this.templateOptions
 
         return rv
     },
@@ -166,7 +168,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
 
             if( this.Views && this.Views[ name ] ) opts = typeof this.Views[ name ] === "object" ? this.Views[ name ] : Reflect.apply( this.Views[ name ], this, [ ] )
 
-            this.views[ name ] = this.factory.create( name, Object.assign( { insertion: { value: { el: obj.el, method: 'insertBefore' } } }, opts ) )
+            this.views[ name ] = this.factory.create( obj.view, Object.assign( { insertion: { value: { el: obj.el, method: 'insertBefore' } } }, opts ) )
             obj.el.remove()
         } )
 

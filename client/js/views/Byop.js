@@ -9,8 +9,6 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     addDivisions() {
         this.Divisions.data.forEach( division => this.slurpTemplate( { template: `<option value="${division.id}">${division.label}</option>`, insertion: { el: this.els.divisionId } } ) )
 
-        //window.requestAnimationFrame( () => this.els.divisionId.focus() )
-
         return Promise.resolve()
     },
 
