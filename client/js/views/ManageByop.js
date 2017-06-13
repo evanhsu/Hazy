@@ -58,6 +58,38 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
         return `${this.Byop.attributes[ name ].label} changed from ${from} to ${to}.`
     },
+        
+    onPatchingByop() {
+        this.patchingByop = true
+        this.views.byopTeamEdit.toggle( 'confirmUpdate', 'patching', this.patchingByop )
+    },
+    
+    onPatchingByopDone() {
+        this.patchingByop = false
+        this.views.byopTeamEdit.toggle( 'confirmUpdate', 'patching', this.patchingByop )
+    },
+
+    patchByop() {
+        if( this.patchingByop ) return
+
+        this.onPatchingByop()
+
+        const payload = Object.keys( this.changes ).reduce( ( memo, key ) => {
+            const el = this.els[key]
+            return Object.assign( memo, { [ el.getAttribute('data-name') ]: el.value } )
+        }, { } )
+
+        this.Byop.patch( this.Byop.data.id, payload )
+        .then( result => {
+            this.reset()
+            this.onPatchingByopDone()
+            return this.Toast.showMessage( 'success', 'Record updated.' ).catch( this.Error )
+        } )
+        .catch( e => {
+            this.Toast.showMessage( 'error', `Something went wrong.  Try again, or email Mike Baron's brother.` ).catch( this.Error )
+            this.onPatchingByopDone()
+        } )
+    },
 
     populateByopForm() {
         Object.keys( this.Byop.data ).forEach( attr => {
@@ -87,6 +119,8 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         } )
 
         this.views.byopTeamEdit.on( 'cancelUpdateClicked', () => this.reset() )
+        this.views.byopTeamEdit.on( 'cancelClicked', () => this.reset() )
+        this.views.byopTeamEdit.on( 'confirmUpdateClicked', () => this.patchByop() )
 
         this.$( this.els.selectedTeam, 'input,select' ).forEach( el => el.addEventListener( 'blur', e => this.onByopInputBlur( e ) ) )
         return this

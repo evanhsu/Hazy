@@ -21,7 +21,7 @@
     "mocha": "^3.4.2",
     "moment": "^2.18.1",
     "smoothscroll-polyfill": "^0.3.5",
-    "stylus": "0.54.5",
+    "stylus": "0.54.0",
     "uglify": "^0.1.5",
     "watch": "0.18.0"
   },

@@ -31,8 +31,8 @@ module.exports = Object.create( Object.assign( {}, require('./__proto__'), {
             
             this.status = 'showing'
 
-            this.show()
-            .then( () => this.hide() )
+            this.showEl( this.els.container )
+            .then( () => this.hideEl( this.els.container ) )
             .then( () => this.teardown() )
             .catch( reject )
         } )

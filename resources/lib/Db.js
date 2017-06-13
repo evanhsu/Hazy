@@ -37,11 +37,11 @@ module.exports = Object.create( {
         var paramCtr = 1,
             name = resource.path[0],
             bodyKeys = Object.keys( resource.body ),
-            set = 'SET ' + bodyKeys.map( key => `${key} = $${paramCtr++}` ).join(', ')
+            set = 'SET ' + bodyKeys.map( key => `"${key}" = $${paramCtr++}` ).join(', ')
 
         return this.Postgres.query(
-            `UPDATE "${name}" ${set} WHERE id = ${paramCtr} RETURNING ${this._getColumns(name)}`,
-            bodyKeys.map( key => this.body[key] ).concat( resource.path[1] ) )
+            `UPDATE "${name}" ${set} WHERE id = $${paramCtr} RETURNING ${this._getColumns(name)}`,
+            bodyKeys.map( key => resource.body[key] ).concat( resource.path[1] ) )
     },
 
     POST( resource ) {

@@ -14,7 +14,14 @@ module.exports = Object.assign( { }, require('./__proto__'), {
               .then( results => this.respond( { body: results } ) )
     },
 
-    PATCH() { this.respond( { body: { }, code: 404 } ); return Promise.resolve() },
+    PATCH() { 
+        return this.getUser()
+        .then( () =>
+            this.user.roles.includes('superuser')
+                ? this.apply( 'PATCH', false )
+                : this.badRequest()
+        )
+    },
     
     PUT() { this.respond( { body: { }, code: 404 } ); return Promise.resolve() },
 

@@ -48,5 +48,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         )
 
         return this
-    }
+    },
+
+    toggle( name, klas, bool ) { this.els[ name ].classList.toggle( klas, bool ) }
 } )
