@@ -816,7 +816,7 @@ button.submitting {
 .ManageByop button {
   color: #4ab74a;
 }
-.ManageByop button:hover {
+.ManageByop button:not(.disabled):hover {
   background-color: #4ab74a;
   color: #fff;
 }

@@ -7,25 +7,48 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         },
 
         name1: {
-            label: 'Player 1',
+            label: 'Player 1 Name',
             type: 'text',
         },
 
         shirtSize1: {
-            label: 'Shirt Size ( p1 )',
+            label: 'Player 1 Shirt Size',
             type: 'select',
             range: 'shirtSizes'
         },
 
+        disc1: {
+            label: 'Player 1 Disc',
+            type: 'select',
+            range: 'discs'
+        },
+
+        weight1: {
+            label: 'Player 1 Weight',
+            type: 'text',
+            range: 'discs'
+        },
+
         name2: {
-            label: 'Player 2',
+            label: 'Player 2 Name',
             type: 'text',
         },
 
         shirtSize2: {
-            label: 'Shirt Size ( p2 )',
+            label: 'Player 2 Shirt Size',
             type: 'select',
             range: 'shirtSizes'
+        },
+
+        disc2: {
+            label: 'Player 2 Disc',
+            type: 'select',
+            range: 'discs'
+        },
+
+        weight2: {
+            label: 'Player 2 Weight',
+            type: 'text'
         },
 
         email: {
@@ -38,30 +61,8 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             label: 'Phone',
             type: 'phone',
             range: 'phone'
-        },
-
-        disc1: {
-            label: 'Disc ( p1 )',
-            type: 'select',
-            range: 'discs'
-        },
-
-        disc2: {
-            label: 'Disc ( p2 )',
-            type: 'select',
-            range: 'discs'
-        },
-
-        weight1: {
-            label: 'Weight ( p1 )',
-            type: 'text',
-            range: 'discs'
-        },
-
-        weight2: {
-            label: 'Weight ( p2 )',
-            type: 'text'
-        },
+        }
+        
     },
 
     data: {
