@@ -223,7 +223,6 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     },
 
     showEl(el) {
-
         return new Promise( resolve => {
             const time = new Date().getTime(),
                 hash = `${time}Show`
@@ -231,7 +230,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
             window.requestAnimationFrame( () => {
                 el.classList.remove( 'hidden' )
                 window.requestAnimationFrame( () => {
-                    this[hash] = e => this_showEl( el, resolve, hash ) 
+                    this[hash] = e => this._showEl( el, resolve, hash ) 
                     el.addEventListener( 'transitionend', this[hash] )
                     el.classList.remove( 'hide' )
                 } )

@@ -651,6 +651,9 @@ input:focus,
 select:focus {
   border-color: #4ab74a;
 }
+select {
+  background-color: #eff1f0;
+}
 button {
   background-color: #fff;
   border: 1px solid #b5b5b5;
@@ -962,6 +965,20 @@ button.submitting {
   background-color: #a4e5a4;
   color: #158115;
   border-color: #158115;
+}
+.ManageByop .changes {
+  background-color: #a4e5a4;
+  border-radius: 1rem;
+  color: #fff;
+  padding: 1rem;
+  margin: 1rem;
+}
+.ManageByop button {
+  color: #4ab74a;
+}
+.ManageByop button:hover {
+  background-color: #4ab74a;
+  color: #fff;
 }
 .Toast {
   background-color: #b13325;

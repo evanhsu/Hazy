@@ -14,7 +14,7 @@ return `<div>
         <div data-view="typeAhead"></div>
         <div data-js="selectedTeam" class="selected-team hide hidden">
             <form>${byopTeamEdit}</form>
-            <div data-js="changes"></div>
+            <div class="changes" data-js="changes"></div>
             <div data-view="buttonFlow" data-name="byopTeamEdit">
         </div>
     </section>
