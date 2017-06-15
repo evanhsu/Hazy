@@ -75,7 +75,7 @@ module.exports = Object.create( Object.assign( {}, require('../lib/MyObject'), {
             upsertVals = upsertKeys.map( key => opts.upsert[ key ] )
         }
 
-        return this._factory().query( `INSERT INTO ${name} ( ${columns} ) VALUES ( ${ queryData.vars.join(', ') } ) ${upsert} RETURNING ${this._getSimpleSelect(name)}`, queryData.vals.concat( upsertVals ) )
+        return this._factory().query( `INSERT INTO "${name}" ( ${columns} ) VALUES ( ${ queryData.vars.join(', ') } ) ${upsert} RETURNING ${this._getSimpleSelect(name)}`, queryData.vals.concat( upsertVals ) )
     },
 
     select( name, where = { }, opts = { } ) {
@@ -93,7 +93,7 @@ module.exports = Object.create( Object.assign( {}, require('../lib/MyObject'), {
         this.validateKeys( name, allKeys )
 
         return this._factory().query(
-            `UPDATE ${name} SET ${ this.columnToVar( patchKeys ) } WHERE ${ this.columnToVar( whereKeys, { baseIndex: patchKeys.length + 1 } ) }`,
+            `UPDATE "${name}" SET ${ this.columnToVar( patchKeys ) } WHERE ${ this.columnToVar( whereKeys, { baseIndex: patchKeys.length + 1 } ) }`,
             allKeys.map( ( key, i ) => i < patchKeys.length ? patch[ key ] : where[ key ] )
         )
     },

@@ -1,28 +1,14 @@
 module.exports = Object.assign( {}, require('./__proto__'), {
 
-    Divisions: Object.create( require('../models/__proto__'), { resource: { value: 'division' } } ),
+    model: Object.create( require('../models/ByopFriday') ),
 
     Templates: {
         PaidCash: require('./templates/PaidCash')
     },
 
-    addDivisions() {
-        this.Divisions.data.forEach( division => this.slurpTemplate( { template: `<option value="${division.id}">${division.label}</option>`, insertion: { el: this.els.divisionId } } ) )
-
-        return Promise.resolve()
-    },
-
     clear() {
-        this.els.name1.value = ''
-        this.els.ace1.value = 'null'
-        this.els.shirtSize1.value = 'null'
-        this.els.disc1.value = 'null'
-        this.els.weight1.value = ''
-        this.els.name2.value = ''
-        this.els.ace2.value = 'null'
-        this.els.shirtSize2.value = 'null'
-        this.els.disc2.value = 'null'
-        this.els.weight2.value = ''
+        this.els.name.value = ''
+        this.els.shirtSize.value = 'null'
         this.els.email.value = ''
         this.els.phone.value = ''
         this.els.belmontDonation.value = ''
@@ -49,50 +35,14 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         if( this.els.paidCash ) this.els.paidCash.removeAttribute('disabled')
     },
 
-    model: Object.create( require('../models/Byop') ),
-
     events: {
-        ace1: 'change',
-        ace2: 'change',
         belmontDonation: 'input',
-        divisionId: 'change',
-        fridaySignUpBtn: 'click',
         paidCash: 'change',
         playersPageLink: 'click',
         submitBtn: 'click',
     },
 
-    onAce1Change() { this.updateTotal() },
-    onAce2Change() { this.updateTotal() },
-
     onBelmontDonationInput() { this.updateTotal() },
-
-    onDivisionIdChange() {
-        if( this.els.divisionId.value === "null" ) {
-            this.els.spotsLeft.textContent = ``
-            this.enablePayment()
-            return
-        }
-
-        this.Xhr( { resource: 'spotsLeft', qs: JSON.stringify( { divisionId: this.els.divisionId.value } ) } )
-        .then( ( { spotsLeft } ) => {
-            if( spotsLeft <= 0 ) {
-                this.waitList = true
-                this.els.spotsLeft.textContent = 'No spots left.  Please register to be placed on the waiting list.'
-                this.disablePayment()
-                this.model.set( 'total', 0 )
-            } else {
-                this.els.spotsLeft.textContent = `${spotsLeft} spots left!`
-                this.enablePayment()
-            }
-            return Promise.resolve()
-        } )
-        .catch( this.Error )
-    },
-
-    onFridaySignUpBtnClick() {
-        this.emit( 'navigate', '/byop-friday' )
-    },
 
     onPaidCashChange() {
         this.els.paidCash.checked
@@ -103,7 +53,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     },
 
     onPlayersPageLinkClick() {
-        this.emit( 'navigate', '/byop-players' )
+        this.emit( 'navigate', '/byop-players-friday' )
     },
 
     onSubmitBtnClick() {
@@ -119,7 +69,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             .then( response => {
                 return this.Toast.showMessage( 'success', response.message )
                 .then( () => {
-                    this.emit( 'navigate', '/byop-players' )
+                    this.emit( 'navigate', '/byop-players-friday' )
                     this.onSubmitEnd()
                     this.clear()
                 } )
@@ -143,13 +93,24 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     },
 
     postRender() {
+
+        this.Xhr( { resource: 'spotsLeftFriday' } )
+        .then( ( { spotsLeft } ) => {
+            if( spotsLeft <= 0 ) {
+                this.waitList = true
+                this.els.spotsLeft.textContent = 'No spots left.  Please register to be placed on the waiting list.'
+                this.disablePayment()
+                this.model.set( 'total', 0 )
+            } else {
+                this.els.spotsLeft.textContent = `${spotsLeft} spots left!`
+                this.enablePayment()
+            }
+            return Promise.resolve()
+        } )
+        .catch( this.Error )
         
         this.model.on( 'totalChanged', () => this.els.total.textContent = this.Format.Currency.format( this.model.git('total') ) )
         this.els.container.querySelectorAll('input, select').forEach( el => el.addEventListener( 'focus', e => e.target.classList.remove('error') ) )
-
-        this.Divisions.get()
-        .then( () => this.addDivisions() )
-        .catch( e => this.Error(e) )
 
         if( this.user.data.roles.includes('admin') ) {
             this.slurpTemplate( { template: this.Templates.PaidCash(), insertion: { method: 'insertBefore', el: this.els.totalWrap } } )
@@ -163,9 +124,6 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
         if( this.els.paidCash && this.els.paidCash.checked ) total -= 3.5
 
-        if( this.els.ace1.value === "true" ) total += 5
-        if( this.els.ace2.value === "true" ) total += 5
-       
         const belmontDonation = window.parseFloat( this.els.belmontDonation.value ) 
         if( !window.isNaN( belmontDonation ) && belmontDonation > 0 ) total += belmontDonation
 
@@ -190,9 +148,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             } else if( this.model.validate( attr, el.value ) ) {
                 this.model.data[ attr ] = attr === "paidCash"
                     ? Boolean( el.checked )
-                    : attr === "ace1" || attr === "ace2"
-                        ? Boolean( el.value === "true" )
-                        : el.value
+                    : el.value
             }
         } )
 

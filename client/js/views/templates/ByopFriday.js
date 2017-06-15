@@ -1,58 +1,28 @@
-module.exports = ( { meta, model, Currency, Range } ) =>  {
+module.exports = ( { model, meta, Currency } ) => {
     const selectCaret = require('./lib/caret-down')( { name: 'caret' } )
     const shirts = meta.shirtSizes.map( ss => `<option value="${ss.value}">${ss.label}</option>` ).join('')
-    const ace = meta.aceOptions.map( option => `<option value="${option.value}">${option.label}</option>` ).join('')
-    const discs = meta.discs.map( option => `<option value="${option.value}">${option.label}</option>` ).join('')
-    const playerFields = no =>
-        `<div class="player">` +
-            `<div>Player ${no}</div>` +
-            `<input data-js="name${no}" type="text" placeholder="Name" />` + 
-            `<div class="select-wrap">` +
-                `<select data-js="shirtSize${no}">` +
-                    `<option value="null">Shirt Size</option>` + shirts +
-                `</select>${selectCaret}` +
-            `</div>` +
-            `<div class="select-wrap">` +
-                `<select data-js="ace${no}">` +
-                    `<option value="null">Ace Fund</option>` + ace +
-                `</select>${selectCaret}` +
-            `</div>` +
-            `<div class="select-wrap">` +
-                `<select data-js="disc${no}">` +
-                    `<option value="null">Would like a...</option>` + discs +
-                `</select>${selectCaret}` +
-            `</div>` +
-            `<input data-js="weight${no}" placeholder="My preferred weight is" />` +
-        `</div>`
-         
     return `` +
 `<section>
-  <div class="featured-event">
-    <img src="/static/img/discs-in-basket.jpg"/>
+    <div class="featured-event">
+    <img src="/static/img/belmont-circle.jpg"/>
     <div class="content">
-        <div class="center">BYOP</div>
+        <div class="center">BYOP - Friday Preview</div>
     </div>
   </div>
   <div class="event-info">
       <section class="important-info">
-          <h4>Join us for the 16th Annual Hazy Shade BYOP Doubles Tournament</h4>
-          <div>Sponsored by Innova and Discmania</div>
+          <h4>Join us for the Belmont West preview round and Players Party at Hazy Shade in Dayton</h4>
+          <div>Sponsored by Innova</div>
           <div>
-              <span>Belmont Park and Belmont Park West, August 11th-13th, 2017</span>
-              <a href="/static/img/byop-map.pdf" target="_blank">Map</a>
+              <span>Belmont Park West, August 11th, 2017</span>
+              <a href="/static/img/byop-map.pdf" target="_blank">Course Map</a>
           </div>
+          <div>Hazy Shade in Dayton is located at 723 Watervliet Ave Dayton, OH 45420</div>
       </section>
-      <ol class="dates">
-        <li>Friday August 11th: Belmont West preview round and Players Party at Hazy Shade in Dayton</li>
-        <li>Saturday August 12th: Rec and Intermediate Divisions</li>
-        <li>Sunday August 13th: All remaining Divisions</li>
-      </ol>
-      <button data-js="fridaySignUpBtn" class="link friday">Sign up for Friday's event by clicking here!</button>
       <ul class="detailed-info">
         <li>
-            <div>Check-In</div>
-            <p>Player check-in and Players Pack pick-up starts at 12pm, Friday, August 11th, at Hazy Shade’s Dayton location (723 Watervliet Ave). Players who check-in Friday will not need to check-in Saturday or Sunday before the round. Players who have not checked-in on Friday can do so on the day of their Division's event, starting at 8am. A players meeting will be held August 12th and 13th at 9:15am before tee-off at 9:30am.</p>
-            <p>The event will feature two rounds of best-shot doubles: one at Belmont, and one at Belmont West.</p>
+            <div>Preview Round</div>
+            <p>Fucking get here on time.</p>
         </li>
         <li>
             <div>Players Party</div>
@@ -60,15 +30,15 @@ module.exports = ( { meta, model, Currency, Range } ) =>  {
         </li>
         <li>
             <div>Players Pack</div>
-            <p>With help from our friends at Innova and Discmania all amateur divisions will receive an amazing Players Pack. Pro divisions will receive a reduced pack and cash payout.</p>
+            <p>Players will receive an Innova player's pack which includes a premium disc, a hat and shirt, a mini, AND a few other cool items that lie in secret.</p>
         </li>
         <li>
             <div>Register Today!</div>
-            <p>The BYOP event can accommodate 108 teams per day and normally sells out. If you have any questions email us at sales@hazyshade.com.</p>
+            <p>The Friday round can accommodate 108 players. If you have any questions email us at sales@hazyshade.com.</p>
             <p>
                 <span>See the</span>
-                <span data-js="playersPageLink" class="link">BYOP Players Page</span>
-                <span>to see who is currently registered in each division</span>
+                <span data-js="playersPageLink" class="link">BYOP Friday Players Page</span>
+                <span>to see who is currently registered</span>
             </p>
         </li>
       </ul>
@@ -76,21 +46,14 @@ module.exports = ( { meta, model, Currency, Range } ) =>  {
   <div class="registration">
       <h3>Registration</h3>
       <div class="sub-heading">Enter your information below.</div>
-      <div class="info">Recreation and Intermediate divisions will play on August 12th.  All other divisions will play August 13th. There must be 3 teams to make a division. If you sign up for a division that is too small you will have the option to move to another division.</div>
-      <div class="division">
-          <div class="select-wrap">
-              <select data-js="divisionId">
-                <option value="null">Division</option>
-              </select>
-              ${selectCaret}
-          </div>
-          <div class="spots-left" data-js="spotsLeft"></div>
-      </div>
+      <div class="spots-left" data-js="spotsLeft"></div>
       <div class="players">
-          ${playerFields('1')}  
-          ${playerFields('2')}
-          <div class="info">$5 per player for entry into the ace fund. You can pass for now and still enter your team on the day of the event.</div>
-          <div class="info">We will do our best to match disc weight requests but can not guarantee we can get exactly what you asked for.</div>
+        <input data-js="name" type="text" placeholder="Name" />
+        <div class="select-wrap">
+            <select data-js="shirtSize">
+                <option value="null">Shirt Size</option>${shirts}
+            </select>${selectCaret}
+        </div>
       </div>
       <div class="contact">
           <div>Contact</div>
