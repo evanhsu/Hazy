@@ -2,7 +2,7 @@ module.exports={
 	Admin: require('./views/templates/Admin'),
 	ButtonFlow: require('./views/templates/ButtonFlow'),
 	Byop: require('./views/templates/Byop'),
-	Byopplayers: require('./views/templates/Byopplayers'),
+	ByopPlayers: require('./views/templates/ByopPlayers'),
 	Division: require('./views/templates/Division'),
 	Footer: require('./views/templates/Footer'),
 	Header: require('./views/templates/Header'),

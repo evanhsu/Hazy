@@ -154,6 +154,8 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     },
 
     updateTotal() {
+        if( this.waitList ) return this.model.set( 'total', 0 )
+
         let total = this.model.meta.basePrice
 
         if( this.els.paidCash && this.els.paidCash.checked ) total -= 3.5

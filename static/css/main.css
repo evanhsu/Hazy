@@ -273,18 +273,18 @@
     line-height: 0.9rem;
   }
 }
-.Byopplayers {
+.ByopPlayers {
   margin-top: 7rem;
 }
-.Byopplayers h3,
-.Byopplayers h4 {
+.ByopPlayers h3,
+.ByopPlayers h4 {
   text-align: center;
 }
-.Byopplayers .register-link {
+.ByopPlayers .register-link {
   text-align: center;
   margin: 1rem 0rem;
 }
-.Byopplayers .waiting-list {
+.ByopPlayers .waiting-list {
   color: #acacac;
 }
 .Division {

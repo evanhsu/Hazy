@@ -47,7 +47,8 @@ module.exports = Object.create( {
     },
 
     handler( path ) {
-        const view = this.Views[ this.capitalizeFirstLetter( path[0].replace( '-', '' ) ) ] ? path[0] : 'home'
+        const name = this.pathToView( path[0] ),
+            view = this.Views[ name ] ? name : 'home'
 
         if( view === this.currentView ) return this.views[ view ].onNavigation( path.slice(1) )
 
@@ -76,6 +77,11 @@ module.exports = Object.create( {
     navigate( location, options={} ) {
         if( location !== window.location.pathname ) history.pushState( {}, '', location )
         if( !options.silent ) this.handle()
+    },
+
+    pathToView( path ) {
+        const hyphenSplit = path.split('-')
+        return hyphenSplit.map( item => this.capitalizeFirstLetter( item ) ).join('')
     },
 
     scrollToTop() {
