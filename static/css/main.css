@@ -785,6 +785,14 @@ button.submitting {
   margin: 1rem;
   border-radius: 1rem;
 }
+.ManageByop .static-data {
+  background-color: #eff1f0;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+.ManageByop .static-data span {
+  color: #000;
+}
 .ManageByop form {
   border-bottom: 1px solid #000;
   display: flex;

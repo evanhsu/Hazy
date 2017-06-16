@@ -97,7 +97,8 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
             if( !el ) return
 
-            el.value = this.Byop.data[ attr ]
+            const elAttr = [ 'INPUT', 'SELECT' ].includes( el.tagName ) ? 'value' : 'textContent'
+            el[ elAttr ] = this.Byop.data[ attr ]
 
             el.classList.remove('changed')
         } )
