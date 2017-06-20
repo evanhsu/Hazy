@@ -2,9 +2,17 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
     AutoComplete: require('./lib/AutoComplete'),
 
-    focus() { this.els.input.focus() },
-    
     Model: require('../models/Byop'),
+
+    events: {
+        input: 'input'
+    },
+    
+    focus() { this.els.input.focus() },
+
+    onInputInput() {
+        if( this.els.input.value.trim() === "" ) { console.log('c;eared'); this.emit('cleared') }
+    },
 
     postRender() {
         new this.AutoComplete( {
@@ -35,7 +43,9 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         ] )
         .then( ( [ name1Data, name2Data ] ) => {
             if( name1Data.length === 0 && name2Data.length === 0 ) return Promise.resolve( false )
-           
+        
+            name2Data = name2Data.filter( datum2 => name1Data.find( datum1 => datum1.id == datum2.id ) === undefined )
+            
             this.Model.constructor( name1Data.concat( name2Data ), { storeBy: [ 'id' ] } )
             suggest( this.Model.data )
             return Promise.resolve( true )

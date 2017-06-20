@@ -1,28 +1,3 @@
-module.exports = ( { opts, GetSelectOptions } ) => {
-    const byopTeamEdit = opts.byopKeys.map( key => {
-        const meta = opts.byopAttributes[ key ],
-            data = `data-js="${key}" data-name="${key}"`,
-            input = meta.type === 'select'
-                ? `<select ${data}>${GetSelectOptions( opts.byopMeta[ meta.range ] )}</select>`
-                : `<input ${data} />`
-        return `<div><label>${meta.label}</label>${input}</div>`
-    } ).join('')
-
-return `<div>
-    <section>
-        <h1>Team Editor</h1>
-        <div data-view="typeAhead"></div>
-        <div data-js="selectedTeam" class="selected-team hide hidden">
-            <div class="static-data">
-                <div>
-                    <label>Paid Cash:</label>
-                    <span data-js="paidCash"></span>
-                </div>
-            </div>
-            <form>${byopTeamEdit}</form>
-            <div class="changes" data-js="changes"></div>
-            <div data-view="buttonFlow" data-name="byopTeamEdit">
-        </div>
-    </section>
+module.exports = ( p ) => `<div>
+    <div data-view="byopTeamEditor"></div>
 </div>`
-}

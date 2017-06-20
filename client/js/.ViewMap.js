@@ -3,6 +3,7 @@ module.exports={
 	ButtonFlow: require('./views/ButtonFlow'),
 	Byop: require('./views/Byop'),
 	ByopPlayers: require('./views/ByopPlayers'),
+	ByopTeamEditor: require('./views/ByopTeamEditor'),
 	Division: require('./views/Division'),
 	Footer: require('./views/Footer'),
 	Header: require('./views/Header'),

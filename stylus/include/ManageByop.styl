@@ -1,8 +1,15 @@
 .ManageByop
 
     h1
-        text-decoration: underline
-        margin-bottom: 1rem
+        border-radius: 1rem
+        cursor: pointer
+        line-height: 3rem
+        margin-bottom: 2rem
+        transition: background-color .5s, color .5s, opacity .25s
+
+        &:hover
+            color: $LightGreen
+            background-color: $DarkGreen
 
     .selected-team
         padding: 2rem
