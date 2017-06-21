@@ -25,8 +25,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
         weight1: {
             label: 'Player 1 Weight',
-            type: 'text',
-            range: 'discs'
+            type: 'text'
         },
 
         name2: {
@@ -61,8 +60,24 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             label: 'Phone',
             type: 'phone',
             range: 'phone'
+        },
+
+        hasPaid: {
+            label: 'Has Paid',
+            type: 'select',
+            range: 'Boolean'
+        },
+
+        refunded: {
+            label: 'Refunded',
+            type: 'select',
+            range: 'Boolean'
+        },
+
+        total: {
+            label: 'Total',
+            type: 'text'
         }
-        
     },
 
     data: {
@@ -72,6 +87,11 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     meta: {
 
         basePrice: 123.5,
+
+        Boolean: [
+            { value: 'true', label: 'True' },
+            { value: 'false', label: 'False' },
+        ],
  
         aceOptions:[
             { value: 'true', label: 'Yes!' },

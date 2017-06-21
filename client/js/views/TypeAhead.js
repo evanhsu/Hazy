@@ -4,14 +4,23 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
     Model: require('../models/Byop'),
 
+    clear( suppressEmit ) {
+        this.els.input.value = ''
+        if( !suppressEmit ) this.emit('cleared')
+    },
+
     events: {
         input: 'input'
     },
     
     focus() { this.els.input.focus() },
 
+    getQs( attr, term ) {
+        return JSON.stringify( Object.assign( this.query || {}, { [ attr ]: { operation: '~*', value: term } } ) )
+    },
+
     onInputInput() {
-        if( this.els.input.value.trim() === "" ) { console.log('c;eared'); this.emit('cleared') }
+        if( this.els.input.value.trim() === "" ) this.emit('cleared')
     },
 
     postRender() {
@@ -38,8 +47,8 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
     search( term, suggest ) {
         return Promise.all( [
-            this.Xhr( { method: 'get', qs: JSON.stringify( { name1: { operation: '~*', value: term } } ), resource: 'byop' } ),
-            this.Xhr( { method: 'get', qs: JSON.stringify( { name2: { operation: '~*', value: term } } ), resource: 'byop' } )
+            this.Xhr( { method: 'get', qs: this.getQs( 'name1', term ), resource: 'byop' } ),
+            this.Xhr( { method: 'get', qs: this.getQs('name2', term ), resource: 'byop' } )
         ] )
         .then( ( [ name1Data, name2Data ] ) => {
             if( name1Data.length === 0 && name2Data.length === 0 ) return Promise.resolve( false )

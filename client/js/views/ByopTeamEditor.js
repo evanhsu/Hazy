@@ -81,8 +81,9 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         this.onPatchingByop()
 
         const payload = Object.keys( this.changes ).reduce( ( memo, key ) => {
-            const el = this.els[key]
-            return Object.assign( memo, { [ el.getAttribute('data-name') ]: el.value } )
+            const el = this.els[key],
+                name = el.getAttribute('data-name')
+            return Object.assign( memo, { [ name ]: this.Byop.attributes[ name ].range === "Boolean" ? Boolean( el.value === "true" ) : el.value } )
         }, { } )
 
         this.Byop.patch( this.Byop.data.id, payload )
@@ -104,7 +105,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
             if( !el ) return
 
             const elAttr = [ 'INPUT', 'SELECT' ].includes( el.tagName ) ? 'value' : 'textContent'
-            el[ elAttr ] = this.Byop.data[ attr ]
+            el[ elAttr ] = this.Byop.data[ attr ].toString()
 
             el.classList.remove('changed')
         } )
@@ -141,7 +142,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         const el = e.target,
             name = el.getAttribute('data-name'),
             modelValue = this.Byop.data[ name ],
-            hasChanged = Boolean( ( typeof modelValue === 'string' ? modelValue.trim() : modelValue ) != el.value.trim() )
+            hasChanged = Boolean( ( typeof modelValue === 'string' ? modelValue.trim() : modelValue ) != ( this.Byop.attributes[ name ].range === "Boolean" ? Boolean( el.value === "true" ) : el.value.trim() ) )
        
         el.classList.toggle( 'changed', hasChanged )
 
