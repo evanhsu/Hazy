@@ -98,6 +98,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
             .then( result => {
                 return this.Toast.showMessage( 'success', 'Swapped!' )
                 .then( () => {
+                    this.els.waitingList.removeChild( this.els.waitingList.querySelector( `option[value="${this.els.waitingList.value}"]` ) )
                     this.clear()
                     this.onDoneSubmitting()
                     return Promise.resolve()
@@ -132,9 +133,13 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         let explanation = `Remove ${removeTeam} ( division: ${removeDivision} ) from event, and put ${waitingTeamLabel} ( division: ${this.waitingDivision.label} ) in their place?  `
 
         explanation +=
-            this.removeTeam.paidCash
-                ? `${removeTeam} paid in cash, so you will have to manage the refund in person, then update their 'refund' record attribute.`
-                : `${removeTeam} paid via Stripe, so they will be refunded automatically.`
+            this.removeTeam.hasPaid
+                ? this.removeTeam.paidCash
+                    ? `${removeTeam} paid in cash, so you will have to manage the refund in person, then update their 'refund' record attribute.`
+                    : this.removeTeam.stripeChargeId
+                        ? `${removeTeam} paid via Stripe, so they will be refunded automatically.`
+                        : `${removeTeam} has slipped through the system, ask CBaron what's up here.`
+                : `${removeTeam} have not paid, so there is no need to refund them.`
 
         this.els.explanation.textContent = explanation
     }

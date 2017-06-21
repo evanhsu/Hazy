@@ -32,7 +32,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     handleStripeCredit( record ) {
-        return this.Stripe.refund( { charge: record.stripeChargeId } )
+        return this.Stripe.refund( record.stripeChargeId )
         .catch( e => {
             console.log( e )
             this.respond( { stopChain: true, code: 500, body: { message: 'Failed to refund via Stripe.  Try again, or hit Chris Baron up.' } } )
