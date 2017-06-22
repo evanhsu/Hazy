@@ -17,6 +17,12 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             range: 'shirtSizes'
         },
 
+        ace1: {
+            label: 'Player 1 Ace Fund',
+            type: 'select',
+            range: 'aceOptions'
+        },
+
         disc1: {
             label: 'Player 1 Disc',
             type: 'select',
@@ -37,6 +43,12 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             label: 'Player 2 Shirt Size',
             type: 'select',
             range: 'shirtSizes'
+        },
+
+        ace2: {
+            label: 'Player 2 Ace Fund',
+            type: 'select',
+            range: 'aceOptions'
         },
 
         disc2: {
@@ -77,6 +89,12 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         total: {
             label: 'Total',
             type: 'text'
+        },
+
+        waitList: {
+            label: 'On Waiting List',
+            type: 'select',
+            range: 'Boolean'
         }
     },
 

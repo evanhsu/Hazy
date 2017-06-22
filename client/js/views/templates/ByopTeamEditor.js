@@ -19,10 +19,6 @@ return `<section>
                     <label>Paid in Store:</label>
                     <span data-js="paidCash"></span>
                 </div>
-                <div>
-                    <label>On Waiting List:</label>
-                    <span data-js="waitList"></span>
-                </div>
             </div>
             <form>${byopTeamEdit}</form>
             <div class="changes" data-js="changes"></div>

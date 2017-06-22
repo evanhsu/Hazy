@@ -277,7 +277,8 @@
 .ByopNumbers .content .players-pack,
 .ByopNumbers .content .shirts,
 .ByopNumbers .content .belmont-donation,
-.ByopNumbers .content .paid-type {
+.ByopNumbers .content .paid-type,
+.ByopNumbers .content .ace {
   display: flex;
   flex: 5;
   flex-wrap: nowrap;
@@ -287,7 +288,8 @@
 .ByopNumbers .content .players-pack >div,
 .ByopNumbers .content .shirts >div,
 .ByopNumbers .content .belmont-donation >div,
-.ByopNumbers .content .paid-type >div {
+.ByopNumbers .content .paid-type >div,
+.ByopNumbers .content .ace >div {
   flex: 1;
   white-space: nowrap;
   padding: 0rem 1rem;

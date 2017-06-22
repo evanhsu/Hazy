@@ -1,9 +1,31 @@
 module.exports = Object.assign( { }, require('./__proto__'), {
 
     Byop: Object.create( require('../models/Byop') ),
+    
+    Divisions: Object.create( require('../models/__proto__'), { resource: { value: 'division' } } ),
 
     events: {
         heading: 'click'
+    },
+
+    handleAceFund() {
+        this.satAce = 0
+        this.sunAce = 0
+
+        const satDivisions = this.Divisions.data.filter( datum => datum.name === 'rec' || datum.name === 'int' ).reduce( ( memo, datum ) => Object.assign( memo, { [datum.id]: true } ), { } )
+
+        this.Byop.data.forEach( datum => {
+            if( satDivisions[ datum.divisionId ] ) {
+                if( datum.ace1 === true ) this.satAce += 5
+                if( datum.ace2 === true ) this.satAce += 5
+            } else {
+                if( datum.ace1 === true ) this.sunAce += 5
+                if( datum.ace2 === true ) this.sunAce += 5
+            }
+        } )
+
+        this.slurpTemplate( { template: `<div>Saturday: ${this.Format.Currency.format( this.satAce )}</div>`, insertion: { el: this.els.aceFund } } )
+        this.slurpTemplate( { template: `<div>Sunday: ${this.Format.Currency.format( this.sunAce )}</div>`, insertion: { el: this.els.aceFund } } )
     },
 
     handleDiscs() {
@@ -31,9 +53,11 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     handlePaymentType() {
-        const inStoreTotal = this.Byop.store.paidCash[ 'false' ].reduce( ( sum, datum ) 
-        Object.keys( this.Byop.store.paidCash ).forEach( trueOrFalse =>
-            this.slurpTemplate( { template: `${trueOrFalse
+        const cashTotal = this.Byop.store.paidCash[ 'true' ].reduce( ( sum, datum ) => sum + parseFloat( datum.total ), 0 ),
+            ccTotal = this.Byop.store.paidCash[ 'false' ].reduce( ( sum, datum ) => sum + parseFloat( datum.total ), 0 )
+
+            this.slurpTemplate( { template: `<div>Cash: ${this.Format.Currency.format( cashTotal )}</div>`, insertion: { el: this.els.paidType } } )
+            this.slurpTemplate( { template: `<div>Credit: ${this.Format.Currency.format( ccTotal )}</div>`, insertion: { el: this.els.paidType } } )
     },
 
     handleShirts() {
@@ -58,7 +82,10 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
     postRender() {
 
-        this.Byop.get( { query: { waitList: false, removedFromEvent: false }, storeBy: [ 'ace1', 'ace2', 'shirtSize1', 'shirtSize2', 'disc1', 'disc2', 'paidCash' ] } )
+        Promise.all( [
+            this.Divisions.get(),
+            this.Byop.get( { query: { waitList: false, removedFromEvent: false }, storeBy: [ 'shirtSize1', 'shirtSize2', 'disc1', 'disc2', 'paidCash' ] } )
+        ] )
         .then( () => {
 
             this.handleDiscs()
@@ -77,6 +104,8 @@ module.exports = Object.assign( { }, require('./__proto__'), {
                 )
 
             this.handlePaymentType()
+            
+            this.handleAceFund()
         } )
         .catch( this.Error )
 

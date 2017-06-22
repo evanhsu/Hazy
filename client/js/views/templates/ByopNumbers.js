@@ -15,12 +15,12 @@ module.exports = ( p ) =>
             <div class="belmont-donation" data-js="belmontDonation"></div>
         </div>
         <div>
-            <label>Paid Cash/Credit</label>
+            <label>Payment Type</label>
             <div class="paid-type" data-js="paidType"></div>
         </div>
         <div>
             <label>Ace Fund</label>
-            <div data-js="aceFund"></div>
+            <div class="ace" data-js="aceFund"></div>
         </div>
     </div>
 </section>`
