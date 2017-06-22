@@ -263,6 +263,35 @@
     line-height: 0.9rem;
   }
 }
+.ByopNumbers label {
+  color: #000;
+  flex: 1;
+  font-weight: 700;
+  padding-top: 1rem;
+}
+.ByopNumbers .content >div {
+  border: 1px solid #4ab74a;
+  display: flex;
+  margin: 1rem;
+}
+.ByopNumbers .content .players-pack,
+.ByopNumbers .content .shirts,
+.ByopNumbers .content .belmont-donation,
+.ByopNumbers .content .paid-type {
+  display: flex;
+  flex: 5;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  padding: 1rem 0rem;
+}
+.ByopNumbers .content .players-pack >div,
+.ByopNumbers .content .shirts >div,
+.ByopNumbers .content .belmont-donation >div,
+.ByopNumbers .content .paid-type >div {
+  flex: 1;
+  white-space: nowrap;
+  padding: 0rem 1rem;
+}
 .ByopPlayers {
   margin-top: 7rem;
 }
