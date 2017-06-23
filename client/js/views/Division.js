@@ -7,7 +7,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     },
 
     notifyIfEmpty() {
-        if( this.model.data.players.length === 0 ) this.els.isEmpty.classList.remove('hide')
+        if( this.model.data.players.length === 0 ) this.els.isEmpty.classList.remove('hidden')
     },
 
     postRender() {

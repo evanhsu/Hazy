@@ -47,6 +47,10 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
             auth: 'auth',
             spotsLeft: 'spotsLeft',
             spotsLeftFriday: 'spotsLeftFriday',
+            auth: 'auth',
+            "byop-swap": 'byop-swap',
+            me: 'me',
+            spotsLeft: 'spotsLeft',
             'waiting-list': 'waiting-list'
         }
 

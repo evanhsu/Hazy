@@ -47,8 +47,8 @@ module.exports = Object.create( {
     },
 
     handler( path ) {
-        const name = this.pathToView( path[0] )
-        const view = this.Views[ name ] ? name : 'home'
+        const name = this.pathToView( path[0] ),
+            view = this.Views[ name ] ? name : 'home'
 
         if( view === this.currentView ) return this.views[ view ].onNavigation( path.slice(1) )
 

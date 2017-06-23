@@ -10,7 +10,8 @@ module.exports = Object.create( {
         var paramCtr = 1,
             name = resource.path[0],
             queryKeys = ( resource.path.length > 1 ) ? { id: resource.path[1] } : Object.keys( resource.query || {} ),
-            where = ( queryKeys.length ) ? 'WHERE' : ''
+            where = ( queryKeys.length ) ? 'WHERE' : '',
+            whereList = [ ]
 
         if( this.Postgres[ `${name}s` ] ) return Promise.resolve( this.Postgres[ `${name}s` ].data )
 
@@ -21,7 +22,7 @@ module.exports = Object.create( {
             if( isObj && !this._validOperations.has( value.operation ) ) throw Error('Invalid Operation')
 
             const operator = isObj ? value.operation : `=`
-            where += ` ${name}.${key} ${operator} $${paramCtr++}`
+            whereList.push(`"${name}"."${key}" ${operator} $${paramCtr++}`)
         } )
 
         const params = queryKeys.map( key =>
@@ -30,7 +31,7 @@ module.exports = Object.create( {
                 : resource.query[ key ]
         )
 
-        return this.Postgres.query( `SELECT ${this._getColumns(name)} FROM "${name}" ${where}`, params )
+        return this.Postgres.query( `SELECT ${this._getColumns(name)} FROM "${name}" ${where} ${whereList.join(' AND ')}`, params )
     },
 
     PATCH( resource ) { 

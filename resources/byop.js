@@ -12,7 +12,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         return Object.keys( this.query ).length
             ? this.getUser()
               .then( () => this.user.roles.includes('superuser') ? this.apply( 'GET', false ) : this.badRequest() )
-            : this.Postgres.query( `SELECT "divisionId", name1, name2 FROM byop WHERE "waitList" = false ORDER BY created` )
+            : this.Postgres.query( `SELECT "divisionId", name1, name2 FROM byop WHERE "waitList" = false AND "removedFromEvent" = false ORDER BY created` )
               .then( results => this.respond( { body: results } ) )
     },
 

@@ -30,13 +30,14 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
             if( opts.storeBy ) {
                 this.store = { }
                 opts.storeBy.forEach( attr => this.store[ attr ] = { } )
+                this.storeBy = opts.storeBy
             }
 
             this.data = this.parse
                 ? this.parse( response, opts.storeBy )
-                : opts.storeBy
-                    ? this.storeBy( response )
-                    : response
+                : response
+                
+            if( opts.storeBy ) this._store()
 
             this.emit('got')
 
