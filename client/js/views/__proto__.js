@@ -84,7 +84,6 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         return new Promise( resolve => {
             this[ hash ] = e => this._hideEl( el, resolve, hash, isSlow )
             el.addEventListener( 'animationend', this[ hash ] )
-            el.classList.add('animate-out')
             el.classList.add(`animate-out${ isSlow ? '-slow' : ''}`)
         } )
     },
