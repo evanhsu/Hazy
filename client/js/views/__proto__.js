@@ -78,6 +78,8 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     },
 
     hideEl( el, isSlow) {
+        if( this.isHidden() ) return Promise.resolve()
+
         const time = new Date().getTime(),
             hash = `${time}Hide`
         
@@ -105,12 +107,6 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     },
     
     isHidden() { return this.els.container.classList.contains('hidden') },
-
-    onHidden( resolve ) {
-        this.els.container.removeEventListener( 'transitionend', this.onHiddenProxy )
-        this.els.container.classList.add('hidden')
-        resolve( this.emit('hidden') )
-    },
 
     onLogin() {
 
