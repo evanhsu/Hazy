@@ -27,12 +27,12 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     },
 
     data: {
-        total: 33.5
+        total: 8.5
     },
 
     meta: {
 
-        basePrice: 33.5,
+        basePrice: 8.5,
  
         shirtSizes: [
             { value: 'f-sx', label: 'Female X-Small' },

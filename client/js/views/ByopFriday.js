@@ -38,6 +38,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     events: {
         belmontDonation: 'input',
         paidCash: 'change',
+        playerPack: 'click',
         playersPageLink: 'click',
         submitBtn: 'click',
     },
@@ -50,6 +51,14 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             : this.enablePayment()
 
         this.updateTotal()
+    },
+
+    onPlayerPackClick() {
+        this.updateTotal()
+
+        this.els.playerPack.checked
+            ? this.els.shirtSize.removeAttribute( 'disabled' )
+            : this.els.shirtSize.setAttribute( 'disabled', 'true' )
     },
 
     onPlayersPageLinkClick() {
@@ -106,6 +115,8 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
     updateTotal() {
         let total = this.model.meta.basePrice
+
+        if( this.els.playerPack.checked ) total = 33.5
 
         if( this.els.paidCash && this.els.paidCash.checked ) total -= 3.5
 

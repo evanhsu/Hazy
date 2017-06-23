@@ -2,8 +2,6 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
     Byops: Object.create( require('../models/__proto__'), { resource: { value: 'byopFriday' } } ),
 
-    WaitingList: Object.create( require('../models/__proto__'), { resource: { value: 'waiting-list' } } ),
-
     events: {
         byopRegisterLink: 'click'
     },
@@ -16,10 +14,6 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
         Promise.all( [ this.Byops.get() ] )
         .then( () => this.renderPlayers() )
-        .catch( e => this.Error(e) )
-
-        this.WaitingList.get( { query: { day: 'friday' } } )
-        .then( () => this.renderWaitingList() )
         .catch( e => this.Error(e) )
 
         return this

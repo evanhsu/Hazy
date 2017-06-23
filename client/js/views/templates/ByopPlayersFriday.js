@@ -7,8 +7,4 @@ module.exports = ( { user } ) =>
         <h4>Registered</h4>
         <ol class="registered-list" data-js="registeredList"></ol>
     </div>
-    <div class="Division">
-        <h4>Waiting List</h4>
-        <ol class"=waiting-list" data-js="waitingList"></ol>
-    </div>
 </section>`

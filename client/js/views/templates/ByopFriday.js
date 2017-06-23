@@ -34,7 +34,7 @@ module.exports = ( { model, meta, Currency } ) => {
         </li>
         <li>
             <div>Register Today!</div>
-            <p>The Friday round can accommodate 108 players. If you have any questions email us at sales@hazyshade.com.</p>
+            <p>If you have any questions email us at sales@hazyshade.com.</p>
             <p>
                 <span>See the</span>
                 <span data-js="playersPageLink" class="link">BYOP Friday Players Page</span>
@@ -46,13 +46,13 @@ module.exports = ( { model, meta, Currency } ) => {
   <div class="registration">
       <h3>Registration</h3>
       <div class="pack">
-          <label><input data-js="pack" type="checkbox"><span>I WANT THE PLAYERS PACK.  GIVE ME THE PLAYERS PACK.</span></label>
+          <label><input data-js="playerPack" type="checkbox"><span>I WANT THE PLAYERS PACK.  GIVE ME THE PLAYERS PACK.</span></label>
       </div>
       <div class="sub-heading">Enter your information below.</div>
       <div class="players">
         <input data-js="name" type="text" placeholder="Name" />
         <div class="select-wrap">
-            <select data-js="shirtSize">
+            <select disabled="true" data-js="shirtSize">
                 <option value="null">Shirt Size</option>${shirts}
             </select>${selectCaret}
         </div>

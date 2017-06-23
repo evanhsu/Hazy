@@ -383,11 +383,11 @@
   font-size: 1rem;
 }
 .ByopFriday .registration .pack span {
-  transition: color 1s, text-shadow 2s;
+  transition: color 1s, font-weight 5s;
 }
 .ByopFriday .registration .pack input:checked + span {
   color: #4ab74a;
-  text-shadow: 1px 2px #4ab74a;
+  font-weight: 700;
 }
 .ByopFriday .registration .shirts {
   line-height: 2rem;
@@ -800,6 +800,9 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+}
+select[disabled='true'] {
+  background-color: #acacac;
 }
 button {
   background-color: #fff;
