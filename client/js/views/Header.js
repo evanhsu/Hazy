@@ -18,12 +18,12 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     },
 
     onUserLogin() {
-        this.els.profileBtn.classList.remove('hide')        
+        this.els.profileBtn.classList.remove('hidden')        
         this.els.name.textContent = this.user.data.name || this.user.data.email
     },
 
     onUserLogout() {
-        this.els.profileBtn.classList.add('hide')        
+        this.els.profileBtn.classList.add('hidden')        
         this.els.name.textContent = ''
     },
 
