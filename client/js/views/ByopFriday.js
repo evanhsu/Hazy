@@ -94,21 +94,6 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
     postRender() {
 
-        this.Xhr( { resource: 'spotsLeftFriday' } )
-        .then( ( { spotsLeft } ) => {
-            if( spotsLeft <= 0 ) {
-                this.waitList = true
-                this.els.spotsLeft.textContent = 'No spots left.  Please register to be placed on the waiting list.'
-                this.disablePayment()
-                this.model.set( 'total', 0 )
-            } else {
-                this.els.spotsLeft.textContent = `${spotsLeft} spots left!`
-                this.enablePayment()
-            }
-            return Promise.resolve()
-        } )
-        .catch( this.Error )
-        
         this.model.on( 'totalChanged', () => this.els.total.textContent = this.Format.Currency.format( this.model.git('total') ) )
         this.els.container.querySelectorAll('input, select').forEach( el => el.addEventListener( 'focus', e => e.target.classList.remove('error') ) )
 

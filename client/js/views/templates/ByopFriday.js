@@ -22,15 +22,15 @@ module.exports = ( { model, meta, Currency } ) => {
       <ul class="detailed-info">
         <li>
             <div>Preview Round</div>
-            <p>Fucking get here on time.</p>
+            <p>For $5 you can play Belmont West all day. Or, for $30 you can get all day play PLUS an Innova Discs Players Pack.  The Friday Preview Round is a flex start and will not have a cap on players, but if you would like to receive a players pack you should pre-register. We will have a limited number of packs available the day of on a 1st come 1st served basis.  The preview round starts at 11am and continues until 6pm.</p>
         </li>
         <li>
             <div>Players Party</div>
-            <p>Don't miss our Friday Night Players Party! It's a chance to have a great time with fellow golfers and win prizes with raffle tickets included with registration.</p>
+            <p>Don't miss our Friday Night Players Party! It's a chance to have a great time with fellow golfers and win prizes with raffle tickets included with registration.  Starts at 5.  Goes until 10.</p>
         </li>
         <li>
             <div>Players Pack</div>
-            <p>Players will receive an Innova player's pack which includes a premium disc, a hat and shirt, a mini, AND a few other cool items that lie in secret.</p>
+            <p>Players will receive an Innova player's pack which includes a premium disc, a hat and shirt, a mini, AND a few other cool items that lie in secret. Players can pick up their players packs starting at noon Friday at Hazy Shade.</p>
         </li>
         <li>
             <div>Register Today!</div>
@@ -45,8 +45,10 @@ module.exports = ( { model, meta, Currency } ) => {
   </div>
   <div class="registration">
       <h3>Registration</h3>
+      <div class="pack">
+          <label><input data-js="pack" type="checkbox"><span>I WANT THE PLAYERS PACK.  GIVE ME THE PLAYERS PACK.</span></label>
+      </div>
       <div class="sub-heading">Enter your information below.</div>
-      <div class="spots-left" data-js="spotsLeft"></div>
       <div class="players">
         <input data-js="name" type="text" placeholder="Name" />
         <div class="select-wrap">

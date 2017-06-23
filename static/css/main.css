@@ -367,15 +367,27 @@
 .ByopFriday .registration .payment-info.disabled {
   opacity: 0.3;
 }
-.ByopFriday .registration .cash {
+.ByopFriday .registration .cash,
+.ByopFriday .registration .pack {
   display: flex;
   justify-content: center;
   margin: -1rem 0 3rem 0;
   opacity: 1;
 }
-.ByopFriday .registration .cash input {
+.ByopFriday .registration .cash input,
+.ByopFriday .registration .pack input {
   margin: 0.5rem;
   width: inherit;
+}
+.ByopFriday .registration .pack {
+  font-size: 1rem;
+}
+.ByopFriday .registration .pack span {
+  transition: color 1s, text-shadow 2s;
+}
+.ByopFriday .registration .pack input:checked + span {
+  color: #4ab74a;
+  text-shadow: 1px 2px #4ab74a;
 }
 .ByopFriday .registration .shirts {
   line-height: 2rem;

@@ -90,7 +90,7 @@
             &.disabled
                 opacity: .3
 
-        .cash
+        .cash, .pack
             display: flex
             justify-content: center
             margin: -1rem 0 3rem 0
@@ -99,6 +99,17 @@
             input
                 margin: .5rem
                 width: inherit
+
+        .pack
+            font-size: 1rem
+            
+            span
+                transition: color 1s, text-shadow 2s
+
+            input:checked + span
+                color: $HazyGreen
+                text-shadow: 1px 2px $HazyGreen
+
                 
         .shirts
             line-height: 2rem
