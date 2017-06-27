@@ -2,11 +2,18 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
     Byop: require('../models/Byop'),
 
+    Team: require('./templates/Team'),
+
     addTeam( team ) {
         this.model.data.players.push( team )
 
         this.slurpTemplate( {
-            template: `<li><div><div><span>${team.name1}, ${team.name2}</span><span class="disc-selection">${this.getDiscLabel(team.disc1)}(${team.weight1}g), ${this.getDiscLabel(team.disc2)}(${team.weight2}g)</span></div></div></li>`,
+            template: this.Team(
+                Object.assign( team, {
+                    discs: `${this.getDiscLabel(team.disc1)}(${team.weight1}g), ${this.getDiscLabel(team.disc2)}(${team.weight2}g)`,
+                    shirts: `${this.getShirtLabel(team.shirtSize1)}, ${this.getShirtLabel(team.shirtSize2)}`,
+                } )
+            ),
             insertion: { el: this.els.players }
         } )
     },
@@ -14,6 +21,11 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     getDiscLabel( value ) {
         const disc = this.discs.store.value[ value ]
         return disc ? disc.label : 'Undecided'
+    },
+
+    getShirtLabel( value ) {
+        const shirt = this.shirts.store.value[ value ]
+        return shirt ? shirt.label : 'Undecided'
     },
 
     notifyIfEmpty() {
@@ -24,10 +36,12 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         this.model.data.players = [ ]
        
         this.discs =
-            this.Model.constructor(
+            Object.create( this.Model, {} ).constructor(
                 this.Byop.meta.discs.map( disc => ( { value: disc.value, label: disc.label.slice( 0, disc.label.indexOf('(') ) } ) ),
                 { storeBy: [ 'value' ] }
-            )
+            ) 
+
+        this.shirts = Object.create( this.Model, { } ).constructor( this.Byop.meta.shirtSizes, { storeBy: [ 'value' ] } )
 
         return this
     }

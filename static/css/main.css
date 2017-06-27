@@ -367,16 +367,16 @@
 .Division ol {
   margin: 1rem 3rem;
   padding: 1rem 3rem;
-  border: 1px solid #4ab74a;
-  border-top: none;
 }
 .Division ol li {
+  border: 1px solid #4ab74a;
   border-radius: 0.25rem;
   color: #acacac;
   display: list-item;
   line-height: 1.15rem;
   list-style-type: decimal;
   list-style-position: outside;
+  padding-top: 0.5rem;
   transition: background-color 0.25s;
 }
 .Division ol li >div {
@@ -384,37 +384,24 @@
   width: 100%;
 }
 .Division ol li >div >div {
-  display: flex;
+  display: block;
 }
 .Division ol li >div >div >span {
-  flex: 1;
-  padding: 0.25rem;
+  display: block;
+  line-height: 1.5rem;
+  text-align: center;
 }
-.Division ol li >div >div .disc-selection {
+.Division ol li >div >div .disc-selection,
+.Division ol li >div >div .shirt-selection {
   opacity: 0;
-  text-align: right;
-  transition: opacity 0.5s;
-  white-space: nowrap;
 }
 .Division ol li:hover {
   background-color: #acacac;
   color: #158115;
 }
-.Division ol li:hover .disc-selection {
-  opacity: 0.7;
-}
-@media (max-width: 1000px) {
-  .Division ol li {
-    border: 1px solid #4ab74a;
-  }
-  .Division ol li >div >div {
-    display: block;
-  }
-  .Division ol li >div >div >span,
-  .Division ol li >div >div .disc-selection {
-    display: block;
-    text-align: center;
-  }
+.Division ol li:hover .disc-selection,
+.Division ol li:hover .shirt-selection {
+  opacity: 0.5;
 }
 @media (max-width: 767px) {
   .Division {
