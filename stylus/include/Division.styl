@@ -15,10 +15,50 @@
         border-top: none
 
         li
+            border-radius: .25rem
             color: $LightGray
             display: list-item
+            line-height: 1.15rem
             list-style-type: decimal
-            list-style-position: inside
+            list-style-position: outside
+            transition: background-color .25s
+
+            >div
+                display: inline-block
+                width: 100%
+
+                >div
+                    display: flex
+
+                    >span
+                        flex: 1
+                        padding: .25rem
+                    
+                    .disc-selection
+                        opacity: 0
+                        text-align: right
+                        transition: opacity .5s
+                        white-space: nowrap
+
+            &:hover
+                background-color: $LightGray
+                color: $DarkGreen
+
+                .disc-selection
+                    opacity: .7
+
+@media (max-width: 1000px)
+    .Division
+        ol
+            li
+                border: 1px solid $HazyGreen
+
+                >div
+                    >div
+                        display: block
+                        >span, .disc-selection
+                            display: block
+                            text-align: center
 
 @media (max-width: 767px)
     .Division
