@@ -6,13 +6,19 @@ module.exports = p => `
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta property="og:url" content="${p.request.url}" />
+        <meta property="og:title" content="${ p.title }" />
+        <meta property="og:description" content="Everything disc golf related." />
+        <meta property="og:image" content="/static/img/hazy-tree.svg" />
+        <meta property="og:type" content="article" />
  
         ${ ( p.isDev )
             ? '<script src="/static/js/debug.js.gz"></script>'
             : '<script src="/static/js/bundle.js.gz"></script>'
         }      
 
-        <title>Hazy Shade</title>
+        <title>${p.title}</title>
 
     </head>
 

@@ -36,7 +36,7 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
 
     html( request, response ) {
         response.writeHead( 200 )
-        response.end( require('./templates/page')( { isDev: this.isDev, title: process.env.NAME } ) )
+        response.end( require('./templates/page')( { isDev: this.isDev, request,  title: process.env.NAME } ) )
         return Promise.resolve()
     },
 
