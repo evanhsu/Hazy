@@ -7,10 +7,10 @@ module.exports = p => `
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta property="og:url" content="${p.request.url}" />
+        <meta property="og:url" content="https://${process.env.DOMAIN}${p.request.url}" />
         <meta property="og:title" content="${ p.title }" />
         <meta property="og:description" content="Everything disc golf related." />
-        <meta property="og:image" content="/static/img/hazy-tree.svg" />
+        <meta property="og:image" content="https://${process.env.DOMAIN}/static/img/hazy-tree.png" />
         <meta property="og:type" content="article" />
  
         ${ ( p.isDev )
