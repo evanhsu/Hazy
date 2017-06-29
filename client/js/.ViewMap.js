@@ -2,6 +2,7 @@ module.exports={
 	Admin: require('./views/Admin'),
 	ButtonFlow: require('./views/ButtonFlow'),
 	Byop: require('./views/Byop'),
+	Byop2016: require('./views/Byop2016'),
 	ByopNumbers: require('./views/ByopNumbers'),
 	ByopPlayers: require('./views/ByopPlayers'),
 	ByopTeamEditor: require('./views/ByopTeamEditor'),

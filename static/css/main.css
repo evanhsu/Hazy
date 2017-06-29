@@ -263,6 +263,49 @@
     line-height: 0.9rem;
   }
 }
+.Byop2016 {
+  margin-top: 7rem;
+}
+.Byop2016 h3,
+.Byop2016 h4 {
+  font-size: 2rem;
+  text-align: center;
+}
+.Byop2016 h4 {
+  color: #158115;
+  font-weight: bold;
+}
+.Byop2016 .Division ol li div div {
+  display: flex;
+}
+.Byop2016 .Division ol li span {
+  display: initial;
+  flex: 1;
+}
+.Byop2016 .Division ol li span:first-child {
+  flex: 6;
+}
+.Byop2016 .Division ol.header li {
+  display: flex;
+  border: none;
+  font-weight: bold;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .Byop2016 h3,
+  .Byop2016 h4 {
+    font-size: 1rem;
+  }
+  .Byop2016 .Division ol.header li {
+    line-height: 1rem;
+    font-size: 0.6rem;
+  }
+  .Byop2016 .Division span:first-chil {
+    flex: 4;
+  }
+}
 .ByopNumbers label {
   color: #000;
   flex: 1;

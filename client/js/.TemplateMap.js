@@ -2,6 +2,7 @@ module.exports={
 	Admin: require('./views/templates/Admin'),
 	ButtonFlow: require('./views/templates/ButtonFlow'),
 	Byop: require('./views/templates/Byop'),
+	Byop2016: require('./views/templates/Byop2016'),
 	ByopNumbers: require('./views/templates/ByopNumbers'),
 	ByopPlayers: require('./views/templates/ByopPlayers'),
 	ByopTeamEditor: require('./views/templates/ByopTeamEditor'),
@@ -16,5 +17,6 @@ module.exports={
 	PaidCash: require('./views/templates/PaidCash'),
 	Team: require('./views/templates/Team'),
 	Toast: require('./views/templates/Toast'),
+	TournamentResult: require('./views/templates/TournamentResult'),
 	TypeAhead: require('./views/templates/TypeAhead')
 }

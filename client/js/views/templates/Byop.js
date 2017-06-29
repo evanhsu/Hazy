@@ -69,6 +69,10 @@ module.exports = ( { meta, model, Currency, Range } ) =>  {
                 <span data-js="playersPageLink" class="link">BYOP Players Page</span>
                 <span>to see who is currently registered in each division</span>
             </p>
+            <p>
+                <span>Checkout last year's results</span>
+                <span data-js="lastYearResults" class="link">here.</span>
+            </p>
         </li>
       </ul>
   </div>

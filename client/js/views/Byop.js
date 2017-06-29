@@ -56,6 +56,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         ace2: 'change',
         belmontDonation: 'input',
         divisionId: 'change',
+        lastYearResults: 'click',
         paidCash: 'change',
         playersPageLink: 'click',
         submitBtn: 'click'
@@ -95,6 +96,10 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             : this.enablePayment()
 
         this.updateTotal()
+    },
+
+    onLastYearResultsClick() {
+        this.emit( 'navigate', '/byop-2016' )
     },
 
     onPlayersPageLinkClick() {

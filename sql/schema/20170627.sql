@@ -1,4 +1,4 @@
-CREATE TABLE "byop2015Results" (
+CREATE TABLE "byop2016Results" (
     "teamId"        VARCHAR(20),
     "name1"        VARCHAR(100),
     "player1Id"    VARCHAR(20),

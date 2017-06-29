@@ -1,43 +1,32 @@
 module.exports = Object.assign( {}, require('./__proto__'), {
 
-    Divisions: Object.create( require('../models/__proto__'), { resource: { value: 'division' } } ),
-    Byops: Object.create( require('../models/__proto__'), { resource: { value: 'byop' } } ),
-    WaitingList: Object.create( require('../models/__proto__'), { resource: { value: 'waiting-list' } } ),
+    Byops: Object.create( require('../models/__proto__'), { resource: { value: 'byop2016Results' } } ),
 
-    events: {
-        byopRegisterLink: 'click'
-    },
-
-    onByopRegisterLinkClick() {
-        this.emit( 'navigate', '/byop' )
-    },
+    TournamentResult: require('./templates/TournamentResult'),
 
     postRender() {
 
-        Promise.all( [ this.Divisions.get(), this.Byops.get() ] )
-        .then( () => this.renderPlayers() )
-        .catch( e => this.Error(e) )
-
-        this.WaitingList.get()
-        .then( () => this.renderWaitingList() )
+        this.Byops.get()
+        .then( () =>
+            this.Byops.data.sort( ( a, b ) => {
+                const aTotal = window.parseInt( a.total ),
+                    bTotal = window.parseInt( b.total )
+                    
+                return window.isNaN( aTotal )
+                    ? 1
+                    : window.isNaN( bTotal )
+                        ? -1
+                        : aTotal - b.Total
+            } )
+            .forEach( byop => {
+                if( !byop.division ) return 
+                
+                this.slurpTemplate( { template: this.TournamentResult( byop ), insertion: { el: this.els[ byop.division.trim() ] } } )
+            } )
+        )
         .catch( e => this.Error(e) )
 
         return this
-    },
-
-    renderPlayers() {
-
-        this.divisions = this.Divisions.data.reduce(
-            ( memo, division ) => Object.assign( memo, { [ division.id ]: this.factory.create( 'division', { model: { value: { data: division } }, insertion: { value: { el: this.els.divisions } } } ) } ),
-            { }
-        )
-
-        this.Byops.data.forEach( byop => this.divisions[ byop.divisionId ].addTeam( byop ) )
-
-        Object.keys( this.divisions ).forEach( divisionId => this.divisions[ divisionId ].notifyIfEmpty() )
-    },
-
-    renderWaitingList() {
-        this.WaitingList.data.forEach( datum => this.slurpTemplate( { template: `<li>${datum.name1}, ${datum.name2}</li>`, insertion: { el: this.els.waitingList } } ) )
     }
+
 } )
