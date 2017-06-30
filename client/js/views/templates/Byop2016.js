@@ -27,5 +27,6 @@ module.exports = ( { user } ) => {
 return `<section>
     <h3>2016 BYOP Results by Division</h3>
     ${html}
+    <div data-view="byopSponsors"></div>
 </section>`
 }

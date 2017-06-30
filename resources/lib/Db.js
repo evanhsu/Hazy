@@ -10,28 +10,37 @@ module.exports = Object.create( {
         var paramCtr = 1,
             name = resource.path[0],
             queryKeys = ( resource.path.length > 1 ) ? { id: resource.path[1] } : Object.keys( resource.query || {} ),
-            where = ( queryKeys.length ) ? 'WHERE' : '',
-            whereList = [ ]
+            joins = [ ],
+            where,
+            selects = { [name]: true },
+            whereList = [ ],
+            params = [ ]
 
         if( this.Postgres[ `${name}s` ] ) return Promise.resolve( this.Postgres[ `${name}s` ].data )
 
         queryKeys.forEach( key => {
-            const value = resource.query[key],
-                isObj = Boolean( typeof value === 'object' )
+            const datum = resource.query[key],
+                isObj = Boolean( typeof datum === 'object' ),
+                operation = isObj ? datum.operation : `=`
 
-            if( isObj && !this._validOperations.has( value.operation ) ) throw Error('Invalid Operation')
+            if( isObj && !this._validOperations.has( operation ) ) throw Error('Invalid Operation')
 
-            const operator = isObj ? value.operation : `=`
-            whereList.push(`"${name}"."${key}" ${operator} $${paramCtr++}`)
+            if( /join/i.test( operation ) ) {
+                let fkCol = this.Postgres.tables[ datum.value.table ].columns.find( column => column.name === datum.value.column )
+                if( fkCol === undefined ) throw Error( `Invalid join ${key}: ${datum}` )
+                joins.push( `${operation === 'leftJoin' ? 'LEFT' : ''} JOIN "${datum.value.table}" ON "${name}"."${key}" = "${datum.value.table}"."${datum.value.column}"` )
+                selects[ datum.value.table ] = true
+            } else {
+                whereList.push(`"${name}"."${key}" ${operation} $${paramCtr++}`)
+                params.push( typeof datum === 'object' ? datum.value : datum )
+            }
         } )
 
-        const params = queryKeys.map( key =>
-            typeof resource.query[key] === 'object'
-                ? resource.query[ key ].value
-                : resource.query[ key ]
-        )
+        where = paramCtr > 1 ? `WHERE ${whereList.join(' AND ')}` : ''
+        joins = joins.join(' ')
+        selects = Object.keys( selects ).map( tableName => this._getColumns( tableName, { extend: joins.length } ) ).join(', ')
 
-        return this.Postgres.query( `SELECT ${this._getColumns(name)} FROM "${name}" ${where} ${whereList.join(' AND ')}`, params )
+        return this.Postgres.query( `SELECT ${selects} FROM "${name}" ${joins} ${where}`, params )
     },
 
     PATCH( resource ) { 
@@ -60,9 +69,11 @@ module.exports = Object.create( {
     },
 
     _getColumns( name, opts={} ) {
-        return this.Postgres.tables[ name ].columns.map( column =>
-            opts.columnOnly ? `"${column.name}"` : `"${name}"."${column.name}"`
-        ).join(', ')
+        return this.Postgres.tables[ name ].columns.map( column => {
+            let rv = opts.columnOnly ? `"${column.name}"` : `"${name}"."${column.name}"`
+            if( opts.extend ) rv += ` as "${name}.${column.name}"`
+            return rv
+        } ).join(', ')
     },
 
     _getValues( keys, columns ) {
@@ -84,7 +95,7 @@ module.exports = Object.create( {
         [ ] )
     },
 
-    _validOperations: new Set( [ '<', '>', '<=', '>=', '=', '<>', '!=', '~*' ] ),
+    _validOperations: new Set( [ '<', '>', '<=', '>=', '=', '<>', '!=', '~*', 'join', 'leftJoin' ] ),
 
     _wrapKeys: keys => keys.map( key => `"${key}"` ).join(', ')
 

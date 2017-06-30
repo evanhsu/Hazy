@@ -351,6 +351,34 @@
 .ByopPlayers .waiting-list {
   color: #acacac;
 }
+.ByopSponsors {
+  padding: 1rem 5rem;
+}
+.ByopSponsors h4 {
+  padding-bottom: 1rem;
+  text-align: center;
+}
+.ByopSponsors >div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.ByopSponsors >div .sponsor {
+  font-weight: 700;
+  margin: 2rem;
+  width: 15rem;
+}
+.ByopSponsors >div .sponsor label {
+  color: #000;
+  display: block;
+  text-align: center;
+}
+.ByopSponsors >div .sponsor img {
+  display: block;
+  height: 10rem;
+  margin: auto;
+  width: 100%;
+}
 .ByopTeamEditor .TypeAhead {
   margin-bottom: 1rem;
 }

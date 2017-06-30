@@ -7,4 +7,5 @@ module.exports = ( { user } ) =>
         <h4>Waiting List</h4>
         <ol class"waiting-list" data-js="waitingList"></ol>
     </div>
+    <div data-view="byopSponsors"></div>
 </section>`

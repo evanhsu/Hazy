@@ -5,6 +5,7 @@ module.exports={
 	Byop2016: require('./views/Byop2016'),
 	ByopNumbers: require('./views/ByopNumbers'),
 	ByopPlayers: require('./views/ByopPlayers'),
+	ByopSponsors: require('./views/ByopSponsors'),
 	ByopTeamEditor: require('./views/ByopTeamEditor'),
 	ByopWaitingListSwap: require('./views/ByopWaitingListSwap'),
 	Division: require('./views/Division'),

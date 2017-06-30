@@ -36,7 +36,12 @@ module.exports = ( { meta, model, Currency, Range } ) =>  {
   <div class="event-info">
       <section class="important-info">
           <h4>Join us for the 16th Annual Hazy Shade BYOP Doubles Tournament</h4>
-          <div>Sponsored by Innova and Discmania</div>
+          <div>
+            <span>Sponsored by</span>
+            <a href="http://www.innovadiscs.com" target="_blank">Innova</a>
+            <span>and</span>
+            <a href="http://www.discmania.net" target="_blank">Discmania</a>
+          </div>
           <div>
               <span>Belmont Park and Belmont Park West, August 11th-13th, 2017</span>
               <a href="/static/img/byop-map.pdf" target="_blank">Map</a>
@@ -164,5 +169,6 @@ module.exports = ( { meta, model, Currency, Range } ) =>  {
           <button data-js="submitBtn" type="button">Submit</button>
       </div>
   </div>
+  <div data-view="byopSponsors"></div>
 </section>`
 }
