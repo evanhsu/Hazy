@@ -14,11 +14,16 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     ],
 
     events: {
-        byopBtn: 'click'
+        byopBtn: 'click',
+        ezFinder: 'click'
     },
 
     onByopBtnClick() {
         this.emit( 'navigate', 'byop' )
     },
+    
+    onEzFinderClick() {
+        this.emit( 'navigate', 'shop' )
+    }
 
 } )

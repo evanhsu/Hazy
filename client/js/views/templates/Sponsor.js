@@ -1,7 +1,7 @@
-module.exports = p =>
+module.exports = ( p, ImageSrc ) =>
 `<div class="sponsor">
-    <a href="${p["organization.uri"]}" target="_blank">
+    <a href="${p['organization.uri']}" target="_blank">
         <!--<label>${p["organization.label"]}</label>-->
-        <img src="/static/img/${p["organization.name"]}.jpg" />
+        <img src="${ ImageSrc( p['organization.name'] ) }.jpg" />
     </a>
 </div>`

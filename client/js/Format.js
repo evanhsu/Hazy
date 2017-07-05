@@ -6,11 +6,13 @@ module.exports = {
       minimumFractionDigits: 2
     } ),
 
-    Range( int ) {
-        return Array.from( Array( int ).keys() )
-    },
-
     GetSelectOptions( options=[] ) {
         return options.map( option => `<option value="${option.value}">${option.label}</option>` ).join('')
+    },
+
+    ImageSrc( name ) { return `https://storage.googleapis.com/mega-poetry-9665/${name}` },
+    
+    Range( int ) {
+        return Array.from( Array( int ).keys() )
     }
 }

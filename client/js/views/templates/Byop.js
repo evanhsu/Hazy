@@ -1,4 +1,4 @@
-module.exports = ( { meta, model, Currency, Range } ) =>  {
+module.exports = ( { meta, model, Currency, Range, ImageSrc } ) =>  {
     const selectCaret = require('./lib/caret-down')( { name: 'caret' } )
     const shirts = meta.shirtSizes.map( ss => `<option value="${ss.value}">${ss.label}</option>` ).join('')
     const ace = meta.aceOptions.map( option => `<option value="${option.value}">${option.label}</option>` ).join('')
@@ -28,7 +28,7 @@ module.exports = ( { meta, model, Currency, Range } ) =>  {
     return `` +
 `<section>
   <div class="featured-event">
-    <img src="/static/img/discs-in-basket.jpg"/>
+    <img src="${ImageSrc('discs-in-basket.jpg')}"/>
     <div class="content">
         <div class="center">BYOP</div>
     </div>
@@ -44,7 +44,7 @@ module.exports = ( { meta, model, Currency, Range } ) =>  {
           </div>
           <div>
               <span>Belmont Park and Belmont Park West, August 11th-13th, 2017</span>
-              <a href="/static/img/byop-map.pdf" target="_blank">Map</a>
+              <a href="${ImageSrc('byop-map.pdf')}" target="_blank">Map</a>
           </div>
       </section>
       <ol class="dates">

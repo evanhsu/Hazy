@@ -1,4 +1,4 @@
-module.exports = ( { model } ) =>  {
+module.exports = ( { model, ImageSrc } ) =>  {
 /*
 const logos = model.map( item => `<li><img src="/static/img/${item}-logo.jpg"/></li>` ).join('')
 <div class="side-by-side">
@@ -25,7 +25,7 @@ const logos = model.map( item => `<li><img src="/static/img/${item}-logo.jpg"/><
         </div>
     </div>
     <div class="side-by-side">
-        <div class="ez-finder">
+        <div class="ezFinder">
             <span class="title">E-Z Finder</span>
             <span class="caption">An enlightened search experience awaits you...</span>
         </div>
@@ -41,7 +41,7 @@ const logos = model.map( item => `<li><img src="/static/img/${item}-logo.jpg"/><
 */
 
 return `<div>
-    <img src="/static/img/saugatuck-basket-on-right.jpg"/>
+    <img src="${ImageSrc('saugatuck-basket-on-right.jpg')}"/>
     <div class="intro side-by-side">
         <div>
             ${require('./lib/logoBlack')()}
@@ -52,8 +52,19 @@ return `<div>
             <p>We also sponsor a number of tournaments and outings thoughout the year.  Become a Hazy Shader today to get the scoop on all the latest disc golf action!</p>
         </div>        
     </div>
+    <div class="side-by-side">
+        <div data-js="ezFinder" class="ez-finder">
+            <span class="title">E-Z Finder</span>
+            <span class="caption">An enlightened search experience awaits you...</span>
+            <img src="${ImageSrc('ez-finder.png')}" />
+        </div>
+        <div class="featured-product">
+            <span class="title">Featured Item</span>
+            <img src="${ImageSrc('hazy-tree.png')}" />
+        </div>
+    </div>
     <div class="featured-event">
-        <img src="/static/img/discs-in-basket.jpg"/>
+        <img src="${ImageSrc('discs-in-basket.jpg')}"/>
         <div class="content">
             <div class="center">
                 <div>Join us for the 16th Annual</div>

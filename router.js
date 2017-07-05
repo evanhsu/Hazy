@@ -7,8 +7,11 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
     Postgres: require('./dal/Postgres'),
 
     handler( request, response ) {
-        let path = request.url.split('/').slice(1)
-            lastPath = path[ path.length - 1 ],
+        const path = request.url.split('/').slice(1)
+            
+         if( /favicon/.test( path.join('') ) ) { response.writeHead( 301, { 'Location': `${process.env.STORAGE_URL}tree.png` } ); return response.end("") }
+
+        let lastPath = path[ path.length - 1 ],
             queryIndex = lastPath.indexOf('?'),
             qs = ''
 
@@ -19,7 +22,7 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
 
         request.setEncoding('utf8');
 
-        ( path[0] === "static" || /favicon/.test( path.join('') )
+        ( path[0] === "static"
             ? this.static( request, response, path )
             : ( /application\/json/.test( request.headers.accept ) )
                 ? this.rest( request, response, path, qs )

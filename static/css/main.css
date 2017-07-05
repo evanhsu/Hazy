@@ -869,9 +869,10 @@ button.submitting {
 .Home .disc-doctor .main .subtitle {
   font-weight: 300;
 }
-.Home .ez-finder {
-  background-image: url("/static/img/ez-finder.png");
-  background-size: 100% 100%;
+.Home .ez-finder .title {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
 }
 .Home .ez-finder .caption {
   position: absolute;
@@ -1089,6 +1090,10 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+img {
+  display: block;
+  width: 100%;
 }
 h1,
 h2,
