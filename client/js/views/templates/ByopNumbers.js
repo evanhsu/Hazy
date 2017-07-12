@@ -22,5 +22,12 @@ module.exports = ( p ) =>
             <label>Ace Fund</label>
             <div class="ace" data-js="aceFund"></div>
         </div>
+        <div>
+            <label>Downloads</label>
+            <div>
+                <button data-js="getAceSheet" class="link">Get Ace Fund Names</button>
+                <button data-js="getAllNames" class="link">Get All Names</button>
+            </div>
+        </div>
     </div>
 </section>`

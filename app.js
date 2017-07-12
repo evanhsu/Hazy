@@ -1,9 +1,7 @@
 require('node-env-file')( __dirname + '/.env' )
 
-const Fs = require('fs'),
-    Router = require('./router'),
-    httpPort = process.env.HTTP_PORT || 80,
-    httpsPort = process.env.HTTPS_PORT || 443
+const Router = require('./router'),
+    httpPort = process.env.HTTP_PORT
 
 module.exports = Router.initialize()
 .then( () => {

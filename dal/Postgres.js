@@ -14,6 +14,10 @@ module.exports = Object.create( Object.assign( {}, MyObject, {
         return this._factory( opts ).query( query, args )
     },
 
+    stream( query, pipe, opts ) {
+        return this._factory( opts ).stream( query, pipe )
+    },
+
     transaction( queries ) {
         return this._factory().transaction( queries )
     },
@@ -187,6 +191,8 @@ module.exports = Object.create( Object.assign( {}, MyObject, {
 
     _factory( data ) {
         return Object.create( {
+            
+            CopyTo: require('pg-copy-streams').to,
 
             P: MyObject.P,
 
@@ -221,6 +227,17 @@ module.exports = Object.create( Object.assign( {}, MyObject, {
                 return this.P( this.client.query, [ 'ROLLBACK' ], this.client )
                 .then( () => { this.done(); return Promise.reject(e) } )
                 .catch( error => { console.log(`Error rolling back: ${error}, ${e}`); return Promise.reject(e) } )
+            },
+
+            stream( query, pipe ) {
+                return this.connect().then( () =>
+                    new Promise( ( resolve, reject ) => {
+                        const stream = this.client.query( this.CopyTo( query ) )
+                        stream.pipe( pipe )
+                        stream.on( 'end', () => { resolve(); this.done() } )
+                        stream.on( 'error', e => { reject(e); this.done() } )
+                    } )
+                )
             },
 
             transaction( queries ) {
