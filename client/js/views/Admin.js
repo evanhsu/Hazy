@@ -1,32 +1,43 @@
 module.exports = Object.assign( { }, require('./__proto__'), {
 
     events: {
-        byop: 'click',
+        manageDiscTypes: 'click',
+        manageByop: 'click',
     },
 
-    model: [
-        { name: 'byop', label: 'Manage Byop', roles: new Set( [ 'superuser' ] ) }
-    ],
+    model: {
+        manageByop: { label: 'Manage Byop', roles: new Set( [ 'superuser' ] ), url: 'manage-byop' },
+        manageDiscTypes: { label: 'Manage Disc Types', roles: new Set( [ 'superuser' ] ), url: 'manage-disc-types' }
+    },
 
-    hideSplash() { return this.hideEl( this.els.splash ) },
+    onManageDiscTypesClick() {
+        this.emit( 'navigate', `/admin/manage-disc-types`, { silent: true } )
+        return this.showView( 'manageDiscTypes' )
+    },
 
-    onByopClick() {
+    onManageByopClick() {
         this.emit( 'navigate', `/admin/manage-byop`, { silent: true } )
-
-        return this.showByop()
+        return this.showView( 'manageByop' )
     },
 
     onNavigation( path ) {
-        if( path[0] === 'manage-byop' ) return this.showByop()
+        const key = this.keys.find( key => this.model[ key ].url === 'path' )
+
+        if( key === undefined ) return this.emit( 'navigate', '/admin')
+
+        this.showView( key )
     },
 
     postRender() {
+        this.keys = Object.keys( this.model )
 
-        this.model.forEach( ( button, i ) => {
-            if( this.user.data.roles.filter( role => button.roles.has( role ) ).length ) {
-                this.slurpTemplate( { template: `<button data-js="${button.name}">${button.label}</button>`, insertion: { el: this.els[ `column${ i % 2 }` ] } } )
+        this.keys.forEach( ( name, i ) => {
+            if( this.user.data.roles.filter( role => this.model[ name ].roles.has( role ) ).length ) {
+                this.slurpTemplate( { template: `<button data-js="${name}">${this.model[ name ].label}</button>`, insertion: { el: this.els[ `column${ i % 2 }` ] } } )
             }
         } )
+
+        this.currentEl = this.els.splash
 
         if( this.path.length > 1 ) this.onNavigation( this.path.slice( 1 ) )
 
@@ -37,11 +48,14 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
     requiresRole: 'admin',
 
-    showByop() {
-        return this.hideEl( this.els.splash )
+    showView( key ) {
+        return this.hideEl( this.currentEl )
         .then( () => {
-            if( this.manageByop ) return this.manageByop.show()
-            this.manageByop = this.factory.create( 'manageByop', { insertion: { value: { el: this.els.views } } } )
+            this.model[ key ].view 
+                ? this.model[ key ].view.show()
+                : this.model[ key ].view = this.factory.create( key, { insertion: { value: { el: this.els.views } } } )
+            
+            this.currentEl = this.model[ key ].view.getContainer()
             return Promise.resolve()
         } )
         .catch( this.Error )

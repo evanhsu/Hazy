@@ -15,6 +15,7 @@ module.exports={
 	Home: require('./views/Home'),
 	Login: require('./views/Login'),
 	ManageByop: require('./views/ManageByop'),
+	ManageDiscTypes: require('./views/ManageDiscTypes'),
 	Toast: require('./views/Toast'),
 	TypeAhead: require('./views/TypeAhead')
 }

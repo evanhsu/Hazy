@@ -46,6 +46,8 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
 
     events: {},
 
+    getContainer() { return this.els.container },
+
     getTemplateOptions() {
         const rv = Object.assign( this.user ? { user: this.user.data } : {},  this.Format )
 

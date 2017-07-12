@@ -46,11 +46,11 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
     initialize() {
 
         this.jsonRoutes = {
-            auth: 'auth',
-            "byop-swap": 'byop-swap',
-            me: 'me',
-            spotsLeft: 'spotsLeft',
-            'waiting-list': 'waiting-list'
+            //auth: 'auth',
+            //"byop-swap": 'byop-swap',
+            //me: 'me',
+            //spotsLeft: 'spotsLeft',
+            //'waiting-list': 'waiting-list'
         }
 
         return Promise.all( [
@@ -61,6 +61,10 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
             const fileHash =
                 files.filter( name => !/^[\._]/.test(name) && /\.js/.test(name) )
                 .reduce( ( memo, name ) => Object.assign( memo, { [name.replace('.js','')]: true } ), { } )
+
+            Object.keys( fileHash ).forEach( name => {
+                if( !this.Postgres.tableNames[ name ] ) this.jsonRoutes[ name ] = name
+            } )
             
             return Promise.resolve( this.Postgres.tableNames.forEach( table => this.jsonRoutes[ table ] = fileHash[ table ] ? table : '__proto__' ) )
         } )

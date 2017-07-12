@@ -15,6 +15,7 @@ module.exports={
 	Home: require('./views/templates/Home'),
 	Login: require('./views/templates/Login'),
 	ManageByop: require('./views/templates/ManageByop'),
+	ManageDiscTypes: require('./views/templates/ManageDiscTypes'),
 	PaidCash: require('./views/templates/PaidCash'),
 	Sponsor: require('./views/templates/Sponsor'),
 	Team: require('./views/templates/Team'),
