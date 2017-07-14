@@ -1,0 +1,1 @@
+ALTER TABLE "byopSponsor" ADD COLUMN year INTEGER;

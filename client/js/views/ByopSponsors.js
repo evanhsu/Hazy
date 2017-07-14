@@ -7,7 +7,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     postRender() {
 
         this.Sponsors.get( { query: { organizationId: { operation: 'join', value: { table: 'organization', column: 'id' } } } } )
-        .then( () => this.shuffleArray( this.Sponsors.data ).forEach( datum => {
+        .then( () => this.shuffleArray( this.Sponsors.data ).sort( ( a, b ) => b['byopSponsor.year'] - a['byopSponsor.year'] ).forEach( datum => {
             this.slurpTemplate( { template: this.Sponsor( datum ), insertion: { el: this.els.sponsors } } )
         } ) )
         .catch( this.Error )
