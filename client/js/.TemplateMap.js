@@ -8,6 +8,7 @@ module.exports={
 	ByopSponsors: require('./views/templates/ByopSponsors'),
 	ByopTeamEditor: require('./views/templates/ByopTeamEditor'),
 	ByopWaitingListSwap: require('./views/templates/ByopWaitingListSwap'),
+	DiscSelection: require('./views/templates/DiscSelection'),
 	Division: require('./views/templates/Division'),
 	DivisionDropdown: require('./views/templates/DivisionDropdown'),
 	Footer: require('./views/templates/Footer'),

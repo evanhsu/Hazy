@@ -1,2 +1,1 @@
-module.exports = Object.assign( { }, require('./__proto__'), {
-} )
+module.exports = Object.assign( { }, require('./__proto__'), { } )

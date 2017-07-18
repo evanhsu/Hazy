@@ -38,7 +38,8 @@ module.exports = ( { meta, model, Currency, Range, ImageSrc } ) =>  {
           <h4>Join us for the 16th Annual Hazy Shade BYOP Doubles Tournament</h4>
           <div>
             <span>Sponsored by</span>
-            <a href="http://www.innovadiscs.com" target="_blank">Innova</a>
+            <a href="https://www.sprint.com" target="_blank">Sprint</a>,
+            <a href="http://www.innovadiscs.com" target="_blank">Innova</a>,
             <span>and</span>
             <a href="http://www.discmania.net" target="_blank">Discmania</a>
           </div>

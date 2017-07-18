@@ -24,7 +24,7 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
 
         ( path[0] === "static"
             ? this.static( request, response, path )
-            : ( /application\/json/.test( request.headers.accept ) )
+            : ( /application\/json/.test( request.headers.accept ) || ( request.method === "GET" && path[0] === "report" )  )
                 ? this.rest( request, response, path, qs )
                 : this.html( request, response )
         )
@@ -49,6 +49,7 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
             //auth: 'auth',
             //"byop-swap": 'byop-swap',
             //me: 'me',
+            //report: 'report',
             //spotsLeft: 'spotsLeft',
             //'waiting-list': 'waiting-list'
         }

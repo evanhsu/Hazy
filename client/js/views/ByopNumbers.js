@@ -4,8 +4,24 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     
     Divisions: Object.create( require('../models/__proto__'), { resource: { value: 'division' } } ),
 
+    Templates: {
+        ByopDiscSelection: require('./templates/DiscSelection'),
+    },
+
     events: {
-        heading: 'click'
+        heading: 'click',
+        getAceSheet: 'click',
+        getAllNames: 'click'
+    },
+
+    getDiscWeightClasses() {
+        return [
+            { min: 150, max: 160, count: 0 },
+            { min: 161, max: 164, count: 0 },
+            { min: 165, max: 169, count: 0 },
+            { min: 170, max: 172, count: 0 },
+            { min: 173, max: 175, count: 0 }
+        ]
     },
 
     handleAceFund() {
@@ -32,23 +48,28 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         this.discs = {}
 
         Object.keys( this.Byop.store.disc1 ).forEach( disc => {
-            if( this.discs[ disc ] === undefined ) this.discs[ disc ] = { }
+            if( this.discs[ disc ] === undefined ) this.discs[ disc ] = { weightClasses: this.getDiscWeightClasses(), unknowns: [ ] }
             this.Byop.store.disc1[ disc ].forEach( datum => {
-                if( this.discs[ disc ][ datum.weight1 ] === undefined ) this.discs[ disc ][ datum.weight1 ] = 0
-                this.discs[ disc ][ datum.weight1 ]++
+                const klass = this.discs[ disc ].weightClasses.find( klass => klass.min <= parseInt( datum.weight1 ) && klass.max >= parseInt( datum.weight1 ) )
+                klass === undefined
+                    ? this.discs[ disc ].unknowns.push( datum.weight1 || `(no value)` )
+                    : klass.count++
             } )
         } )
         Object.keys( this.Byop.store.disc2 ).forEach( disc => {
-            if( this.discs[ disc ] === undefined ) this.discs[ disc ] = { }
+            if( this.discs[ disc ] === undefined ) this.discs[ disc ] = { weightClasses: this.getDiscWeightClasses(), unknowns: [ ] }
             this.Byop.store.disc2[ disc ].forEach( datum => {
-                if( this.discs[ disc ][ datum.weight2 ] === undefined ) this.discs[ disc ][ datum.weight2 ] = 0
-                this.discs[ disc ][ datum.weight2 ]++
+                const klass = this.discs[ disc ].weightClasses.find( klass => klass.min <= parseInt( datum.weight2 ) && klass.max >= parseInt( datum.weight2 ) )
+                klass === undefined
+                    ? this.discs[ disc ].unknowns.push( datum.weight2 || `(no value)` )
+                    : klass.count++
             } )
         } )
 
         Object.keys( this.discs ).forEach( disc => {
             const total = ( this.Byop.store.disc1[ disc ] ? this.Byop.store.disc1[ disc ].length : 0 ) + ( this.Byop.store.disc2[ disc ] ? this.Byop.store.disc2[ disc ].length : 0 )
-            this.slurpTemplate( { template: `<div>${disc}: ${total}</div>`, insertion: { el: this.els.playerPack } } )
+            this.slurpTemplate( { template: this.Templates.ByopDiscSelection( { disc, total, meta: this.discs[ disc ] } ), insertion: { el: this.els.playerPack } } )
+
         } )
     },
 
@@ -79,6 +100,14 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
     
     onHeadingClick() { this.els.content.classList.contains('hidden') ? this.showEl( this.els.content ) : this.hideEl( this.els.content ) },
+
+    onGetAceSheetClick() {
+        window.open( `/report?${ window.encodeURIComponent( JSON.stringify( { id: 'byopAce' } ) ) }` )
+    },
+    
+    onGetAllNamesClick() {
+        window.open( `/report?${ window.encodeURIComponent( JSON.stringify( { id: 'byopNames' } ) ) }` )
+    },
 
     postRender() {
 
