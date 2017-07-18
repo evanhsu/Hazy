@@ -13,6 +13,7 @@ module.exports={
 	Footer: require('./views/Footer'),
 	Header: require('./views/Header'),
 	Home: require('./views/Home'),
+	List: require('./views/List'),
 	Login: require('./views/Login'),
 	ManageByop: require('./views/ManageByop'),
 	ManageDiscTypes: require('./views/ManageDiscTypes'),

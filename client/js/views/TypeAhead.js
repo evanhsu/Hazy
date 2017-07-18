@@ -5,7 +5,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     Resources: {
 
         Byop: {
-            Model: require('../models/Byop')
+            Model: require('../models/Byop'),
             onSelect: ( e, term, item ) => {
                 this.emit( 'teamSelected', this.resource.Model.store.id[ e.target.getAttribute( 'data-id' ) ] )
             },
@@ -30,14 +30,14 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             }
         },
 
-        Byop: {
-            Model: require('../models/DiscType')
+        DiscType: {
+            Model: require('../models/DiscType'),
             onSelect: ( e, term, item ) => {
                 this.emit( 'discTypeSelected', this.resource.Model.store.id[ e.target.getAttribute( 'data-id' ) ] )
             },
-            renderItem: ( item, search ) => `<div class="autocomplete-suggestion" data-val="${value}" data-id="${item.id}">${item.title}</div>`,
+            renderItem: ( item, search ) => `<div class="autocomplete-suggestion" data-val="${item._id}" data-id="${item._id}">${item.title}</div>`,
             search( term, suggest ) {
-                this.Xhr( { method: 'get', qs: this.getQs( 'name1', term ), resource: 'DiscType' } ),
+                return this.Xhr( { method: 'get', qs: JSON.stringify( { title: { '$regex': term, '$options': 'i' } } ), resource: 'DiscType' } )
                 .then( discTypes => {
                     if( discTypes.length === 0 ) return Promise.resolve( false )
                 
@@ -61,7 +61,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     focus() { this.els.input.focus() },
 
     getQs( attr, term ) {
-        return JSON.stringify( Object.assign( this.query || {}, { [ attr ]: { operation: '~*', value: term } } ) )
+        return JSON.stringify( Object.assign( {}, { [ attr ]: { operation: '~*', value: term } } ) )
     },
 
     onInputInput() {
@@ -69,7 +69,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     },
 
     postRender() {
-        this.resource = this.Resources[ this.Resource ] || 'Byop'
+        this.resource = this.Resources[ this.Resource || 'Byop' ]
 
         new this.AutoComplete( {
             delay: 500,
@@ -78,7 +78,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             cache: false,
             renderItem: this.resource.renderItem,
             source: ( term, suggest ) => {
-                Reflect.apply( this.search, this, [ term.trim(), suggest ] )
+                Reflect.apply( this.resource.search, this, [ term.trim(), suggest ] )
                 .then( found => found ? Promise.resolve(true) : suggest([]) )
                 .catch( this.Error )
             },

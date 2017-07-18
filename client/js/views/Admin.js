@@ -21,7 +21,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     onNavigation( path ) {
-        const key = this.keys.find( key => this.model[ key ].url === 'path' )
+        const key = this.keys.find( key => this.model[ key ].url === path[0] )
 
         if( key === undefined ) return this.emit( 'navigate', '/admin')
 

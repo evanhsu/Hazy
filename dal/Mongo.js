@@ -2,7 +2,21 @@ module.exports = Object.create( Object.assign( { }, require('../lib/MyObject'), 
 
     Client: require('mongodb').MongoClient,
 
-    _connect() { return this.Client.connect(process.env.MONGODB) },
+    GET( resource ) {
+        const cursorMethods = [ 'skip', 'limit', 'sort' ].reduce(
+            ( memo, attr ) => {
+                if( resource.query[ attr ] !== undefined ) { memo[attr] = resource.query[attr]; delete resource.query[attr] }
+                return memo
+            },
+            { skip: 0, limit: undefined, sort: { } }
+        );
+       
+        return this.forEach(
+            db => db.collection( resource.path[0] ).find( resource.query ).skip( cursorMethods.skip ).limit( cursorMethods.limit ).sort( cursorMethods.sort ),
+            result => Promise.resolve( result ),
+            this
+        )
+    },
 
     forEach( cursorFn, callbackFn, thisVar ) {
         return this.getDb()
@@ -36,10 +50,11 @@ module.exports = Object.create( Object.assign( { }, require('../lib/MyObject'), 
         return Promise.resolve( this.collections[ collection.name ] = { } )
     },
 
-    getCollectionData() {
+    initialize() {
         return this.forEach( db => db.listCollections( { name: { $ne: 'system.indexes' } } ), this.cacheCollection, this )
+        .then( () => Promise.resolve( this.collectionNames = Object.keys( this.collections ) ) )
     },
 
-    getDb() { return this._connect() }
-
+    getDb() { return this.Client.connect(process.env.MONGODB) },
+    
 } ), { collections: { value: { } } } )

@@ -1,8 +1,8 @@
-module.exports = ( { user } ) =>
+module.exports = ( { user, ImageSrc } ) =>
 `<div>
     <div class="splash" data-js="splash">
         <div data-js="column0"></div>
-        <img src="/static/img/hazy-tree.svg"/>
+        <img src="${ImageSrc('hazy-tree.svg')}"/>
         <div data-js="column1"></div>
     </div>
     <div data-js="views"></div>

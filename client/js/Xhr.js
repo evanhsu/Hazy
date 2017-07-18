@@ -20,7 +20,7 @@ module.exports = Object.create( Object.assign( {}, require('../../lib/MyObject')
                 data.method = data.method || "get"
 
                 if( data.method === "get" || data.method === "options" ) {
-                    let qs = data.qs ? `?${data.qs}` : '' 
+                    let qs = data.qs ? `?${window.encodeURIComponent( data.qs )}` : '' 
                     req.open( data.method, `/${data.resource}${qs}` )
                     this.setHeaders( req, data.headers )
                     req.send(null)
@@ -33,12 +33,6 @@ module.exports = Object.create( Object.assign( {}, require('../../lib/MyObject')
 
                 if( data.onProgress ) data.onProgress( 'sent' )
             } )
-        },
-
-        plainEscape( sText ) {
-            /* how should I treat a text/plain form encoding? what characters are not allowed? this is what I suppose...: */
-            /* "4\3\7 - Einstein said E=mc2" ----> "4\\3\\7\ -\ Einstein\ said\ E\=mc2" */
-            return sText.replace(/[\s\=\\]/g, "\\$&");
         },
 
         setHeaders( req, headers={} ) {

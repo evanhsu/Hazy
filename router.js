@@ -2,6 +2,8 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
 
     Fs: require('fs'),
 
+    Mongo: require('./dal/Mongo'),
+
     Path: require('path'),
     
     Postgres: require('./dal/Postgres'),
@@ -55,19 +57,23 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
         }
 
         return Promise.all( [
+            this.Mongo.initialize(),
             this.Postgres.initialize(),
             this.P( this.Fs.readdir, [ `${__dirname}/resources` ] )
         ] )
-        .then( ( [ a, [ files ] ] ) => {
+        .then( ( [ a, b, [ files ] ] ) => {
             const fileHash =
                 files.filter( name => !/^[\._]/.test(name) && /\.js/.test(name) )
                 .reduce( ( memo, name ) => Object.assign( memo, { [name.replace('.js','')]: true } ), { } )
 
-            Object.keys( fileHash ).forEach( name => {
-                if( !this.Postgres.tableNames[ name ] ) this.jsonRoutes[ name ] = name
-            } )
+            this.Postgres.tableNames.forEach( table => this.jsonRoutes[ table ] = fileHash[ table ] ? table : '__proto__' )
+            this.Mongo.collectionNames.forEach( table => this.jsonRoutes[ table ] = fileHash[ table ] ? table : '__proto__' )
             
-            return Promise.resolve( this.Postgres.tableNames.forEach( table => this.jsonRoutes[ table ] = fileHash[ table ] ? table : '__proto__' ) )
+            Object.keys( fileHash )
+                .filter( name => (!this.Postgres.tableNames[ name ]) && (!this.Mongo.collectionNames[ name ]) )
+                .forEach( name => this.jsonRoutes[ name ] = name )
+
+            return Promise.resolve() 
         } )
     },
 

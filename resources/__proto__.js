@@ -10,6 +10,8 @@ module.exports = Object.assign( { }, require('../lib/MyObject'), {
 
     Postgres: require('../dal/Postgres'),
 
+    QueryString: require('querystring'),
+
     Response: require('./lib/Response'),
 
     apply( method, check=true ) {
@@ -43,7 +45,7 @@ module.exports = Object.assign( { }, require('../lib/MyObject'), {
     getHeaders( body ) { return Object.assign( {}, this.headers, { 'Date': new Date().toISOString(), 'Content-Length': Buffer.byteLength( body ) } ) },
 
     getQs() {
-        this.query = this.qs.length ? JSON.parse( decodeURIComponent( this.qs ) ) : { }
+        this.query = this.qs.length ? JSON.parse( this.QueryString.unescape( this.qs ) ) : { }
     },
 
     getUser() {
