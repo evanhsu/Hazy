@@ -425,6 +425,33 @@
 .ByopWaitingListSwap .waiting-list >div {
   flex: 3;
 }
+.DiscType {
+  align-items: center;
+  display: flex;
+  line-height: 1.25rem;
+  padding: 1rem;
+  text-align: left;
+}
+.DiscType >span:first-child {
+  flex: 10;
+}
+.DiscType >span:last-child {
+  align-items: center;
+  display: flex;
+  flex: 1;
+}
+.DiscType svg {
+  display: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0rem 0.5rem;
+}
+.DiscType:hover {
+  background-color: rgba(172,172,172,0.1);
+}
+.DiscType:hover svg {
+  display: inline-block;
+}
 .Division {
   padding: 2rem 6rem;
 }
@@ -933,6 +960,10 @@ button.submitting {
     line-height: 1.5rem;
     padding-top: 1rem;
   }
+}
+.List {
+  margin: 2rem;
+  padding: 0.5rem;
 }
 .Login {
   margin: 10rem auto 6rem auto;

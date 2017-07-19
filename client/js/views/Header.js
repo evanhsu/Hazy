@@ -6,6 +6,10 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         'events'
     ],
 
+    enableTypeAhead( meta ) {
+        this.slurpTemplate( { template: `<div data-view="typeAhead"></div>`, insertion: { el: this.els.profileBtn, method: 'insertBefore' } } )
+    },
+
     events: {
         logo: 'click',
         logout: 'click'

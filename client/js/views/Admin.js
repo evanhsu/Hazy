@@ -54,6 +54,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
             this.model[ key ].view 
                 ? this.model[ key ].view.show()
                 : this.model[ key ].view = this.factory.create( key, { insertion: { value: { el: this.els.views } } } )
+                                                            .on( 'enableHeaderTypeAhead', e => this.emit( 'enableHeaderTypeAhead', e ) )
             
             this.currentEl = this.model[ key ].view.getContainer()
             return Promise.resolve()

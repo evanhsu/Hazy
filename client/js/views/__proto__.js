@@ -152,7 +152,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
             obj.el.remove()
         } )
 
-        delete this.subviewElements
+        this.subviewElements = [ ]
 
         return this
     },

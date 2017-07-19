@@ -1,1 +1,5 @@
-module.exports = datum => `<li data-id="${datum.id}">${datum.title}</li>`
+module.exports = datum =>
+    `<li class="DiscType" data-id="${datum._id}">
+        <span>${datum.title}</span>
+        <div data-view="buttonFlow"></div>
+    </li>`

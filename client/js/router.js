@@ -69,12 +69,14 @@ module.exports = Object.create( {
                     } )
                     .on( 'navigate', ( route, options ) => this.navigate( route, options ) )
                     .on( 'deleted', () => delete this.views[ view ] )
+                    .on( 'enableHeaderTypeAhead', meta => this.header.enableTypeAhead( meta ) )
             )
         } )
         .catch( this.Error )
     },
 
     navigate( location, options={} ) {
+        if( this.header.displayingTypeAhead ) this.header.removeTypeAhead()
         if( location !== window.location.pathname ) history.pushState( {}, '', location )
         if( !options.silent ) this.handle()
     },

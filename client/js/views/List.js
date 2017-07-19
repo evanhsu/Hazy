@@ -5,6 +5,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
             template: this.model.data.map( datum => this.itemTemplate( datum ) ).join(''),
             insertion: { el: this.els.list }
         } )
+        this.renderSubviews()
     },
 
     postRender() {
