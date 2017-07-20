@@ -9,7 +9,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     POST() {
         return this.getUser()
         .then( () =>
-            this.user.roles.includes('superuser')
+            this.user.roles.includes('admin')
                 ? this.slurpBody()
                 : this.badRequest()
         )
