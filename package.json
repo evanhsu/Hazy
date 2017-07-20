@@ -23,7 +23,7 @@
     "moment": "^2.18.1",
     "smoothscroll-polyfill": "^0.3.5",
     "stylus": "0.54.0",
-    "uglify": "^0.1.5",
+    "uglify-js": "3.0.25",
     "watch": "0.18.0"
   },
   "license": "MIT",

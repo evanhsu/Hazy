@@ -5,7 +5,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     model: [
-        { name: 'byop', label: 'Manage Byop', roles: new Set( [ 'superuser' ] ) }
+        { name: 'byop', label: 'Manage Byop', roles: new Set( [ 'superuser', 'manage-byop' ] ) }
     ],
 
     hideSplash() { return this.hideEl( this.els.splash ) },
