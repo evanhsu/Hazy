@@ -9,7 +9,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     GET() {
         return this.getUser()
         .then( () => {
-            if( !this.user.roles.includes('superuser') ) return this.badRequest()
+            if( !this.user.roles.includes('admin') ) return this.badRequest()
 
             this.getQs()
             this.response.writeHead( 200, {

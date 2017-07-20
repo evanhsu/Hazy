@@ -120,7 +120,8 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             { value: 'luster-gator', label: 'Luster Gator (173g-175g)' },
             { value: 'star-roc', label: 'Star Roc (178g-180g)' },
             { value: 'star-destroyer', label: 'Star Destroyer (151g-175g)' },
-            { value: 'star-aviar-three', label: 'Star Aviar3 (173g-175g)' },
+            //{ value: 'star-aviar-three', label: 'Star Aviar3 (173g-175g)' },
+            { value: 'xt-nova', label: 'XT Nova (165g-175g)' },
             { value: 'champion-leopard-three', label: 'Champion Leopard 3 (165g-175g)' },
             { value: 'champion-flattop-firebird', label: 'Champion Flattop Firebird (165g-175g)' }
         ],

@@ -1,5 +1,6 @@
-module.exports = Object.assign( {}, require('./__proto'), {
+module.exports = Object.assign( {}, require('./__proto__'), {
 
+    /*
     addItem( model ) {
         const type = model.get( 'type' ),
             prototype = this.itemTypes[ type ]
@@ -127,5 +128,6 @@ module.exports = Object.assign( {}, require('./__proto'), {
     },
 
     template: require('./templates/JSON')
+    */
 
 } )

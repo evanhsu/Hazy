@@ -11,7 +11,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
         return Object.keys( this.query ).length
             ? this.getUser()
-              .then( () => this.user.roles.includes('superuser') ? this.apply( 'GET', false ) : this.badRequest() )
+              .then( () => this.user.roles.includes('admin') ? this.apply( 'GET', false ) : this.badRequest() )
             : this.Postgres.query( `SELECT "divisionId", name1, name2, disc1, weight1, disc2, weight2, "shirtSize1", "shirtSize2" FROM byop WHERE "waitList" = false AND "removedFromEvent" = false ORDER BY created` )
               .then( results => this.respond( { body: results } ) )
     },
@@ -19,7 +19,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     PATCH() { 
         return this.getUser()
         .then( () =>
-            this.user.roles.includes('superuser')
+            this.user.roles.includes('admin')
                 ? this.apply( 'PATCH', false )
                 : this.badRequest()
         )
