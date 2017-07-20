@@ -32,6 +32,7 @@ module.exports = Object.create( {
                 { insertion: { value: { el: this.contentContainer, method: 'insertBefore' } }, user: { value: this.User } }
             )
             .on( 'navigate', route => this.navigate( route ) )
+            .on( 'itemSelected', item => this.views[ this.currentView ].itemSelected( item ) )
 
         this.footer =
             this.ViewFactory.create(
@@ -70,6 +71,7 @@ module.exports = Object.create( {
                     .on( 'navigate', ( route, options ) => this.navigate( route, options ) )
                     .on( 'deleted', () => delete this.views[ view ] )
                     .on( 'enableHeaderTypeAhead', meta => this.header.enableTypeAhead( meta ) )
+                    .on( 'disableHeaderTypeAhead', meta => this.header.disableTypeAhead() )
             )
         } )
         .catch( this.Error )

@@ -17,19 +17,18 @@ $background = rgba( 0, 0, 0, .7 )
         margin: .25rem
 
     .nav 
+        align-items: center
         display: flex
 
         >li
-            position: relative
-
             &:first-child
                 flex: 1
            
             &:last-child
                 cursor: pointer
                 height: 100%
-                position: absolute
-                right: 1rem
+                margin-right: 1rem
+                text-align: right
                 transition: background-color .5s
                     
                 svg
@@ -68,17 +67,6 @@ $background = rgba( 0, 0, 0, .7 )
                     ul
                         display: block
 
-                    
-
-            /* 
-            &:nth-child(2)
-                flex: 10
-            
-            &:last-child
-                flex: 1
-            */
-            
-
     .spans
         li
             display: inline-block
@@ -90,6 +78,21 @@ $background = rgba( 0, 0, 0, .7 )
     span
         color: white
         text-transform: uppercase
+
+    &.has-typeahead
+        .nav 
+            >li
+                &:first-child
+                    flex: 1
+               
+                &:nth-child(2)
+                    flex: 10
+                    max-width: 35rem
+                    
+                &:last-child
+                    flex: 1
+                    position: initial
+        
 
 @media (min-width: 1200px)
     .Header

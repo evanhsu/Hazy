@@ -434,6 +434,9 @@
 }
 .DiscType >span:first-child {
   flex: 10;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .DiscType >span:last-child {
   align-items: center;
@@ -720,17 +723,8 @@ button.submitting {
   margin: 0.25rem;
 }
 .Header .nav {
+  align-items: center;
   display: flex;
-}
-.Header .nav >li {
-  position: relative;
-/* 
-            &:nth-child(2)
-                flex: 10
-            
-            &:last-child
-                flex: 1
-            */
 }
 .Header .nav >li:first-child {
   flex: 1;
@@ -738,8 +732,8 @@ button.submitting {
 .Header .nav >li:last-child {
   cursor: pointer;
   height: 100%;
-  position: absolute;
-  right: 1rem;
+  margin-right: 1rem;
+  text-align: right;
   transition: background-color 0.5s;
 }
 .Header .nav >li:last-child svg {
@@ -787,6 +781,17 @@ button.submitting {
 .Header span {
   color: #fff;
   text-transform: uppercase;
+}
+.Header.has-typeahead .nav >li:first-child {
+  flex: 1;
+}
+.Header.has-typeahead .nav >li:nth-child(2) {
+  flex: 10;
+  max-width: 35rem;
+}
+.Header.has-typeahead .nav >li:last-child {
+  flex: 1;
+  position: initial;
 }
 @media (min-width: 1200px) {
   .Header {
@@ -1066,19 +1071,20 @@ button.submitting {
   font-weight: bold;
 }
 .TypeAhead {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  position: relative;
 }
 .TypeAhead input {
   display: inline-block;
   font-size: 1rem;
-  padding: 0.5rem 0.25rem;
-  width: 35rem;
+  padding: 0.5rem 1rem 0.5rem 3rem;
 }
-.TypeAhead .form-label {
-  font-size: 1.2rem;
-  margin-right: 1rem;
+.TypeAhead .search {
+  position: absolute;
+  height: 1rem;
+  left: 1rem;
 }
 @font-face {
   font-family: 'Roboto';

@@ -15,6 +15,7 @@ module.exports={
 	Footer: require('./views/templates/Footer'),
 	Header: require('./views/templates/Header'),
 	Home: require('./views/templates/Home'),
+	JSON: require('./views/templates/JSON'),
 	List: require('./views/templates/List'),
 	Login: require('./views/templates/Login'),
 	ManageByop: require('./views/templates/ManageByop'),

@@ -8,7 +8,7 @@ module.exports = Object.create( Object.assign( { }, require('../lib/MyObject'), 
                 if( resource.query[ attr ] !== undefined ) { memo[attr] = resource.query[attr]; delete resource.query[attr] }
                 return memo
             },
-            { skip: 0, limit: undefined, sort: { } }
+            { skip: 0, limit: 2147483648, sort: { } }
         );
        
         return this.forEach(

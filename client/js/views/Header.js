@@ -6,8 +6,20 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         'events'
     ],
 
+    disableTypeAhead() {
+        if( !this.views.typeAhead ) return Promise.resolve()
+
+        delete this.Views.typeAhead 
+        this.els.container.classList.remove( 'has-typeahead' )
+        return this.views.typeAhead.delete()
+    },
+
     enableTypeAhead( meta ) {
-        this.slurpTemplate( { template: `<div data-view="typeAhead"></div>`, insertion: { el: this.els.profileBtn, method: 'insertBefore' } } )
+        this.Views = Object.assign( this.Views || {}, { typeAhead: meta } )
+        this.slurpTemplate( { template: `<li><div data-view="typeAhead"></div></li>`, insertion: { el: this.els.profileBtn, method: 'insertBefore' } } )
+        this.renderSubviews()
+        this.els.container.classList.add( 'has-typeahead' )
+        this.views.typeAhead.on( 'itemSelected', item => this.emit( 'itemSelected', item ) )
     },
 
     events: {

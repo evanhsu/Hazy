@@ -6,9 +6,6 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
         Byop: {
             Model: require('../models/Byop'),
-            onSelect: ( e, term, item ) => {
-                this.emit( 'teamSelected', this.resource.Model.store.id[ e.target.getAttribute( 'data-id' ) ] )
-            },
             renderItem: ( item, search ) => {
                 const value = `${item.name1}, ${item.name2}`
                 return `<div class="autocomplete-suggestion" data-val="${value}" data-id="${item.id}">${value}</div>`
@@ -32,16 +29,13 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
         DiscType: {
             Model: require('../models/DiscType'),
-            onSelect: ( e, term, item ) => {
-                this.emit( 'discTypeSelected', this.resource.Model.store.id[ e.target.getAttribute( 'data-id' ) ] )
-            },
-            renderItem: ( item, search ) => `<div class="autocomplete-suggestion" data-val="${item._id}" data-id="${item._id}">${item.title}</div>`,
+            renderItem: ( item, search ) => `<div class="autocomplete-suggestion" data-val="${item.title}" data-id="${item._id}">${item.title}</div>`,
             search( term, suggest ) {
                 return this.Xhr( { method: 'get', qs: JSON.stringify( { title: { '$regex': term, '$options': 'i' } } ), resource: 'DiscType' } )
                 .then( discTypes => {
                     if( discTypes.length === 0 ) return Promise.resolve( false )
                 
-                    this.resource.Model.constructor( discTypes, { storeBy: [ 'id' ] } )
+                    this.resource.Model.constructor( discTypes, { storeBy: [ '_id' ] } )
                     suggest( this.resource.Model.data )
                     return Promise.resolve( true )
                 } )
@@ -82,7 +76,13 @@ module.exports = Object.assign( {}, require('./__proto__'), {
                 .then( found => found ? Promise.resolve(true) : suggest([]) )
                 .catch( this.Error )
             },
-            onSelect: this.resource.onSelect.bind( this )
+            onSelect: ( e, term, item ) => {
+                const store = this.resource.Model.store;
+                this.emit(
+                    'itemSelected',
+                    (  store.id ? store.id : store['_id'] )[ e.target.getAttribute( 'data-id' ) ]
+                )
+            }
         } )
 
         return this

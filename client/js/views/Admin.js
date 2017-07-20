@@ -5,9 +5,21 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         manageByop: 'click',
     },
 
+    itemSelected( item ) { this.currentView.onItemSelected( item ) },
+
     model: {
+
         manageByop: { label: 'Manage Byop', roles: new Set( [ 'superuser' ] ), url: 'manage-byop' },
-        manageDiscTypes: { label: 'Manage Disc Types', roles: new Set( [ 'superuser' ] ), url: 'manage-disc-types' }
+
+        manageDiscTypes: {
+            label: 'Manage Disc Types',
+            roles: new Set( [ 'superuser' ] ),
+            url: 'manage-disc-types',
+            typeAhead: {
+                Resource: { value: 'DiscType' },
+                templateOptions: { value: { placeholder: 'Search Disc Types' } }
+            }
+        }
     },
 
     onManageDiscTypesClick() {
@@ -51,11 +63,15 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     showView( key ) {
         return this.hideEl( this.currentEl )
         .then( () => {
+            this.emit('disableHeaderTypeAhead');
+
             this.model[ key ].view 
                 ? this.model[ key ].view.show()
                 : this.model[ key ].view = this.factory.create( key, { insertion: { value: { el: this.els.views } } } )
-                                                            .on( 'enableHeaderTypeAhead', e => this.emit( 'enableHeaderTypeAhead', e ) )
-            
+        
+            if( this.model[ key ].typeAhead ) this.emit( 'enableHeaderTypeAhead', this.model[ key ].typeAhead )
+
+            this.currentView = this.model[ key ].view
             this.currentEl = this.model[ key ].view.getContainer()
             return Promise.resolve()
         } )

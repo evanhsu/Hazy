@@ -25,16 +25,11 @@ module.exports = Object.assign( { }, require('./__proto__'), {
             itemTemplate: { value: require('./templates/DiscType') }
         },
 
-        typeAhead: {
-            Resource: { value: 'DiscType' },
-            templateOptions: { value: { label: 'Search Disc Types' } }
-        }
+        
     },
 
-    postRender() {
+    onItemSelected( item ) {
+        console.log(item);
+    }
 
-        this.emit( 'enableHeaderTypeAhead', this.Views.typeAhead )
-
-        return this
-    },
 } )

@@ -1,5 +1,5 @@
-module.exports = ( { opts } ) =>
+module.exports = ( { opts={placeholder:''} } ) =>
 `<div>
-    <label class="form-label">${opts.label}</label>  
-    <input data-js="input" type="text">
+    <input data-js="input" placeholder="${opts.placeholder}" "type="text">
+    ${require('./lib/search')()}
 </div>`
