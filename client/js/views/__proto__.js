@@ -15,7 +15,11 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         els.forEach( el => el.addEventListener( event || 'click', e => this[ `on${this.capitalizeFirstLetter(key)}${this.capitalizeFirstLetter(event)}` ]( e ) ) )
     },
 
-    constructor() {
+    constructor( opts ) {
+
+        Object.assign( this, opts )
+
+        if( this.model.data ) this.model = Object.create( this.Model ).constructor( this.model.data )
 
         this.subviewElements = [ ]
 
@@ -103,6 +107,12 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         return Object.assign( this, { els: { }, slurp: { attr: 'data-js', view: 'data-view', name: 'data-name' }, views: { } } )
     },
 
+    insertToDom( fragment, options ) {
+        options.insertion.method === 'insertBefore'
+            ? options.insertion.el.parentNode.insertBefore( fragment, options.insertion.el )
+            : options.insertion.el[ options.insertion.method || 'appendChild' ]( fragment )
+    },
+
     isAllowed( user ) {
         if( !this.requiresRole ) return true
         return this.requiresRole && user.data.roles.includes( this.requiresRole )
@@ -131,7 +141,12 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     render() {
         if( this.data ) this.model = Object.create( this.Model, { } ).constructor( this.data )
 
-        this.slurpTemplate( { template: this.template( this.getTemplateOptions() ), insertion: this.insertion || { el: document.body }, isView: true } )
+        this.slurpTemplate( {
+            insertion: this.insertion || { el: document.body },
+            isView: true,
+            storeFragment: this.storeFragment,
+            template: this.template( this.getTemplateOptions() )
+        } )
 
         this.renderSubviews()
 
@@ -222,10 +237,10 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
                 this.subviewElements.push( { el, view: el.getAttribute(this.slurp.view), name: el.getAttribute(this.slurp.name) } )
             }
         } )
-          
-        options.insertion.method === 'insertBefore'
-            ? options.insertion.el.parentNode.insertBefore( fragment, options.insertion.el )
-            : options.insertion.el[ options.insertion.method || 'appendChild' ]( fragment )
+   
+        if( options.storeFragment ) return Object.assign( this, { fragment } )
+
+        this.insertToDom( fragment, options )
 
         if( options.renderSubviews ) this.renderSubviews()
 

@@ -22,22 +22,18 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     populateList() {
-        if( this.itemTemplate ) {
-            this.slurpTemplate( {
-                insertion: { el: this.els.list },
-                renderSubviews: true,
-                template: this.model.data.reduce(
-                    ( memo, datum) => {
-                        this.model.store[ this.key ][ datum[ this.key ] = datum
-                        return memo + this.itemTemplate( datum )
-                    },
-                    ''
-                )
-            } )
-        }
-
-        this.model.
-        this.itemViews[
+        this.slurpTemplate( {
+            insertion: { el: this.els.list },
+            renderSubviews: true,
+            template: this.model.data.reduce(
+                ( memo, datum ) => {
+                    this.model.store[ this.key ][ datum[ this.key ] = datum
+                    if( this.item ) this.itemViews[ this.key ] = this.factory.create( this.item ).constructor( { model: { data: datum }, storeFragment: true } )
+                    return memo + this.item ? this.itemViews[ this.key ].fragthis.itemTemplate( datum )
+                },
+                ''
+            )
+        } )
     },
 
     postRender() {
@@ -54,7 +50,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     update( items ) {
-        this.model.constructor( data )
+        this.model.constructor( items )
 
         if( this.itemTemplate ) return this.removeChildren().popuplateList()
 
