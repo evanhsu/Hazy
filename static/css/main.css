@@ -449,12 +449,6 @@
   height: 1.25rem;
   margin: 0rem 0.5rem;
 }
-.DiscType:hover {
-  background-color: rgba(172,172,172,0.1);
-}
-.DiscType:hover svg {
-  display: inline-block;
-}
 .Division {
   padding: 2rem 6rem;
 }
@@ -966,9 +960,47 @@ button.submitting {
     padding-top: 1rem;
   }
 }
+.Json ol {
+  text-align: left;
+}
+.Json ol >li {
+  display: flex;
+  padding: 0.5rem;
+}
+.Json ol >li >div {
+  padding: 0.5rem;
+}
+.Json ol >li >div:first-child {
+  flex: 1;
+}
+.Json ol >li >div:last-child {
+  flex: 5;
+}
+.Json >button {
+  border: none;
+  bottom: 2rem;
+  background-color: #158115;
+  border-radius: 2rem;
+  color: #fff;
+  line-height: 2rem;
+  height: 2rem;
+  padding: 0rem;
+  position: fixed;
+  right: 3rem;
+  width: 2rem;
+}
 .List {
   margin: 2rem;
   padding: 0.5rem;
+}
+.List li {
+  cursor: pointer;
+}
+.List li:hover {
+  background-color: rgba(172,172,172,0.1);
+}
+.List li:hover svg {
+  display: inline-block;
 }
 .Login {
   margin: 10rem auto 6rem auto;

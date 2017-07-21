@@ -140,6 +140,11 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         return this.postRender()
     },
 
+    removeChildren( el ) {
+        while( el.firstChild ) el.removeChild( el.firstChild )
+        return this
+    },
+
     renderSubviews() {
         this.subviewElements.forEach( obj => {
             const name = obj.name || obj.view
@@ -221,6 +226,8 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         options.insertion.method === 'insertBefore'
             ? options.insertion.el.parentNode.insertBefore( fragment, options.insertion.el )
             : options.insertion.el[ options.insertion.method || 'appendChild' ]( fragment )
+
+        if( options.renderSubviews ) this.renderSubviews()
 
         return this
     }

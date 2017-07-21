@@ -1,5 +1,6 @@
 module.exports={
 	Admin: require('./views/Admin'),
+	Array: require('./views/Array'),
 	ButtonFlow: require('./views/ButtonFlow'),
 	Byop: require('./views/Byop'),
 	Byop2016: require('./views/Byop2016'),
@@ -15,6 +16,7 @@ module.exports={
 	Home: require('./views/Home'),
 	Json: require('./views/Json'),
 	List: require('./views/List'),
+	Literal: require('./views/Literal'),
 	Login: require('./views/Login'),
 	ManageByop: require('./views/ManageByop'),
 	ManageDiscTypes: require('./views/ManageDiscTypes'),

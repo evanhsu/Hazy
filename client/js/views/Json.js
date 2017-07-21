@@ -1,5 +1,73 @@
 module.exports = Object.assign( {}, require('./__proto__'), {
 
+    events: {
+        addButton: 'click'
+    },
+
+    Model: require('../models/Json'),
+
+    Templates: {
+        Key: ( key, value, isEditable ) => `<li data-js="${key}"><div contenteditable="${isEditable}">${value || ''}</div><div data-view="buttonFlow" data-name="</li>`,
+    },
+
+    addItem( key ) {
+        const value = this.model.git( key ),
+            isEditable = this.model.isEditable(key)
+        this.slurpTemplate( { template: this.Templates.Key( key, key, isEditable ), insertion: { el: this.els.data } } )
+        this.views[ key ] =
+            this.factory.create(
+                this.model.getViewName( value ),
+                { model: { value: { data: value, meta: { editable: isEditable } } },
+                  insertion: { value: { el: this.els[key] } }
+                }
+            )
+    },
+
+    displayData() {
+        Object.keys( this.model.data ).sort().forEach( key => this.addItem( key ) )
+    },
+
+    onAddButtonClick() {
+        const time = new Date().getTime()
+        this.slurpTemplate( { template: this.Templates.Key( time, 'new-attribute', true ), insertion: { el: this.els.data } } )
+        this.views[ time ] =
+            this.factory.create( 'literal',
+                { model: { value: { data: 'new-value', meta: { editable: true } } },
+                  insertion: { value: { el: this.els[time] } }
+                }
+            )
+
+        this.els[ time ].firstChild.focus()
+    },
+
+    postRender() {
+        if( !this.model ) return this
+        
+        this.model = this.Model.constructor( this.model.data )
+
+        this.displayData()
+
+        return this
+    },
+
+    update( data ) {
+
+        Promise.all( Object.keys( this.views ).map( key => 
+            this.views[key].delete()
+            .then( () => {
+                this.els.container.removeChild( this.els[ key ] )
+                delete this.els[ key ]
+                return Promise.resolve()
+            } )
+        ) )
+        .then( () => {
+            Object.assign( this, { model: this.Model.constructor( data ), views: { } } )
+            this.displayData()
+            return Promise.resolve()
+        } )
+        .catch( this.Error )
+    },
+
     /*
     addItem( model ) {
         const type = model.get( 'type' ),

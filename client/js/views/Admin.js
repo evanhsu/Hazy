@@ -23,13 +23,13 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     onManageDiscTypesClick() {
-        this.emit( 'navigate', `/admin/manage-disc-types`, { silent: true } )
-        return this.showView( 'manageDiscTypes' )
+        this.emit( 'navigate', `manage-disc-types`, { append: true } )
+        //return this.showView( 'manageDiscTypes' )
     },
 
     onManageByopClick() {
-        this.emit( 'navigate', `/admin/manage-byop`, { silent: true } )
-        return this.showView( 'manageByop' )
+        this.emit( 'navigate', `/admin/manage-byop`, { append: true } )
+        //return this.showView( 'manageByop' )
     },
 
     onNavigation( path ) {
@@ -66,8 +66,9 @@ module.exports = Object.assign( { }, require('./__proto__'), {
             this.emit('disableHeaderTypeAhead');
 
             this.model[ key ].view 
-                ? this.model[ key ].view.show()
-                : this.model[ key ].view = this.factory.create( key, { insertion: { value: { el: this.els.views } } } )
+                ? this.model[ key ].view.onNavigation( this.path.slice( 1 ) )
+                : this.model[ key ].view = this.factory.create( key, { insertion: { value: { el: this.els.views } }, path: { value: this.path.slice(1) } } )
+                    .on( 'navigate', ( route, opts ) => this.emit( 'navigate', route, opts ) )
         
             if( this.model[ key ].typeAhead ) this.emit( 'enableHeaderTypeAhead', this.model[ key ].typeAhead )
 

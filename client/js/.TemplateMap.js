@@ -1,5 +1,6 @@
 module.exports={
 	Admin: require('./views/templates/Admin'),
+	Array: require('./views/templates/Array'),
 	ButtonFlow: require('./views/templates/ButtonFlow'),
 	Byop: require('./views/templates/Byop'),
 	Byop2016: require('./views/templates/Byop2016'),
@@ -15,8 +16,9 @@ module.exports={
 	Footer: require('./views/templates/Footer'),
 	Header: require('./views/templates/Header'),
 	Home: require('./views/templates/Home'),
-	JSON: require('./views/templates/JSON'),
+	Json: require('./views/templates/Json'),
 	List: require('./views/templates/List'),
+	Literal: require('./views/templates/Literal'),
 	Login: require('./views/templates/Login'),
 	ManageByop: require('./views/templates/ManageByop'),
 	ManageDiscTypes: require('./views/templates/ManageDiscTypes'),
