@@ -62,6 +62,10 @@
 .ButtonFlow svg.link:hover {
   text-decoration: underline;
 }
+.ButtonFlow svg {
+  height: 1rem;
+  width: 1rem;
+}
 .Byop a {
   color: #4ab74a;
 }
@@ -960,34 +964,24 @@ button.submitting {
     padding-top: 1rem;
   }
 }
-.Json ol {
-  text-align: left;
-}
-.Json ol >li {
+.JsonProperty {
   display: flex;
   padding: 0.5rem;
 }
-.Json ol >li >div {
+.JsonProperty >div {
   padding: 0.5rem;
 }
-.Json ol >li >div:first-child {
+.JsonProperty >div:first-child {
   flex: 1;
 }
-.Json ol >li >div:last-child {
+.JsonProperty >div:nth-child(2) {
   flex: 5;
 }
-.Json >button {
-  border: none;
-  bottom: 2rem;
-  background-color: #158115;
-  border-radius: 2rem;
-  color: #fff;
-  line-height: 2rem;
-  height: 2rem;
-  padding: 0rem;
-  position: fixed;
-  right: 3rem;
-  width: 2rem;
+.JsonProperty .ButtonFlow {
+  display: none;
+}
+.JsonProperty:hover .ButtonFlow {
+  display: initial;
 }
 .List {
   margin: 2rem;
@@ -1068,6 +1062,19 @@ button.submitting {
 .ManageByop button:not(.disabled):hover {
   background-color: #4ab74a;
   color: #fff;
+}
+.ManageDiscTypes >button {
+  border: none;
+  bottom: 2rem;
+  background-color: #158115;
+  border-radius: 2rem;
+  color: #fff;
+  line-height: 2rem;
+  height: 2rem;
+  padding: 0rem;
+  position: fixed;
+  right: 3rem;
+  width: 2rem;
 }
 .Toast {
   background-color: #b13325;

@@ -11,8 +11,8 @@ module.exports = Object.create( {
                 factory: { value: this },
                 template: { value: this.Templates[ name ] },
                 user: { value: this.User }
-                }, opts )
-        ).constructor()
+                } )
+        ).constructor( opts )
     },
 
 }, {

@@ -6,7 +6,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
     Views: {
 
-        byopTeamEdit: { model: { value: { data: {
+        byopTeamEdit: { model: { data: {
             disabled: true,
             states: { 
                 start: [
@@ -18,10 +18,10 @@ module.exports = Object.assign( { }, require('./__proto__'), {
                     { name: 'cancel', class: '', nextState: 'start', text: 'Cancel', emit: true }
                 ]
             }
-        } } } },
+        } } },
 
         typeAhead: {
-            templateOptions: { value: { label: 'Search Byop 2017 by player name' } }
+            templateOptions: { label: 'Search Byop 2017 by player name' }
         }
 
     },

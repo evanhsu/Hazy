@@ -22,39 +22,59 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     populateList() {
-        this.slurpTemplate( {
-            insertion: { el: this.els.list },
-            renderSubviews: true,
-            template: this.model.data.reduce(
-                ( memo, datum ) => {
-                    this.model.store[ this.key ][ datum[ this.key ] = datum
-                    if( this.item ) this.itemViews[ this.key ] = this.factory.create( this.item ).constructor( { model: { data: datum }, storeFragment: true } )
-                    return memo + this.item ? this.itemViews[ this.key ].fragthis.itemTemplate( datum )
-                },
-                ''
-            )
-        } )
+        if( this.item ) {
+            const fragment =
+                this.model.data.reduce(
+                    ( fragment, datum ) => {
+                        const keyValue = datum[ this.key ]
+                        this.model.store[ this.key ][ keyValue ] = datum
+                        this.itemViews[ keyValue ] = this.factory.create( this.item, { model: Object.create( this.Model ).constructor( datum ), storeFragment: true } )
+                        while( this.itemViews[ keyValue ].fragment.firstChild ) fragment.appendChild( this.itemViews[ keyValue ].fragment.firstChild )
+                        return fragment
+                    },
+                    document.createDocumentFragment()
+                )
+
+            this.els.list.appendChild( fragment )
+        } else {
+            this.slurpTemplate( {
+                insertion: { el: this.els.list },
+                renderSubviews: true,
+                template: this.model.data.reduce(
+                    ( memo, datum ) => {
+                        this.model.store[ this.key ][ datum[ this.key ] ] = datum
+                        return memo + this.itemTemplate( datum )
+                    },
+                    ''
+                )
+            } )
+        }
     },
 
     postRender() {
         this.skip = this.skip || 0
         this.pageSize = this.pageSize || 100
-        this.key = this.model.meta.key || '_id'
-        this.model.store = { [ this.key ]: { } }
+        this.key = this.Model.meta ? this.Model.meta.key : '_id'
 
-        this.model.get( { query: { skip: this.skip, limit: this.pageSize, sort: this.model.meta.sort || { } } } )
-        .then( () => this.populateList() )
-        .catch( this.Error )
+        if( this.model ) this.model.store = { [ this.key ]: { } }
+
+        if( this.model ) {
+            this.model.get( { query: { skip: this.skip, limit: this.pageSize, sort: this.model.meta.sort || { } } } )
+            .then( () => this.populateList() )
+            .catch( this.Error )
+        }
 
         return this
     },
 
     update( items ) {
-        this.model.constructor( items )
+        if( !this.model ) this.model = Object.create( this.Model )
 
-        if( this.itemTemplate ) return this.removeChildren().popuplateList()
+        this.model.constructor( items, { storeBy: [ this.key ] } )
 
-        Promise.all( Object.keys( this.itemViews ).map( key => this.deleteItemView( key ) )
+        if( this.itemTemplate ) return this.removeChildren( this.els.list ).populateList()
+
+        Promise.all( Object.keys( this.itemViews || { } ).map( key => this.deleteItemView( key ) ) )
         .then( () => {
             Object.assign( this, { itemViews: { } } )
             this.populateList()

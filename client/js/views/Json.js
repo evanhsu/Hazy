@@ -15,12 +15,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
             isEditable = this.model.isEditable(key)
         this.slurpTemplate( { template: this.Templates.Key( key, key, isEditable ), insertion: { el: this.els.data } } )
         this.views[ key ] =
-            this.factory.create(
-                this.model.getViewName( value ),
-                { model: { value: { data: value, meta: { editable: isEditable } } },
-                  insertion: { value: { el: this.els[key] } }
-                }
-            )
+            this.factory.create( this.model.getViewName( value ), { model: { data: value, meta: { editable: isEditable } }, insertion: { el: this.els[key] } } )
     },
 
     displayData() {
@@ -31,11 +26,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         const time = new Date().getTime()
         this.slurpTemplate( { template: this.Templates.Key( time, 'new-attribute', true ), insertion: { el: this.els.data } } )
         this.views[ time ] =
-            this.factory.create( 'literal',
-                { model: { value: { data: 'new-value', meta: { editable: true } } },
-                  insertion: { value: { el: this.els[time] } }
-                }
-            )
+            this.factory.create( 'literal', { model: { data: 'new-value', meta: { editable: true } }, insertion: { el: this.els[time] } } )
 
         this.els[ time ].firstChild.focus()
     },

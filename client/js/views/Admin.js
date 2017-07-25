@@ -16,20 +16,18 @@ module.exports = Object.assign( { }, require('./__proto__'), {
             roles: new Set( [ 'superuser' ] ),
             url: 'manage-disc-types',
             typeAhead: {
-                Resource: { value: 'DiscType' },
-                templateOptions: { value: { placeholder: 'Search Disc Types' } }
+                Resource: 'DiscType',
+                templateOptions: { placeholder: 'Search Disc Types' }
             }
         }
     },
 
     onManageDiscTypesClick() {
         this.emit( 'navigate', `manage-disc-types`, { append: true } )
-        //return this.showView( 'manageDiscTypes' )
     },
 
     onManageByopClick() {
         this.emit( 'navigate', `/admin/manage-byop`, { append: true } )
-        //return this.showView( 'manageByop' )
     },
 
     onNavigation( path ) {
@@ -67,7 +65,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
             this.model[ key ].view 
                 ? this.model[ key ].view.onNavigation( this.path.slice( 1 ) )
-                : this.model[ key ].view = this.factory.create( key, { insertion: { value: { el: this.els.views } }, path: { value: this.path.slice(1) } } )
+                : this.model[ key ].view = this.factory.create( key, { insertion: { el: this.els.views }, path: this.path.slice(1) } )
                     .on( 'navigate', ( route, opts ) => this.emit( 'navigate', route, opts ) )
         
             if( this.model[ key ].typeAhead ) this.emit( 'enableHeaderTypeAhead', this.model[ key ].typeAhead )

@@ -2,7 +2,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     
     Views: {
 
-        buttonFlow: { model: { value: { data: {
+        buttonFlow: { model: { data: {
             disabled: true,
             states: { 
                 start: [
@@ -14,11 +14,11 @@ module.exports = Object.assign( { }, require('./__proto__'), {
                     { name: 'cancel', class: '', nextState: 'start', text: 'Cancel', emit: true }
                 ]
             }
-        } } } },
+        } } },
 
         typeAhead: {
             query: { waitList: false },
-            templateOptions: { value: { label: 'Player name' } }
+            templateOptions: { label: 'Player name' }
         }
     },
     

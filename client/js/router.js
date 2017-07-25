@@ -27,18 +27,11 @@ module.exports = Object.create( {
         )
         
         this.header =
-            this.ViewFactory.create(
-                'header',
-                { insertion: { value: { el: this.contentContainer, method: 'insertBefore' } }, user: { value: this.User } }
-            )
+            this.ViewFactory.create( 'header', { insertion: { el: this.contentContainer, method: 'insertBefore' } } )
             .on( 'navigate', route => this.navigate( route ) )
             .on( 'itemSelected', item => this.views[ this.currentView ].itemSelected( item ) )
 
-        this.footer =
-            this.ViewFactory.create(
-                'footer',
-                { insertion: { value: { el: document.body, method: 'appendChild' } }, user: { value: this.User } }
-            )
+        this.footer = this.ViewFactory.create( 'footer', { insertion: { el: document.body, method: 'appendChild' } } )
 
         this.handle()
     },
@@ -64,10 +57,7 @@ module.exports = Object.create( {
 
             return Promise.resolve(
                 this.views[ view ] =
-                    this.ViewFactory.create( view, {
-                        insertion: { value: { el: this.contentContainer } },
-                        path: { value: path, writable: true }
-                    } )
+                    this.ViewFactory.create( view, { insertion: { el: this.contentContainer }, path } )
                     .on( 'navigate', ( route, options ) => this.navigate( route, options ) )
                     .on( 'deleted', () => delete this.views[ view ] )
                     .on( 'enableHeaderTypeAhead', meta => this.header.enableTypeAhead( meta ) )

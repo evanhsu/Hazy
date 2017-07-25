@@ -42,8 +42,8 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         Object.keys( this.model.data.states ).forEach( stateName =>
            this.model.data.states[ stateName ].forEach( button => {
                const el = this.els[ button.name ]
-                button.clickListener = this.getListener( button.name, button )
-                if( !this.model.data.disabled ) { el.addEventListener( 'click', button.clickListener ) }
+               button.clickListener = this.getListener( button.name, button )
+               if( !this.model.data.disabled ) { el.addEventListener( 'click', button.clickListener ) }
            } )
         )
 

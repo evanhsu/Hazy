@@ -3,7 +3,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     Model: require('../models/Json'),
 
     addItem( value ) {
-        this.views.push( this.factory.create( this.Model.getViewName( value ), { model: { value: { data: value } }, insertion: { value: { el: this.els.container } } } ) )
+        this.views.push( this.factory.create( this.Model.getViewName( value ), { model: { data: value }, insertion: { el: this.els.container } } ) )
     },
 
     displayData() {

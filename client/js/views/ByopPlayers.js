@@ -28,7 +28,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     renderPlayers() {
 
         this.divisions = this.Divisions.data.reduce(
-            ( memo, division ) => Object.assign( memo, { [ division.id ]: this.factory.create( 'division', { model: { value: { data: division } }, insertion: { value: { el: this.els.divisions } } } ) } ),
+            ( memo, division ) => Object.assign( memo, { [ division.id ]: this.factory.create( 'division', { model: { data: division }, insertion: { el: this.els.divisions } } ) } ),
             { }
         )
 

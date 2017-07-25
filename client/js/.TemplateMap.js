@@ -17,6 +17,7 @@ module.exports={
 	Header: require('./views/templates/Header'),
 	Home: require('./views/templates/Home'),
 	Json: require('./views/templates/Json'),
+	JsonProperty: require('./views/templates/JsonProperty'),
 	List: require('./views/templates/List'),
 	Literal: require('./views/templates/Literal'),
 	Login: require('./views/templates/Login'),

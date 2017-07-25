@@ -19,8 +19,6 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
 
         Object.assign( this, opts )
 
-        if( this.model.data ) this.model = Object.create( this.Model ).constructor( this.model.data )
-
         this.subviewElements = [ ]
 
         if( this.requiresLogin && ( !this.user.isLoggedIn() ) ) return this.handleLogin()
@@ -67,7 +65,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     },
 
     handleLogin() {
-        this.factory.create( 'login', { insertion: { value: { el: document.querySelector('#content') } } } )
+        this.factory.create( 'login', { insertion: { el: document.querySelector('#content') } } )
             .on( "loggedIn", () => this.onLogin() )
 
         return this
@@ -168,7 +166,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
 
             if( this.Views && this.Views[ name ] ) opts = typeof this.Views[ name ] === "object" ? this.Views[ name ] : Reflect.apply( this.Views[ name ], this, [ ] )
 
-            this.views[ name ] = this.factory.create( obj.view, Object.assign( { insertion: { value: { el: obj.el, method: 'insertBefore' } } }, opts ) )
+            this.views[ name ] = this.factory.create( obj.view, Object.assign( { insertion: { el: obj.el, method: 'insertBefore' } }, opts ) )
             obj.el.remove()
         } )
 
