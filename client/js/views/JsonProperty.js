@@ -16,7 +16,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
                             { name: 'delete', svg: require('./templates/lib/garbage')( { name: 'delete' } ), nextState: 'confirmDelete' }
                         ],
                         confirmDelete: [
-                            { name: 'doDelete', text: 'Delete Property?', emit: true, nextState: 'start' },
+                            { name: 'doDelete', class: 'link', text: 'Delete Property?', emit: true, nextState: 'start' },
                             { name: 'cancel', svg: require('./templates/lib/ex')( { name: 'cancel' } ), nextState: 'start' }
                         ]
                     }
@@ -38,6 +38,12 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
             model: this.model.data
         }
+    },
+
+    postRender() {
+        this.views.buttonFlow.on( 'doDeleteClicked', this.delete )
+
+        return this
     }
 
 } )

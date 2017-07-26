@@ -1,5 +1,13 @@
 module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('../../../lib/Model'), require('events').EventEmitter.prototype, {
 
+    add( datum ) {
+        this.data.push( datum )
+
+        if( this.storeBy ) this._storeOne( datum )
+
+        return this
+    },
+
     Xhr: require('../Xhr'),
 
     delete( id ) {
@@ -73,6 +81,14 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
 
             return Promise.resolve( response )
         } )
+    },
+
+    remove( item ) {
+        const index = this.data.findIndex( datum => JSON.stringify( datum ) === JSON.stringify( item ) )
+
+        if( index === -1 ) return
+
+        this.data.splice( index, 1 )
     },
 
     set( attr, value ) {

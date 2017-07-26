@@ -965,23 +965,44 @@ button.submitting {
   }
 }
 .JsonProperty {
+  align-items: center;
   display: flex;
   padding: 0.5rem;
 }
 .JsonProperty >div {
+  cursor: auto;
   padding: 0.5rem;
 }
 .JsonProperty >div:first-child {
-  flex: 1;
+  flex: 3;
 }
 .JsonProperty >div:nth-child(2) {
-  flex: 5;
+  flex: 10;
+}
+.JsonProperty >div:hover {
+  background-color: rgba(172,172,172,0.1);
 }
 .JsonProperty .ButtonFlow {
-  display: none;
+  opacity: 0;
+  flex: 1;
+  text-align: right;
+  transition: opacity 0.5s;
+}
+.JsonProperty .ButtonFlow .state {
+  justify-content: center;
+}
+.JsonProperty .ButtonFlow .confirmDelete button {
+  font-size: 0.75rem;
+}
+.JsonProperty .ButtonFlow .confirmDelete svg {
+  height: 0.75rem;
+  width: 0.75rem;
 }
 .JsonProperty:hover .ButtonFlow {
-  display: initial;
+  opacity: 1;
+}
+.JsonProperty:hover .ButtonFlow:hover {
+  stroke: #b13325;
 }
 .List {
   margin: 2rem;

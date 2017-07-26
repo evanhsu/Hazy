@@ -22,7 +22,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
     getListener( name, button ) {
         return e => {
-            if( button.nextState ) e.fdNextState = this.onNextState( button.nextState )
+            if( button.nextState ) this.onNextState( button.nextState )
             if( button.emit ) this.emit( `${name}Clicked`, e )
         }
     },

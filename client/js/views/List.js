@@ -1,16 +1,29 @@
 module.exports = Object.assign( { }, require('./__proto__'), {
 
-    deleteItemView( key ) {
-        return this.views[key].delete()
-            .then( () => {
-                this.els.container.removeChild( this.els[ key ] )
-                delete this.els[ key ]
-                return Promise.resolve()
-            } )
+    add( datum ) {
+        if( !this.model ) this.model = Object.create( this.Model )
+
+        const insertion = { el: this.els.list }
+
+        this.model.add( datum )
+
+        if( this.itemTemplate ) return this.slurpTemplate( { insertion, renderSubviews: true, template: this.itemTemplate( datum ) } )
+
+        this.itemViews[ datum[ this.key ] ] =
+            this.factory.create( this.item, { insertion, model: Object.create( this.Model ).constructor( datum ) } )
+            .on( 'deleted', () => this.onDeleted( datum )
+
     },
 
-    events: {
-        list: 'click'
+    onDeleted( datum ) {
+        if( this.item ) {
+            this.model.remove( datum )
+            delete this.itemViews[ datum[ this.key ] ]
+        } else {
+    },
+
+    empty() {
+        this.els.list.innerHTML = ''
     },
 
     onListClick( e ) {
@@ -18,7 +31,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
         if( !el ) return
 
-        this.emit( 'itemSelected', this.model.store[ '_id' ][ el.getAttribute('data-id') ] )
+        this.emit( 'itemSelected', this.model.store[ this.key ][ el.getAttribute('data-key') ] )
     },
 
     populateList() {
@@ -28,7 +41,11 @@ module.exports = Object.assign( { }, require('./__proto__'), {
                     ( fragment, datum ) => {
                         const keyValue = datum[ this.key ]
                         this.model.store[ this.key ][ keyValue ] = datum
-                        this.itemViews[ keyValue ] = this.factory.create( this.item, { model: Object.create( this.Model ).constructor( datum ), storeFragment: true } )
+
+                        this.itemViews[ keyValue ] =
+                            this.factory.create( this.item, { model: Object.create( this.Model ).constructor( datum ), storeFragment: true } )
+                                .on( 'deleted', () => this.onDeleted( datum )
+
                         while( this.itemViews[ keyValue ].fragment.firstChild ) fragment.appendChild( this.itemViews[ keyValue ].fragment.firstChild )
                         return fragment
                     },
@@ -74,12 +91,8 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
         if( this.itemTemplate ) return this.removeChildren( this.els.list ).populateList()
 
-        Promise.all( Object.keys( this.itemViews || { } ).map( key => this.deleteItemView( key ) ) )
-        .then( () => {
-            Object.assign( this, { itemViews: { } } )
-            this.populateList()
-            return Promise.resolve()
-        } )
-        .catch( this.Error )
+        this.empty()
+        
+        Object.assign( this, { itemViews: { } } ).populateList()
     }
 } )

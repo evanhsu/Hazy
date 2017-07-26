@@ -10,6 +10,6 @@ module.exports = Object.assign( {}, require('./__proto__'), {
         key: 'key'
     },
 
-    isEditable( key ) { return key === '_id' }
+    isEditable( key ) { return key !== '_id' }
 
 } )

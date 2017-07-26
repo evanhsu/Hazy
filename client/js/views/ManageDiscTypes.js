@@ -32,11 +32,24 @@ module.exports = Object.assign( { }, require('./__proto__'), {
             item: 'jsonProperty',
             Model: require('../models/JsonProperty')
         }
-        
-
     },
 
     discType: Object.create( DiscType ),
+    
+    events: {
+        addButton: 'click'
+    },
+
+    onAddButtonClick() {
+        this.views.discTypeJson.add( { key: 'new key', value: 'new value' } )
+        return
+        const time = new Date().getTime()
+        this.slurpTemplate( { template: this.Templates.Key( time, 'new-attribute', true ), insertion: { el: this.els.data } } )
+        this.views[ time ] =
+            this.factory.create( 'literal', { model: { data: 'new-value', meta: { editable: true } }, insertion: { el: this.els[time] } } )
+
+        this.els[ time ].firstChild.focus()
+    },
 
     onItemSelected( item ) {
         this.discType.constructor( item )
