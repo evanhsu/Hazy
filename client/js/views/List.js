@@ -11,15 +11,20 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
         this.itemViews[ datum[ this.key ] ] =
             this.factory.create( this.item, { insertion, model: Object.create( this.Model ).constructor( datum ) } )
-            .on( 'deleted', () => this.onDeleted( datum )
+            .on( 'deleted', () => this.onDeleted( datum ) )
 
     },
 
     onDeleted( datum ) {
+        this.model.remove( datum )
+
         if( this.item ) {
-            this.model.remove( datum )
             delete this.itemViews[ datum[ this.key ] ]
         } else {
+            const child = this.els.list.querySelector( `[data-key="${datum[ this.key ]}"]` )
+
+            if( child ) this.els.list.removeChild( child )
+        }
     },
 
     empty() {
@@ -44,7 +49,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
                         this.itemViews[ keyValue ] =
                             this.factory.create( this.item, { model: Object.create( this.Model ).constructor( datum ), storeFragment: true } )
-                                .on( 'deleted', () => this.onDeleted( datum )
+                                .on( 'deleted', () => this.onDeleted( datum ) )
 
                         while( this.itemViews[ keyValue ].fragment.firstChild ) fragment.appendChild( this.itemViews[ keyValue ].fragment.firstChild )
                         return fragment

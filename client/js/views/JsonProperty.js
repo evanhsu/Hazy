@@ -41,7 +41,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     postRender() {
-        this.views.buttonFlow.on( 'doDeleteClicked', this.delete )
+        this.views.buttonFlow.on( 'doDeleteClicked', this.delete.bind(this) )
 
         return this
     }
