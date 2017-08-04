@@ -47,14 +47,7 @@ module.exports = Object.create( Object.assign( {}, require('./lib/MyObject'), {
 
     initialize() {
 
-        this.jsonRoutes = {
-            //auth: 'auth',
-            //"byop-swap": 'byop-swap',
-            //me: 'me',
-            //report: 'report',
-            //spotsLeft: 'spotsLeft',
-            //'waiting-list': 'waiting-list'
-        }
+        this.jsonRoutes = {}
 
         return Promise.all( [
             this.Mongo.initialize(),

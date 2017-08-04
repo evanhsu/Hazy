@@ -1,6 +1,8 @@
 module.exports = Object.create( Object.assign( { }, require('../lib/MyObject'), {
 
     Client: require('mongodb').MongoClient,
+    
+    Mongo: require('mongodb'),
 
     GET( resource ) {
         const cursorMethods = [ 'skip', 'limit', 'sort' ].reduce(
@@ -16,6 +18,13 @@ module.exports = Object.create( Object.assign( { }, require('../lib/MyObject'), 
             result => Promise.resolve( result ),
             this
         )
+        .then( results => Promise.resolve( results.length === 1 ? results[0] : results ) )
+    },
+
+    PUT( resource ) {
+        return this.getDb()
+        .then( db => db.collection( resource.path[0] ).update( { _id: new ( this.Mongo.ObjectID )( resource.path[1] ) }, resource.body ) )
+        .then( result => Promise.resolve( [ Object.assign( { _id: resource.path[1] }, resource.body ) ] ) )
     },
 
     forEach( cursorFn, callbackFn, thisVar ) {

@@ -3,16 +3,24 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     add( datum ) {
         if( !this.model ) this.model = Object.create( this.Model )
 
-        const insertion = { el: this.els.list }
+        const insertion = { el: this.els.list },
+            keyValue = datum[ this.key ]
 
         this.model.add( datum )
 
-        if( this.itemTemplate ) return this.slurpTemplate( { insertion, renderSubviews: true, template: this.itemTemplate( datum ) } )
+        if( this.itemTemplate ) {
+            return this.slurpTemplate( {
+                insertion,
+                renderSubviews: true,
+                template: `<li data-key="${keyValue}">${this.itemTemplate( datum )}</li>`
+             } )
+        }
 
-        this.itemViews[ datum[ this.key ] ] =
+        this.itemViews[ keyValue ] =
             this.factory.create( this.item, { insertion, model: Object.create( this.Model ).constructor( datum ) } )
             .on( 'deleted', () => this.onDeleted( datum ) )
-
+       
+        window.scroll( { behavior: 'smooth', top: this.itemViews[ keyValue ].els.container.getBoundingClientRect().bottom - document.documentElement.clientHeight + window.pageYOffset + 50 } )
     },
 
     onDeleted( datum ) {
@@ -31,12 +39,25 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         this.els.list.innerHTML = ''
     },
 
+    events: {
+        resetBtn: 'click',
+        saveBtn: 'click'
+    },
+
     onListClick( e ) {
         const el = e.target.closest('LI')
 
         if( !el ) return
 
         this.emit( 'itemSelected', this.model.store[ this.key ][ el.getAttribute('data-key') ] )
+    },
+    
+    onResetBtnClick() {
+        this.emit( 'resetClicked' )
+    },
+
+    onSaveBtnClick() {
+        this.emit( 'saveClicked', this.model )
     },
 
     populateList() {
@@ -64,8 +85,9 @@ module.exports = Object.assign( { }, require('./__proto__'), {
                 renderSubviews: true,
                 template: this.model.data.reduce(
                     ( memo, datum ) => {
-                        this.model.store[ this.key ][ datum[ this.key ] ] = datum
-                        return memo + this.itemTemplate( datum )
+                        const keyValue = datum[ this.key ]
+                        this.model.store[ this.key ][ keyValue ] = datum
+                        return memo + `<li data-key="${keyValue}">${this.itemTemplate( datum )}</li>`
                     },
                     ''
                 )
@@ -99,5 +121,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         this.empty()
         
         Object.assign( this, { itemViews: { } } ).populateList()
+        
+        window.scroll( { behavior: 'smooth', top: this.els.container.getBoundingClientRect().top + window.pageYOffset - 50 } )
     }
 } )

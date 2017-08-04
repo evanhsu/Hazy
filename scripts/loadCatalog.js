@@ -2,6 +2,8 @@
 
 require('node-env-file')( `${__dirname}/../.env` )
 
+const QueryString = require('querystring')
+
 const lineReader = require('readline').createInterface( {
   input: require('fs').createReadStream( `${__dirname}/../bootstrap/omnispearBullshit.lol` )
 } ),
@@ -17,7 +19,7 @@ lineReader.on( 'line', line => {
 
     if( /^\w+\s.*\t\w/.test( line ) ) {
         if( currentDisc.title ) {
-            data[ currentDisc.title.replace(' ','-').toLowerCase() ] = JSON.parse( JSON.stringify( currentDisc ) )
+            data[ QueryString.unescape( currentDisc.title ).replace(/\s/g,'-').toLowerCase() ] = JSON.parse( JSON.stringify( currentDisc ) )
         }
             
         currentDisc =  { }
@@ -28,7 +30,7 @@ lineReader.on( 'line', line => {
         const result = /<div class="chartGreen">(-?[0-9]+)<\/div><div class="chartRed">(-?[0-9]+)<\/div><div class="chartBlue">(-?[0-9]+)<\/div><div class="chartYellow">(-?[0-9]+)<\/div>/.exec(line)
         if( result !== null ) {
             Object.assign( currentDisc, { speed: result[1], glide: result[2], turn: result[3], fade: result[4] } )
-            data[ currentDisc.title.replace(/\s/g,'-').toLowerCase() ] = JSON.parse( JSON.stringify( currentDisc ) )
+            data[ QueryString.unescape( currentDisc.title ).replace(/\s/g,'-').toLowerCase() ] = JSON.parse( JSON.stringify( currentDisc ) )
         } else {
             const anotherResult = /.*alt="Disc Flight Path">(.*)/i.exec( line )
             if( anotherResult === null ) {

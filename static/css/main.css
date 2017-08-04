@@ -1017,6 +1017,25 @@ button.submitting {
 .List li:hover svg {
   display: inline-block;
 }
+.List >button {
+  border: none;
+  bottom: initial;
+  background-color: #158115;
+  border-radius: 2rem;
+  color: #fff;
+  font-size: 0.5rem;
+  left: 3rem;
+  line-height: 2rem;
+  height: 3rem;
+  padding: 0rem;
+  position: fixed;
+  top: 8rem;
+  width: 3rem;
+}
+.List >button+button {
+  bottom: 2rem;
+  top: initial;
+}
 .Login {
   margin: 10rem auto 6rem auto;
   text-align: center;
@@ -1091,11 +1110,11 @@ button.submitting {
   border-radius: 2rem;
   color: #fff;
   line-height: 2rem;
-  height: 2rem;
+  height: 3rem;
   padding: 0rem;
   position: fixed;
   right: 3rem;
-  width: 2rem;
+  width: 3rem;
 }
 .Toast {
   background-color: #b13325;

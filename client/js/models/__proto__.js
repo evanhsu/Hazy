@@ -70,6 +70,21 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         } )
     },
 
+    put( id, data ) {
+        return this.Xhr( { method: 'put', id, resource: this.resource, headers: this.headers || {}, data: JSON.stringify( data ) } )
+        .then( response => {
+           
+            if( Array.isArray( this.data ) ) { 
+                this.data = this.data ? this.data.concat( response ) : [ response ]
+                if( this.store ) Object.keys( this.store ).forEach( attr => this._store( response, attr ) )
+            } else {
+                this.data = response
+            }
+
+            return Promise.resolve( response )
+        } )
+    },
+
     post( model ) {
         return this.Xhr( { method: 'post', resource: this.resource, headers: this.headers || {}, data: JSON.stringify( model || this.data ) } )
         .then( response => {

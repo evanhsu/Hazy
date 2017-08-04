@@ -15,8 +15,9 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         els.forEach( el => el.addEventListener( event || 'click', e => this[ `on${this.capitalizeFirstLetter(key)}${this.capitalizeFirstLetter(event)}` ]( e ) ) )
     },
 
-    constructor( opts ) {
+    constructor( opts={} ) {
 
+        if( opts.events ) { Object.assign( this.events, opts.events ); delete opts.events; }
         Object.assign( this, opts )
 
         this.subviewElements = [ ]

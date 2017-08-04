@@ -12,8 +12,7 @@ module.exports = Object.assign( {}, require('./__proto__'), {
 
     resource: 'DiscType',
 
-    toList( model ) {
-        return Object.keys( model ).sort().map( key => ( { key, value: model[ key ] } ) )
-    },
-
+    toList() {
+        return Object.keys( this.data ).sort().map( key => ( { key, value: this.data[ key ] } ) )
+    }
 } )

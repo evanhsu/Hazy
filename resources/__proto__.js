@@ -8,6 +8,8 @@ module.exports = Object.assign( { }, require('../lib/MyObject'), {
 
     Model: require('../lib/Model'),
 
+    Permissions: require('./.Permissions'),
+
     Postgres: require('../dal/Postgres'),
 
     QueryString: require('querystring'),
@@ -21,7 +23,7 @@ module.exports = Object.assign( { }, require('../lib/MyObject'), {
         .then( () => 
             method === 'GET'
                 ? Promise.resolve( this.getQs() )
-                : method === 'PATCH' || method === 'POST'
+                : method === 'PATCH' || method === 'POST' || method === 'PUT'
                     ? this.validateUser().then( () => this.slurpBody() )
                     : method === 'DELETE'
                         ? Promise.resolve()
@@ -104,7 +106,11 @@ module.exports = Object.assign( { }, require('../lib/MyObject'), {
     },
 
     validateUser() {
-        if( this.user.id === undefined ) return this.respond( { stopChain: true, code: 401, body: { } } )
+        const permissions = this.Permissions[ this.path[0] ] && this.Permissions[ this.path[0] ][ this.request.method ]
+
+        if( this.user.id === undefined ||
+            permissions && this.user.roles.find( role => permissions.has( role ) ) === undefined
+          ) { return this.respond( { stopChain: true, code: 401, body: { } } ) }
 
         return Promise.resolve()
     }

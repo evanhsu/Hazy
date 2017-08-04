@@ -1,6 +1,6 @@
 module.exports = ( { viewName, isEditable, model } ) =>
-`<li>
+`<div>
     <div contenteditable="${isEditable}">${model.key}</div>
     <div data-view="${viewName}"></div>
     <div data-view="buttonFlow" />
-</li>`
+</div>`

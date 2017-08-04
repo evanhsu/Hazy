@@ -30,6 +30,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
         discTypeJson: {
             item: 'jsonProperty',
+            templateOptions: { reset: true, save: true },
             Model: require('../models/JsonProperty')
         }
     },
@@ -54,7 +55,7 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     onItemSelected( item ) {
         this.discType.constructor( item )
 
-        this.views.discTypeJson.update( DiscType.toList( item ) )
+        this.views.discTypeJson.update( this.discType( item ) )
         this.emit( 'navigate', item.name, { append: true, silent: true } )
 
         if( this.views.discTypesList.isHidden() ) return
@@ -68,8 +69,8 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
         this.discType.get( { query: { name: path[0] } } )
         .then( () => {
-            if( this.discType.data.length === 0 ) return Promise.resolve( this.emit( 'navigate', '/admin/manage-disc-types' ) )
-            this.views.discTypeJson.update( DiscType.toList( this.discType.data[0] ) )
+            if( Object.keys( this.discType.data ).length === 0 ) return Promise.resolve( this.emit( 'navigate', '/admin/manage-disc-types' ) )
+            this.views.discTypeJson.update( this.discType.toList() )
             return this.views.discTypesList.isHidden()
                 ? Promise.resolve()
                 : this.views.discTypesList.hide()
@@ -79,6 +80,15 @@ module.exports = Object.assign( { }, require('./__proto__'), {
 
     postRender() {
         this.views.discTypesList.on( 'itemSelected', item => this.onItemSelected( item ) )
+       
+        this.views.discTypeJson.on( 'saveClicked', model => {
+            const obj = model.toObj()
+            this.discType.put( obj._id, this.omit( obj, [ '_id' ] ) )
+            .then( () => this.Toast.showMessage( 'success', 'Disc Type updated.' ) )
+            .catch( e => this.Toast.showMessage( 'error', `Something went wrong.  Try again, or bother Mike Baron.` ) )
+        } )
+        
+        this.views.discTypeJson.on( 'resetClicked', model => this.views.discTypeJson.update( this.discType.toList() ) )
 
         if( this.path.length === 2 ) this.onNavigation( this.path.slice(1) )
 

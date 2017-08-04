@@ -10,5 +10,8 @@ module.exports = Object.create( {
 
     PATCH( resource, rows ) { resource.respond( { body: rows[0] } ) },
 
-    POST( resource, rows ) { resource.respond( { body: rows[0] } ) }
+    POST( resource, rows ) { resource.respond( { body: rows[0] } ) },
+
+    PUT( resource, rows ) { resource.respond( { body: rows[0] } ) }
+
 }, { } )
