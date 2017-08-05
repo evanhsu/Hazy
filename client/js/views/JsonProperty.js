@@ -13,11 +13,11 @@ module.exports = Object.assign( { }, require('./__proto__'), {
                 data: {
                     states: { 
                         start: [
-                            { name: 'delete', svg: require('./templates/lib/garbage')( { name: 'delete' } ), nextState: 'confirmDelete' }
+                            { name: 'delete', svg: require('./templates/lib/garbage')( { name: 'delete' } ), nextState: 'confirmDelete', emit: true }
                         ],
                         confirmDelete: [
-                            { name: 'doDelete', class: 'link', text: 'Delete Property?', emit: true, nextState: 'start' },
-                            { name: 'cancel', svg: require('./templates/lib/ex')( { name: 'cancel' } ), nextState: 'start' }
+                            { name: 'doDelete', class: 'link', text: 'Delete?', emit: true, nextState: 'start' },
+                            { name: 'cancel', svg: require('./templates/lib/ex')( { name: 'cancel' } ), nextState: 'start', emit: true }
                         ]
                     }
                 }
@@ -41,7 +41,12 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     postRender() {
+        if( !this.model.isEditable( this.model.data.key ) ) { this.views.buttonFlow.disable(); return this; }
+
         this.views.buttonFlow.on( 'doDeleteClicked', this.delete.bind(this) )
+        
+        this.views.buttonFlow.on( 'deleteClicked', () => this.els.container.classList.add('confirm-delete') )
+        this.views.buttonFlow.on( 'cancelClicked', () => this.els.container.classList.remove('confirm-delete') )
 
         return this
     }

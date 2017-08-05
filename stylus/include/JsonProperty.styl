@@ -7,20 +7,23 @@
         cursor: auto
         padding: .5rem
 
+        &:first-child
+            flex: 1
+
         &:nth-child(2)
             flex: 3
+            transition: all .5s
         
         &:nth-child(3)
             flex: 10
+            transition: all .5s
        
-        &:hover 
-            background-color: $LightGrayTransparent
 
     .ButtonFlow
+        font-size: .75rem
         opacity: 0
-        flex: 1
         text-align: left
-        transition: opacity .5s
+        transition: all .5s
 
         .state
             justify-content: center
@@ -33,10 +36,22 @@
             svg
                 height: .75rem
                 width: .75rem
-
+        
     &:hover
         .ButtonFlow
             opacity: 1
 
             &:hover
                 stroke: $ErrorRed
+
+    &.editable
+        >div
+            &:hover 
+                background-color: $LightGrayTransparent
+        
+    &.confirm-delete
+        background-color: $ErrorRedTransparent
+
+        >div
+            &:hover
+                background-color: transparent

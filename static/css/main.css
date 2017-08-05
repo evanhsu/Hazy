@@ -973,20 +973,22 @@ button.submitting {
   cursor: auto;
   padding: 0.5rem;
 }
+.JsonProperty >div:first-child {
+  flex: 1;
+}
 .JsonProperty >div:nth-child(2) {
   flex: 3;
+  transition: all 0.5s;
 }
 .JsonProperty >div:nth-child(3) {
   flex: 10;
-}
-.JsonProperty >div:hover {
-  background-color: rgba(172,172,172,0.1);
+  transition: all 0.5s;
 }
 .JsonProperty .ButtonFlow {
+  font-size: 0.75rem;
   opacity: 0;
-  flex: 1;
   text-align: left;
-  transition: opacity 0.5s;
+  transition: all 0.5s;
 }
 .JsonProperty .ButtonFlow .state {
   justify-content: center;
@@ -1004,6 +1006,15 @@ button.submitting {
 .JsonProperty:hover .ButtonFlow:hover {
   stroke: #b13325;
 }
+.JsonProperty.editable >div:hover {
+  background-color: rgba(172,172,172,0.1);
+}
+.JsonProperty.confirm-delete {
+  background-color: rgba(217,88,73,0.1);
+}
+.JsonProperty.confirm-delete >div:hover {
+  background-color: transparent;
+}
 .List {
   padding: 0.5rem;
 }
@@ -1017,7 +1028,7 @@ button.submitting {
   display: inline-block;
 }
 .List >button {
-  right: 3rem;
+  right: 2rem;
   top: 8rem;
 }
 .List >button+button {
@@ -1095,7 +1106,7 @@ button.submitting {
 }
 .ManageDiscTypes >button {
   bottom: 2rem;
-  right: 3rem;
+  right: 2rem;
 }
 .Toast {
   background-color: #b13325;
