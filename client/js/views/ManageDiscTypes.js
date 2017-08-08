@@ -25,12 +25,13 @@ module.exports = Object.assign( { }, require('./__proto__'), {
             events: { list: 'click' },
             itemTemplate: require('./templates/DiscType'),
             leftPanel: true,
-            model: Object.create( DiscType )
-        },   
+            model: Object.create( DiscType ),
+            templateOptions: { goBack: 'Back to Admin', heading: 'Disc Types' }
+        },
 
         discTypeJson: {
             item: 'jsonProperty',
-            templateOptions: { reset: true, save: true },
+            templateOptions: { goBack: 'Back to Disc Types', heading: 'Disc Type', reset: true, save: true },
             Model: require('../models/JsonProperty')
         }
     },
@@ -53,29 +54,40 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     onItemSelected( item ) {
+        console.log( item )
         this.discType.constructor( item )
 
-        this.views.discTypeJson.update( this.discType( item ) )
         this.emit( 'navigate', item.name, { append: true, silent: true } )
-
-        if( this.views.discTypesList.isHidden() ) return
+        this.path = [ `manage-disc-types`, item.name ]
 
         this.views.discTypesList.hide()
-        .then( () => this.views.discTypeJson.show() )
+        .then( () => {
+            this.views.discTypeJson.update( this.discType.toList( item ) )
+            return this.views.discTypeJson.show()
+        } )
         .catch( this.Error )
     },
 
     onNavigation( path ) {
 
-        this.discType.get( { query: { name: path[0] } } )
-        .then( () => {
-            if( Object.keys( this.discType.data ).length === 0 ) return Promise.resolve( this.emit( 'navigate', '/admin/manage-disc-types' ) )
-            this.views.discTypeJson.update( this.discType.toList() )
-            return this.views.discTypesList.isHidden()
-                ? Promise.resolve()
-                : this.views.discTypesList.hide()
-        } )
-        .catch( this.Error )
+        this.path = path
+        
+        this.views.discTypeJson.hideSync()
+        this.views.discTypesList.hideSync()
+
+        if( this.isHidden() ) this.showSync()
+
+        if( this.path.length === 2 ) { 
+            this.discType.get( { query: { name: this.path[1] } } )
+            .then( () => {
+                if( Object.keys( this.discType.data ).length === 0 ) return Promise.resolve( this.emit( 'navigate', '/admin/manage-disc-types' ) )
+                this.views.discTypeJson.update( this.discType.toList() )
+                return this.views.discTypeJson.show()
+            } )
+            .catch( this.Error )
+        } else {
+            this.views.discTypesList.show().catch( this.Error )
+        } 
     },
 
     postRender() {
@@ -89,8 +101,12 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         } )
         
         this.views.discTypeJson.on( 'resetClicked', model => this.views.discTypeJson.update( this.discType.toList() ) )
+        
+        this.views.discTypeJson.on( 'goBackClicked', () => this.emit( 'navigate', '/admin/manage-disc-types' ) )
 
-        if( this.path.length === 2 ) this.onNavigation( this.path.slice(1) )
+        this.views.discTypesList.on( 'goBackClicked', () => this.emit( 'navigate', '/admin' ) )
+
+        if( this.path.length === 2 ) this.onNavigation( this.path )
 
         return this
     }

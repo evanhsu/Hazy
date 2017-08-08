@@ -1029,10 +1029,39 @@ button.submitting {
 }
 .List >button {
   right: 2rem;
-  top: 8rem;
+  top: 10rem;
 }
 .List >button+button {
-  top: 14rem;
+  top: 16rem;
+}
+.List .heading {
+  border-bottom: 1px solid #acacac;
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  padding: 0rem 0.25rem 0.75rem 0.25rem;
+  position: relative;
+}
+.List .heading button {
+  border: none;
+  display: flex;
+  font-size: 0.75rem;
+  height: 1rem;
+  left: 1rem;
+  padding: 0rem;
+  position: absolute;
+  top: 0.25rem;
+}
+.List .heading button svg {
+  height: 1rem;
+}
+.List .heading button span {
+  font-size: 0.75rem;
+  padding-left: 1rem;
+}
+.List .heading button:hover {
+  text-decoration: underline;
 }
 .Login {
   margin: 10rem auto 6rem auto;

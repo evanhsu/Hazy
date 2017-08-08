@@ -1,4 +1,6 @@
-module.exports = Object.assign( { }, require('./__proto__'), {
+const Super = require('./__proto__')
+
+module.exports = Object.assign( { }, Super, {
 
     add( datum ) {
         if( !this.model ) this.model = Object.create( this.Model )
@@ -23,6 +25,12 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         window.scroll( { behavior: 'smooth', top: this.itemViews[ keyValue ].els.container.getBoundingClientRect().bottom - document.documentElement.clientHeight + window.pageYOffset + 50 } )
     },
 
+    hide() {
+        if( this.els.resetBtn ) this.els.resetBtn.classList.add('hidden')
+        if( this.els.saveBtn ) this.els.saveBtn.classList.add('hidden')
+        return Reflect.apply( Super.hide, this, [ ] )
+    },
+
     onDeleted( datum ) {
         this.model.remove( datum )
 
@@ -40,8 +48,13 @@ module.exports = Object.assign( { }, require('./__proto__'), {
     },
 
     events: {
+        goBackBtn: 'click',
         resetBtn: 'click',
         saveBtn: 'click'
+    },
+
+    onGoBackBtnClick( e ) {
+        this.emit( 'goBackClicked' )
     },
 
     onListClick( e ) {
@@ -109,6 +122,12 @@ module.exports = Object.assign( { }, require('./__proto__'), {
         }
 
         return this
+    },
+
+    show() {
+        if( this.els.resetBtn ) this.els.resetBtn.classList.remove('hidden')
+        if( this.els.saveBtn ) this.els.saveBtn.classList.remove('hidden')
+        return Reflect.apply( Super.show, this, [ ] )
     },
 
     update( items ) {

@@ -1,5 +1,9 @@
 module.exports = Object.assign( {}, require('./__proto__'), {
 
+    Views: {
+        typeAhead: { }
+    },
+
     data: [
         'shop',
         'courses',
@@ -9,17 +13,23 @@ module.exports = Object.assign( {}, require('./__proto__'), {
     disableTypeAhead() {
         if( !this.views.typeAhead ) return Promise.resolve()
 
-        delete this.Views.typeAhead 
+        this.views.typeAhead.removeAllListeners( 'itemSelected' ) 
         this.els.container.classList.remove( 'has-typeahead' )
+       
         return this.views.typeAhead.delete()
+        .then( () => delete this.views.typeAhead )
+        .catch( this.Error )
     },
 
-    enableTypeAhead( meta ) {
-        this.Views = Object.assign( this.Views || {}, { typeAhead: meta } )
-        this.slurpTemplate( { template: `<li><div data-view="typeAhead"></div></li>`, insertion: { el: this.els.profileBtn, method: 'insertBefore' } } )
-        this.renderSubviews()
-        this.els.container.classList.add( 'has-typeahead' )
-        this.views.typeAhead.on( 'itemSelected', item => this.emit( 'itemSelected', item ) )
+    enableTypeAhead( meta, method ) {
+        ( this.views.typeAhead ? this.disableTypeAhead() : Promise.resolve() )
+        .then( () => {
+            this.Views.typeAhead = meta
+            this.slurpTemplate( { template: `<div data-view="typeAhead"></div>`, insertion: { el: this.els.typeAhead } } )
+            this.renderSubviews()
+            this.els.container.classList.add( 'has-typeahead' )
+            this.views.typeAhead.on( 'itemSelected', item => method( item ) )
+        } )
     },
 
     events: {

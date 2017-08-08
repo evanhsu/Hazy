@@ -29,7 +29,6 @@ module.exports = Object.create( {
         this.header =
             this.ViewFactory.create( 'header', { insertion: { el: this.contentContainer, method: 'insertBefore' } } )
             .on( 'navigate', route => this.navigate( route ) )
-            .on( 'itemSelected', item => this.views[ this.currentView ].itemSelected( item ) )
 
         this.footer = this.ViewFactory.create( 'footer', { insertion: { el: document.body, method: 'appendChild' } } )
 
@@ -43,6 +42,9 @@ module.exports = Object.create( {
     handler( path ) {
         const name = this.pathToView( path[0] ),
             view = this.Views[ name ] ? name : 'home'
+
+        this.header.disableTypeAhead()
+        this.footer.els.container.classList.toggle( 'hidden', path[0] === 'admin' )
 
         if( view === this.currentView ) return this.views[ view ].onNavigation( path.slice(1) )
 
@@ -60,7 +62,7 @@ module.exports = Object.create( {
                     this.ViewFactory.create( view, { insertion: { el: this.contentContainer }, path } )
                     .on( 'navigate', ( route, options ) => this.navigate( route, options ) )
                     .on( 'deleted', () => delete this.views[ view ] )
-                    .on( 'enableHeaderTypeAhead', meta => this.header.enableTypeAhead( meta ) )
+                    .on( 'enableHeaderTypeAhead', ( meta, method ) => this.header.enableTypeAhead( meta, method ) )
                     .on( 'disableHeaderTypeAhead', meta => this.header.disableTypeAhead() )
             )
         } )

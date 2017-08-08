@@ -42,7 +42,9 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     delete() {
         return this.hide()
         .then( () => {
-            this.els.container.parentNode.removeChild( this.els.container )
+            const container = this.els.container,
+                parent = container.parentNode
+            if( container && parent ) parent.removeChild( container )
             return Promise.resolve( this.emit('deleted') )
         } )
     },
@@ -73,6 +75,8 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     },
 
     hide( isSlow ) { return this.hideEl( this.els.container, isSlow ) },
+    
+    hideSync() { this.els.container.classList.add('hidden'); return this },
 
     _hideEl( el, resolve, hash, isSlow ) {
         el.removeEventListener( 'animationend', this[ hash ] )
@@ -82,7 +86,7 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
         resolve()
     },
 
-    hideEl( el, isSlow) {
+    hideEl( el, isSlow ) {
         if( this.isHidden() ) return Promise.resolve()
 
         const time = new Date().getTime(),
@@ -187,6 +191,8 @@ module.exports = Object.assign( { }, require('../../../lib/MyObject'), require('
     show( isSlow ) {
         return this.showEl( this.els.container, isSlow )
     },
+
+    showSync() { this.els.container.classList.remove('hidden'); return this },
 
     _showEl( el, resolve, hash, isSlow ) {
         el.removeEventListener( 'animationend', this[hash] )
