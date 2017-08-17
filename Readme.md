@@ -23,6 +23,22 @@ Ansible is used to provision the virtual machine.
 > 2) vagrant-vbguest: `$ vagrant plugin install vagrant-vbguest`
 
 
+# Building the Project
+
+1. In the project root, run vagrant (it will take about 5 minutes):
+
+        vagrant up
+
+1. Build your assets and start the file watcher:
+
+        npm run build:watch
+        
+At this point, you should be ready for development:
+* The nginx server is running in the VM and will respond to `hazyshade.dev` on port 80.
+* Nginx will reverse-proxy that web traffic to the Node process on port 1339.
+* PM2 is being used to run and monitor the `app.js` node process (on port 1339).
+* The file watcher is running on your **host** machine and will trigger a browser refresh when your files change.
+
 
 # Building the Project Manually
 
