@@ -29,7 +29,26 @@ Ansible is used to provision the virtual machine.
 
         vagrant up
 
-1. Build your assets and start the file watcher:
+1. Create database tables and insert seed data: 
+
+   SSH into the virtual machine and run each `.sql` file in the `sql/schema` folder on the postgres db,
+   
+   THEN run each `.sql` file in the `sql/bootstrap` folder: 
+
+        $ vagrant ssh
+        vagrant@hazyshade$ sudo -iu hazyshade
+        hazyshade@hazyshade$ cd ~/sites/hazyshade.dev/sql/schema
+        hazyshade@hazyshade$ psql -U hazyshade -d hazyshade -a -f [file1].sql
+        hazyshade@hazyshade$ psql -U hazyshade -d hazyshade -a -f [file2].sql
+        hazyshade@hazyshade$ psql -U hazyshade -d hazyshade -a -f [file3].sql
+        hazyshade@hazyshade$ cd ~/sites/hazyshade.dev/sql/bootstrap
+        hazyshade@hazyshade$ psql -U hazyshade -d hazyshade -a -f [file1].sql
+        hazyshade@hazyshade$ psql -U hazyshade -d hazyshade -a -f [file2].sql
+        hazyshade@hazyshade$ exit
+        vagrant@hazyshade$ exit
+        
+        
+1. Build your assets and start the file watcher (on your HOST machine, not inside the vm):
 
         npm run build:watch
         
