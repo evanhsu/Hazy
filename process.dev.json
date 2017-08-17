@@ -1,0 +1,16 @@
+{
+    "apps": [
+        {
+            "name": "hazyshade",
+            "script": "npm",
+            "args": "run start",
+            "cwd": "/home/hazyshade/sites/hazyshade.dev",
+            "instances": 1,
+            "exec_mode": "fork",
+            "watch": false,
+            "env": {
+                "NODE_ENV": "development"
+            }
+        }
+    ]
+}

@@ -39,6 +39,8 @@
     "build:js-debug": "scripts/writeLoadViews.js && browserify client/js/main.js -o static/js/debug.js -d -t [ babelify --presets [ es2015 ] --ignore [ /node_modules/ ] ] && gzip -c static/js/debug.js > static/js/debug.js.gz",
     "build:watch": "npm run watch:css & npm run watch:js & npm run livereload",
     "livereload": "scripts/liveReload.js",
+    "start": "NODE_ENV=development node ./app.js",
+    "start:prod": "NODE_ENV=production node ./app.js",
     "test": "mocha --timeout 5000",
     "watch:css": "watch 'npm run build:css' stylus --ignoreDotFiles --interval=0.5",
     "watch:js": "watch 'npm run build:js-debug' client/js --ignoreDotFiles --interval=0.5"
