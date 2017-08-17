@@ -1,0 +1,100 @@
+---
+# group_vars/production.yml
+# These variables apply to the PRODUCTION environment.
+#
+#
+# This is a list of all the user accounts, vhosts, databases, etc that should exist on the server.
+# The user name will also be used to create a home-folder, a vhost, and a database.
+#
+# NOTE: usernames are limited to 32 characters
+
+# Syntax and options for vhost entries are documented in the Readme.md file.
+
+GROUPS_LIST:
+
+  - &developers
+    name: "developers"
+    id: 1001
+  - &clients
+    name: "clients"
+    id: 1002
+
+
+DEVELOPERS_LIST:
+
+  - &evan
+    name: "evan"
+    id: 2001
+    groups:
+      - "developers"
+      - "sudo"
+    ssh_keys:
+      - "evan.pub"
+      - "evan_at_eva.pub"
+      - "evan_at_home.pub"
+
+  - &chris
+    name: "chris"
+    id: 2002
+    groups:
+      - "developers"
+      - "sudo"
+
+postfix_settings:
+  postfix_domain: 'localhost'
+  postfix_notify_email: 'support@localhost.com'
+  postfix_use_smtp: true
+  # postfix_relayhost: '[mailtrap.io]'
+  # postfix_relayhost_user: 'abcdefg...'
+  # postfix_relayhost_pass: '1234567...'
+
+postgresql_ext_install_dev_headers: yes  # Install globally for compiling pg extensions
+postgresql_ext_install_postgis: no
+
+CLIENTS_LIST:
+
+  - &hazyshade
+    name: "hazyshade"
+    id: 3001
+    groups:
+      - "clients"
+
+user_groups:
+  - <<: *developers
+  - <<: *clients
+
+users:
+  - <<: *evan
+  - <<: *chris
+
+  - <<: *hazyshade
+
+    databases:
+      - name: "hazyshade"
+        type: "postgres"
+
+    mongodb:
+      - mongodb_conf_port: 27017 # This option isn't currently passed through to the role on a per-user basis
+
+    nodejs:
+      version: 7.9.0
+      packages:
+        - name: node-gyp
+
+    pm2_apps:
+      - run: "/home/hazyshade/sites/hazyshade.dev/process.dev.json"
+        env:
+          NODE_ENV: development
+
+    upstreams:
+      - listen: "80"
+        server_name: "hazyshade.dev"
+        server_aliases:
+          - "www.hazyshade.dev"
+        name: hazyshade
+        location: "/"
+        strategy: "ip_hash"
+        keepalive: 32
+        servers: {
+          "localhost:1339",
+        }

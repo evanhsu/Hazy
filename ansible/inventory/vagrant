@@ -1,0 +1,2 @@
+# This file isn't used for provisioning the vagrant machine.
+# Inventory is configured dynamically in `/Vagrantfile`.
