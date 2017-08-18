@@ -1,5 +1,0 @@
-test:
-  adapter: postgresql
-  database: hazyshade
-  username: hazyshade
-  encoding: utf8
