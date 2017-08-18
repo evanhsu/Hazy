@@ -46,7 +46,7 @@ Object.create( Object.assign( { }, require('./__proto__'), {
     runTests() {
 
         this.Mocha.before( () =>
-            this.P( this.Exec, [ `psql -d hazy -f ./sql/bootstrap/20170523.sql` ], this )
+            this.P( this.Exec, [ `psql -d ${process.env.PGDATABASE} -f ./sql/bootstrap/20170523.sql` ], this )
             .then( () => this.createServer() )
         )
         
