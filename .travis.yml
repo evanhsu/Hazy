@@ -13,7 +13,7 @@ services:
   - postgresql
 
 before_script:
-- sudo cp travis/postgresql.yml.travis config/database.yml
+- createuser -S -D -R hazyshade
 
 before_install:
 - npm install -g node-gyp
