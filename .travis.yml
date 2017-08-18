@@ -12,6 +12,9 @@ services:
   - mongodb
   - postgresql
 
+before_script:
+- sudo cp travis/postgresql.yml.travis config/database.yml
+
 before_install:
 - npm install -g node-gyp
 - sudo apt-get -qq update && sudo apt-get install -y postgresql-server-dev-9.5
