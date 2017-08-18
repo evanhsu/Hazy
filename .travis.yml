@@ -18,7 +18,7 @@ before_script:
 - |
   for f in sql/schema/*.sql;
   do
-    psql -f "$f"
+    psql -U hazyshade -d hazyshade -a -f "$f"
   done
 
 before_install:
