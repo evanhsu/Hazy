@@ -11,3 +11,5 @@ ssh ${ssh_user}@${deploy_host} "sudo chown -RP --quiet --preserve-root ${site_ow
 
 # Migrate the database
 #ssh ${ssh_user}@${deploy_host} "sudo -u ${site_owner} node ${site_path}/migration_script.js"
+
+ssh ${ssh_user}@${deploy_host} "sudo -u ${site_owner} pm2 startOrRestart ${deploy_path}/process.staging.json --update-env"
