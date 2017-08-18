@@ -1,4 +1,5 @@
 # Hazy Shade
+[![Build Status](https://travis-ci.org/evanhsu/Hazy.svg?branch=master)](https://travis-ci.org/evanhsu/Hazy)
 
 # Building the Project
 
