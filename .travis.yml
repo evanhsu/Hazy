@@ -14,6 +14,7 @@ services:
 
 before_script:
 - createuser -S -D -R hazyshade
+- createdb hazyshade
 
 before_install:
 - npm install -g node-gyp
