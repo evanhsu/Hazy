@@ -12,14 +12,7 @@ services:
   - mongodb
   - postgresql
 
-before_script:
-- createuser -S -D -R hazyshade
-- createdb hazyshade
-- |
-  for f in sql/schema/*.sql;
-  do
-    psql -U hazyshade -d hazyshade -a -f "$f"
-  done
+
 
 before_install:
 - npm install -g node-gyp
@@ -30,6 +23,18 @@ install:
 - npm install
 - npm run build:css
 - npm run build:js
+
+before_script:
+- createuser -S -D -R hazyshade
+- createdb hazyshade
+- |
+  for f in sql/schema/*.sql;
+  do
+    psql -U hazyshade -d hazyshade -a -f "$f"
+  done
+
+script:
+-
 
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_376a195a109b_key -iv $encrypted_376a195a109b_iv
