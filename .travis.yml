@@ -8,6 +8,9 @@ git:
 addons:
   ssh_known_hosts: smirksoftware.com
 
+services:
+  - mongodb
+
 before_install:
 - npm install -g node-gyp
 - sudo apt -qq update && sudo apt install -y postgresql-server-dev-9.5
