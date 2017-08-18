@@ -4,11 +4,14 @@ node_js:
 - '7'
 git:
   depth: 3
+
 addons:
   ssh_known_hosts: smirksoftware.com
+
 services:
 - mongodb
 - postgresql
+
 before_install:
 - openssl aes-256-cbc -K $encrypted_376a195a109b_key -iv $encrypted_376a195a109b_iv
   -in deploy_rsa.enc -out deploy_rsa -d
@@ -17,11 +20,13 @@ before_install:
 - ssh-add /tmp/deploy_rsa
 - npm install -g node-gyp
 - sudo apt-get -qq update && sudo apt-get install -y postgresql-server-dev-9.5
+
 install:
 - cp .env.example .env
 - npm install
 - npm run build:css
 - npm run build:js
+
 before_script:
 - createuser -S -D -R hazyshade
 - createdb hazyshade
@@ -30,10 +35,13 @@ before_script:
   do
     psql -U hazyshade -d hazyshade -a -f "$f"
   done
+
 script:
-- 
+-
+
 before_deploy:
 - rm .env
+
 deploy:
   provider: script
   skip_cleanup: true
