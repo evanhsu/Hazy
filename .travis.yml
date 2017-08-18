@@ -15,7 +15,8 @@ services:
 before_script:
 - createuser -S -D -R hazyshade
 - createdb hazyshade
-- for f in sql/schema/*.sql;
+- |
+  for f in sql/schema/*.sql;
   do
     psql -f "$f"
   done
