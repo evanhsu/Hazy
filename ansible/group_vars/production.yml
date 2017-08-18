@@ -20,7 +20,6 @@ GROUPS_LIST:
     id: 1002
 
 
-
 DEVELOPERS_LIST:
 
   - &evan
@@ -34,20 +33,28 @@ DEVELOPERS_LIST:
       - "evan_at_eva.pub"
       - "evan_at_home.pub"
 
+  - &chris
+    name: "chris"
+    id: 2002
+    groups:
+      - "developers"
+      - "sudo"
 
 postfix_settings:
-  postfix_domain: 'firecrew.us'
-  postfix_notify_email: 'support@firecrew.us'
+  postfix_domain: 'localhost'
+  postfix_notify_email: 'support@localhost.com'
   postfix_use_smtp: true
   # postfix_relayhost: '[mailtrap.io]'
   # postfix_relayhost_user: 'abcdefg...'
   # postfix_relayhost_pass: '1234567...'
 
+postgresql_ext_install_dev_headers: yes  # Install globally for compiling pg extensions
+postgresql_ext_install_postgis: no
 
 CLIENTS_LIST:
 
-  - &firecrew
-    name: "firecrew"
+  - &hazyshade
+    name: "hazyshade"
     id: 3001
     groups:
       - "clients"
@@ -58,21 +65,36 @@ user_groups:
 
 users:
   - <<: *evan
+  - <<: *chris
 
-  - <<: *firecrew
+  - <<: *hazyshade
 
     databases:
-      - name: "firecrew"
-        collation: "utf8mb4_unicode_ci"
-        encoding: "utf8mb4"
+      - name: "hazyshade"
+        type: "postgres"
 
-    vhosts:
+    mongodb:
+      - mongodb_conf_port: 27017 # This option isn't currently passed through to the role on a per-user basis
+
+    nodejs:
+      version: 7.9.0
+      packages:
+        - name: node-gyp
+
+    pm2_apps:
+      - run: "/home/hazyshade/sites/hazyshade.com/process.json"
+        env:
+          NODE_ENV: development
+
+    upstreams:
       - listen: "80"
-        server_name: "firecrew.us"
+        server_name: "hazyshade.com"
         server_aliases:
-          - "www.firecrew.us"
-        php: true
-        root: "/home/firecrew/sites/firecrew.us/public"
-
-    cron:
-      - "* * * * * php /home/firecrew/sites/firecrew.us/artisan schedule:run >> /dev/null 2>&1"
+          - "www.hazyshade.com"
+        name: hazyshade
+        location: "/"
+        strategy: "ip_hash"
+        keepalive: 32
+        servers: {
+          "localhost:1339",
+        }

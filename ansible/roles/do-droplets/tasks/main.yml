@@ -39,7 +39,7 @@
 - name: Add new droplet to our dynamic inventory.
   add_host:
     name: "{{ item.droplet.ip_address }}"
-    groups: core,http,sql,mail,postgresql,elasticsearch
+    groups: core,http,sql,mail,postgresql,elasticsearch,mongodb
   with_items: "{{ droplets.results }}"
 
 - name: Waiting for droplets to finish booting up

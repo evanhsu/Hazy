@@ -1,6 +1,6 @@
 ---
-# group_vars/production.yml
-# These variables apply to the PRODUCTION environment.
+# group_vars/vagrant.yml
+# These variables apply to the VAGRANT environment.
 #
 #
 # This is a list of all the user accounts, vhosts, databases, etc that should exist on the server.
